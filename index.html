@@ -989,6 +989,8 @@
         
         setTimeout(() => {
             startStage(gameState.activeStage, true);
+            // إخفاء شاشة التحميل بعد بدء المرحلة
+            document.getElementById('loadingScreen').style.display = 'none';
         }, 500);
     }
 
@@ -1025,9 +1027,9 @@
 
     function updateRank() {
         const ranks = [
-            { name: "مبتدئ", min: 0, icon: "🌱" }, 
-            { name: "طالب علم", min: 100, icon: "📖" },
-            { name: "حافظ", min: 300, icon: "🧠" },             { name: "فقيه", min: 600, icon: "⚖️" },
+            { name: "مبتدئ", min: 0, icon: "🌱" },             { name: "طالب علم", min: 100, icon: "📖" },
+            { name: "حافظ", min: 300, icon: "🧠" }, 
+            { name: "فقيه", min: 600, icon: "⚖️" },
             { name: "عالم", min: 1000, icon: "🕌" }, 
             { name: "شيخ الإسلام", min: 1600, icon: "👳" },
             { name: "إمام الأمة", min: 2500, icon: "👑" }
@@ -1074,9 +1076,9 @@
                     <h3>${stage.title}</h3>
                     <span>${stage.questions} أسئلة • ${stage.type === 'fiqh' ? 'فقه' : 'ثقافة إسلامية'}</span>
                     <div class="node-meta">
-                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}
-                        ${score.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
-                    </div>                </div>
+                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}                        ${score.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
+                    </div>
+                </div>
                 ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
             `;
             map.appendChild(node);
@@ -1123,9 +1125,9 @@
                 { q: "حكم صلاة المسافر:", opts: ["يجب القصر", "يجوز القصر", "لا يجوز"], ans: 1, exp: "يجوز القصر." },
                 { q: "النية في الصيام:", opts: ["تكفي للشهر", "تجب لكل يوم", "تستحب"], ans: 1, exp: "تجب لكل يوم." },
                 { q: "من أفطر لعذر:", opts: ["الكفارة", "القضاء", "لا شيء"], ans: 1, exp: "القضاء فقط." },
-                { q: "حكم التراويح:", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "سنة مؤكدة." },
-                { q: "عدد ركعات الوتر:", opts: ["واحدة", "ثلاث", "أكثر"], ans: 2, exp: "واحدة أو أكثر." },
-                { q: "وقت الوتر:", opts: ["بعد العشاء", "من العشاء للفجر", "قبل الفجر"], ans: 1, exp: "من العشاء للفجر." }            ]
+                { q: "حكم التراويح:", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "سنة مؤكدة." },                { q: "عدد ركعات الوتر:", opts: ["واحدة", "ثلاث", "أكثر"], ans: 2, exp: "واحدة أو أكثر." },
+                { q: "وقت الوتر:", opts: ["بعد العشاء", "من العشاء للفجر", "قبل الفجر"], ans: 1, exp: "من العشاء للفجر." }
+            ]
         },
         {
             id: 2, title: "المرحلة الثالثة: السيرة النبوية", icon: "fa-book-open", type: "islamic",
@@ -1172,9 +1174,9 @@
                 { q: "الطاهرة:", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة بنت خويلد." },
                 { q: "أبي عبد الله:", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق." },
                 { q: "ألقيتكم في بحركم:", opts: ["خالد", "سعد", "عمرو"], ans: 0, exp: "خالد بن الوليد." },
-                { q: "فتح مصر:", opts: ["عمرو", "خالد", "عقبة"], ans: 0, exp: "عمرو بن العاص." },
-                { q: "إنما الأعمال:", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث نبوي شريف." },
-                { q: "البصر والبصيرة:", opts: ["ابن عباس", "ابن مسعود", "ابن عمر"], ans: 0, exp: "ابن عباس." },                { q: "الحميراء:", opts: ["عائشة", "حفصة", "جويرية"], ans: 0, exp: "عائشة رضي الله عنها." },
+                { q: "فتح مصر:", opts: ["عمرو", "خالد", "عقبة"], ans: 0, exp: "عمرو بن العاص." },                { q: "إنما الأعمال:", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث نبوي شريف." },
+                { q: "البصر والبصيرة:", opts: ["ابن عباس", "ابن مسعود", "ابن عمر"], ans: 0, exp: "ابن عباس." },
+                { q: "الحميراء:", opts: ["عائشة", "حفصة", "جويرية"], ans: 0, exp: "عائشة رضي الله عنها." },
                 { q: "ذو النورين:", opts: ["أبو بكر", "عمر", "عثمان"], ans: 2, exp: "عثمان بن عفان." },
                 { q: "الفاروق:", opts: ["أبو بكر", "عمر", "علي"], ans: 1, exp: "عمر بن الخطاب." },
                 { q: "سيد الشهداء:", opts: ["حمزة", "جعفر", "مصعب"], ans: 0, exp: "حمزة بن عبد المطلب." },
@@ -1221,9 +1223,9 @@
                 { q: "أفضل الأيام:", opts: ["الجمعة", "عرفة", "النحر"], ans: 2, exp: "يوم النحر." },
                 { q: "أفضل الليالي:", opts: ["القدر", "شعبان", "الجمعة"], ans: 0, exp: "ليلة القدر." },
                 { q: "أفضل الشهور:", opts: ["رمضان", "المحرم", "ذو الحجة"], ans: 0, exp: "شهر رمضان." },
-                { q: "أفضل البقاع:", opts: ["الحرام", "النبوي", "الأقصى"], ans: 0, exp: "المسجد الحرام." },
-                { q: "أفضل الصلاة:", opts: ["الليل", "الضحى", "التراويح"], ans: 0, exp: "صلاة الليل." },
-                { q: "أفضل الصيام:", opts: ["الاثنين والخميس", "شوال", "عرفة"], ans: 0, exp: "الاثنين والخميس." },                { q: "أفضل الذكر:", opts: ["لا إله إلا الله", "سبحان الله", "الله أكبر"], ans: 0, exp: "لا إله إلا الله." },
+                { q: "أفضل البقاع:", opts: ["الحرام", "النبوي", "الأقصى"], ans: 0, exp: "المسجد الحرام." },                { q: "أفضل الصلاة:", opts: ["الليل", "الضحى", "التراويح"], ans: 0, exp: "صلاة الليل." },
+                { q: "أفضل الصيام:", opts: ["الاثنين والخميس", "شوال", "عرفة"], ans: 0, exp: "الاثنين والخميس." },
+                { q: "أفضل الذكر:", opts: ["لا إله إلا الله", "سبحان الله", "الله أكبر"], ans: 0, exp: "لا إله إلا الله." },
                 { q: "أفضل الدعوة:", opts: ["الوالد", "الصائم", "المظلوم"], ans: 2, exp: "دعوة المظلوم." },
                 { q: "أفضل الجهاد:", opts: ["النفس", "المال", "كلمة حق"], ans: 2, exp: "كلمة حق." },
                 { q: "أفضل الهجرة:", opts: ["البدن", "السوء", "الأهل"], ans: 1, exp: "هجرة السوء." },
@@ -1254,6 +1256,7 @@
 
     function startStage(index, isResume) {
         if(!isResume && gameState.lives <= 0) { 
+            document.getElementById('loadingScreen').style.display = 'none';
             showToast("❤️ انتهت محاولاتك!", "error");
             return; 
         }
@@ -1263,16 +1266,20 @@
         gameState.isQuizActive = true;
         document.getElementById('quizOverlay').style.display = 'flex';
         document.getElementById('stageTitle').innerText = stagesData[index].title;
+        
+        // إخفاء شاشة التحميل
+        document.getElementById('loadingScreen').style.display = 'none';
+        
         updateQuestionCounter();
         showQuestion();
-        saveGame();
-    }
+        saveGame();    }
 
     function updateQuestionCounter() {
         const stage = stagesData[gameState.activeStage];
         document.getElementById('questionCounter').innerText = `${gameState.activeQuestion + 1}/${stage.questions.length}`;
         document.getElementById('currentQNum').innerText = gameState.activeQuestion + 1;
     }
+
     function showQuestion() {
         const stage = stagesData[gameState.activeStage];
         if (gameState.activeQuestion >= stage.questions.length) {
@@ -1314,14 +1321,14 @@
             el.classList.add('wrong');
             gameState.lives--;
             showToast('❌ إجابة خاطئة', 'error');
-            items.forEach(item => {
-                if (parseInt(item.dataset.originalIndex) === correct) item.classList.add('correct');
+            items.forEach(item => {                if (parseInt(item.dataset.originalIndex) === correct) item.classList.add('correct');
             });
         }        
         if (!gameState.stageScores[gameState.activeStage]) {
             gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
         }
-        gameState.stageScores[gameState.activeStage].total++;        if (selected === correct) gameState.stageScores[gameState.activeStage].correct++;
+        gameState.stageScores[gameState.activeStage].total++;
+        if (selected === correct) gameState.stageScores[gameState.activeStage].correct++;
         
         updateStats();
         saveGame();
@@ -1363,14 +1370,14 @@
             if(nextIdx < stagesData.length && !gameState.unlockedStages.includes(nextIdx)) {
                 gameState.unlockedStages.push(nextIdx);
                 showToast(`🔓 تم فتح المرحلة التالية`, 'success');
-            }
-        }
+            }        }
         
         const bonus = 100 + (completedIndex * 25);
         gameState.points += bonus;
         document.getElementById('earnedPoints').innerText = bonus;
         
-        updateStats();        saveGame();
+        updateStats();
+        saveGame();
         
         document.getElementById('quizOverlay').style.display = 'none';
         document.getElementById('resultOverlay').style.display = 'flex';
@@ -1412,14 +1419,14 @@
         toast.className = `toast ${type} show`;
         if (type === 'success') toast.querySelector('i').className = 'fas fa-check-circle';
         else if (type === 'error') toast.querySelector('i').className = 'fas fa-exclamation-circle';
-        else toast.querySelector('i').className = 'fas fa-info-circle';
-        setTimeout(() => toast.classList.remove('show'), 3000);
+        else toast.querySelector('i').className = 'fas fa-info-circle';        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     function init() {
         checkConnection();
         if (navigator.onLine) {
-            loadGame();        }
+            loadGame();
+        }
         document.addEventListener('touchmove', (e) => {
             if (gameState.isQuizActive) e.preventDefault();
         }, { passive: false });
