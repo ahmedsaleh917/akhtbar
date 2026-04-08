@@ -6,20 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>sabriFX Edition</title>
     
-    <!-- خطوط النظام كبديل آمن -->
     <style>
-        /* تحميل الخطوط مع فاول باك */
+        /* ========================================
+           📝 خط عربي مدمج - يعمل في WebView
+           ======================================== */
         @font-face {
-            font-family: 'AlmaraiFallback';
-            src: local('Segoe UI'), local('Tahoma'), local('Arial'), local('Droid Arabic Kufi'), local('Noto Sans Arabic');
+            font-family: 'AppFont';
+            font-weight: 400;
+            font-style: normal;
+            src: local('Noto Sans Arabic'), local('Droid Arabic Kufi'), local('Segoe UI'), local('Tahoma'), local('Arial');
         }
-    </style>
-    
-    <!-- Font Awesome محلياً كـ SVG في حال فشل CDN -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
+        @font-face {
+            font-family: 'AppFont';
+            font-weight: 700;
+            font-style: normal;
+            src: local('Noto Sans Arabic Bold'), local('Droid Arabic Kufi Bold'), local('Segoe UI Bold'), local('Tahoma Bold'), local('Arial Bold');
+        }
+        @font-face {
+            font-family: 'AppFont';
+            font-weight: 800;
+            font-style: normal;
+            src: local('Noto Sans Arabic Black'), local('Segoe UI Black'), local('Arial Black');
+        }
+
         :root {
             --primary: #1e4d2b;
             --primary-dark: #153a20;
@@ -33,609 +42,280 @@
             --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0; padding: 0;
-            overflow-x: hidden;
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;        }
+        
+        html, body { 
+            width: 100%; height: 100%; 
+            margin: 0; padding: 0; 
+            overflow-x: hidden; 
         }
 
         body {
-            font-family: 'Almarai', 'Tajawal', 'AlmaraiFallback', 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: 'AppFont', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
             background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%);
-            user-select: none;
+            user-select: none; 
             -webkit-user-select: none;
-            color: #333;            min-height: 100vh;
+            color: #333; 
+            min-height: 100vh; 
             -webkit-text-size-adjust: 100%;
+            line-height: 1.6;
         }
 
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 radial-gradient(circle at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 25%),
                 radial-gradient(circle at 80% 20%, rgba(30,77,43,0.08) 0%, transparent 25%),
                 radial-gradient(circle at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 35%);
-            pointer-events: none;
-            z-index: -1;
+            pointer-events: none; z-index: -1;
         }
+
+        /* 🌐 شاشة انقطاع الإنترنت */
+        .offline-overlay {
+            position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 20px; animation: fadeIn 0.3s ease;
+        }
+        .offline-icon { font-size: 80px; color: var(--gold); margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+        .offline-title { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
+        .offline-desc { font-size: 16px; color: #666; margin-bottom: 30px; line-height: 1.6; max-width: 300px; }
+        .btn-retry {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; border: none; padding: 15px 40px; border-radius: 25px;
+            font-size: 18px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(30,77,43,0.3); transition: transform 0.2s;
+            font-family: inherit;
+        }
+        .btn-retry:active { transform: scale(0.95); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         .game-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            min-height: 200px;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            padding: 15px 10px 20px;
-            box-shadow: var(--shadow);
-            position: sticky; top: 0; z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            min-height: 200px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; padding: 15px 10px 20px; box-shadow: var(--shadow);
+            position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
 
         .logo-container {
-            width: 85px; height: 85px;
-            background: white;
-            border-radius: 50%;
-            padding: 4px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25), 0 0 0 3px var(--gold);
-            margin-bottom: 12px;
+            width: 85px; height: 85px; background: white; border-radius: 50%; padding: 4px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25), 0 0 0 3px var(--gold); margin-bottom: 12px;
             animation: float 3s ease-in-out infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .logo-container img {
-            width: 100%; height: 100%;            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--gold);
-        }
+        .logo-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
 
         .stats-bar {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            justify-content: space-around;
-            margin-top: 8px;
-            padding: 0 5px;
-            gap: 8px;
+            width: 100%; max-width: 500px; display: flex; justify-content: space-around;
+            margin-top: 8px; padding: 0 5px; gap: 8px;
         }
-
         .stat-box { 
-            text-align: center; 
-            background: rgba(255,255,255,0.15);
-            padding: 8px 12px;
-            border-radius: 15px;
-            min-width: 75px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            text-align: center; background: rgba(255,255,255,0.15); padding: 8px 12px;
+            border-radius: 15px; min-width: 75px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
             transition: transform 0.2s;
         }
-        
         .stat-box:hover { transform: translateY(-3px); background: rgba(255,255,255,0.25); }
-        
         .stat-box i { color: var(--gold); font-size: 18px; margin-bottom: 4px; display: block; }
         .stat-val { display: block; font-weight: 800; font-size: 18px; color: white; }
         .stat-label { font-size: 11px; color: rgba(255,255,255,0.9); margin-top: 2px; font-weight: 500; }
-
         .lives i { animation: pulse 1.5s infinite; }
-        @keyframes pulse { 
-            0%, 100% { transform: scale(1); opacity: 1; } 
-            50% { transform: scale(1.2); opacity: 0.8; } 
-        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }
 
         .rank-display { 
-            text-align: center; 
-            margin-top: 12px; 
-            background: rgba(212,175,55,0.2);
-            padding: 6px 20px;
-            border-radius: 25px;
-            border: 1px solid var(--gold);
+            text-align: center; margin-top: 12px; background: rgba(212,175,55,0.2);
+            padding: 6px 20px; border-radius: 25px; border: 1px solid var(--gold);
         }
-        
         .rank-name { 
-            font-weight: 800; 
-            font-size: 16px;             color: var(--gold-light); 
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            justify-content: center;
+            font-weight: 800; font-size: 16px; color: var(--gold-light);
+            display: flex; align-items: center; gap: 6px; justify-content: center;
         }
-        
         .rank-label { font-size: 10px; color: rgba(255,255,255,0.85); margin-top: 3px; }
 
         .progress-bar {
-            width: 100%;
-            max-width: 500px;
-            height: 8px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            margin-top: 10px;
-            overflow: hidden;
+            width: 100%; max-width: 500px; height: 8px; background: rgba(255,255,255,0.2);
+            border-radius: 10px; margin-top: 10px; overflow: hidden;
         }
-        
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            width: 0%;
+            height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 10px; transition: width 0.5s ease; width: 0%;
         }
 
         .map-container {
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 22px;
-            padding-bottom: 110px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+            padding: 30px 20px; display: flex; flex-direction: column; align-items: center;
+            gap: 22px; padding-bottom: 110px; max-width: 600px; margin: 0 auto;        }
 
         .level-node {
-            width: 100%;
-            max-width: 450px;
-            background: var(--white);
-            padding: 22px 25px;
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            box-shadow: var(--shadow);
-            position: relative;
-            cursor: pointer;            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
-            overflow: hidden;
+            width: 100%; max-width: 450px; background: var(--white); padding: 22px 25px;
+            border-radius: 28px; display: flex; align-items: center; gap: 20px;
+            box-shadow: var(--shadow); position: relative; cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent; overflow: hidden;
         }
-        
         .level-node::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--gold));
         }
-        
-        .level-node.locked { 
-            opacity: 0.7; 
-            filter: grayscale(0.8); 
-            cursor: not-allowed; 
-            transform: none !important;
-        }
-        
+        .level-node.locked { opacity: 0.7; filter: grayscale(0.8); cursor: not-allowed; transform: none !important; }
         .level-node.locked:hover { transform: none !important; }        
-        .level-node.active { 
-            border-color: var(--gold); 
-            transform: scale(1.025); 
-            box-shadow: var(--shadow-gold);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15); }
-            to { box-shadow: 0 15px 45px rgba(212, 175, 55, 0.35); }
-        }
-        
-        .level-node.completed { 
-            border-color: var(--correct); 
-            background: linear-gradient(135deg, #fff 70%, #e8f5e9 100%);
-        }
-        
-        .level-node.completed::before {
-            background: linear-gradient(90deg, var(--correct), #4caf50);
-        }
+        .level-node.active { border-color: var(--gold); transform: scale(1.025); box-shadow: var(--shadow-gold); animation: glow 2s ease-in-out infinite alternate; }
+        @keyframes glow { from { box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15); } to { box-shadow: 0 15px 45px rgba(212, 175, 55, 0.35); } }
+        .level-node.completed { border-color: var(--correct); background: linear-gradient(135deg, #fff 70%, #e8f5e9 100%); }
+        .level-node.completed::before { background: linear-gradient(90deg, var(--correct), #4caf50); }
 
         .node-icon {
-            width: 70px; height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 22px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--gold); font-size: 28px;
-            box-shadow: 0 8px 25px rgba(30,77,43,0.3);
-            flex-shrink: 0;
-            position: relative;            overflow: hidden;
+            width: 70px; height: 70px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 22px; display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 28px; box-shadow: 0 8px 25px rgba(30,77,43,0.3);
+            flex-shrink: 0; position: relative; overflow: hidden;
         }
-        
         .node-icon::after {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
-            animation: rotate 4s linear infinite;
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%); animation: rotate 4s linear infinite;
         }
-        
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .node-info { flex: 1; min-width: 0; }
-        .node-info h3 { 
-            margin: 0 0 6px 0; 
-            font-size: 18px; 
-            color: var(--primary); 
-            font-weight: 800;
-            line-height: 1.4;
-        }
-        .node-info span { 
-            font-size: 13px; 
-            color: #666; 
-            display: block;
-            font-weight: 500;
-        }
-        
-        .node-meta {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #777;
-        }
-        
+        .node-info h3 { margin: 0 0 6px 0; font-size: 18px; color: var(--primary); font-weight: 800; line-height: 1.4; }
+        .node-info span { font-size: 13px; color: #666; display: block; font-weight: 500; }
+        .node-meta { display: flex; gap: 12px; margin-top: 8px; font-size: 12px; color: #777; }
         .node-meta i { color: var(--gold); margin-left: 4px; }
 
-        .lock-icon { 
-            position: absolute; 
-            left: 25px; 
-            color: #aaa; 
-            font-size: 22px; 
-            z-index: 2;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .completed-icon { 
-            position: absolute; 
-            left: 25px;             color: var(--correct); 
-            font-size: 24px; 
-            z-index: 2;
-            animation: bounce 0.6s ease;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
+        .lock-icon { position: absolute; left: 25px; color: #aaa; font-size: 22px; z-index: 2; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .completed-icon { position: absolute; left: 25px; color: var(--correct); font-size: 24px; z-index: 2; animation: bounce 0.6s ease; }
+        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
         .quiz-overlay {
-            position: fixed; inset: 0; 
-            background: linear-gradient(135deg, rgba(30,77,43,0.95), rgba(21,58,32,0.98));
-            z-index: 200; 
-            display: none; 
-            flex-direction: column;
-            animation: slideUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background: linear-gradient(135deg, rgba(30,77,43,0.95), rgba(21,58,32,0.98));
+            z-index: 200; display: none; flex-direction: column;
+            animation: slideUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        @keyframes slideUp { 
-            from { transform: translateY(100%); opacity: 0; } 
-            to { transform: translateY(0); opacity: 1; } 
+        .quiz-header {            background: linear-gradient(135deg, var(--primary-dark), var(--primary)); height: 75px;
+            display: flex; align-items: center; justify-content: space-between; color: white;
+            padding: 0 22px; box-shadow: 0 5px 25px rgba(0,0,0,0.3); position: relative;
         }
-
-        .quiz-header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            padding: 0 22px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        
         .quiz-header::after {
-            content: "";
-            position: absolute;
-            bottom: 0; left: 0; right: 0; height: 2px;
+            content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .quiz-body { 
-            padding: 25px 20px; 
-            flex: 1; 
-            display: flex;             flex-direction: column; 
-            align-items: center; 
-            overflow-y: auto; 
-            background: var(--bg);
+            padding: 25px 20px; flex: 1; display: flex; flex-direction: column; 
+            align-items: center; overflow-y: auto; background: var(--bg);
         }
 
         .question-card {
-            background: var(--white);
-            width: 100%; max-width: 550px;
-            padding: 40px 30px; 
-            border-radius: 32px;
-            text-align: center; 
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-            border: 1px solid rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
+            background: var(--white); width: 100%; max-width: 550px; padding: 40px 30px; 
+            border-radius: 32px; text-align: center; box-shadow: var(--shadow); margin-bottom: 25px;
+            border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden;
         }
-        
         .question-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 5px;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
         }
-        
         .question-card h2 { 
-            margin: 0; 
-            font-size: 22px; 
-            font-weight: 800; 
-            line-height: 1.6; 
-            color: #2c3e50; 
-            position: relative;
-            z-index: 2;
+            margin: 0; font-size: 22px; font-weight: 800; line-height: 1.6; color: #2c3e50; position: relative; z-index: 2;
         }
-        
         .question-number {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--primary);
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 14px;
-            margin-bottom: 15px;
+            display: inline-block; background: var(--gold); color: var(--primary); padding: 4px 14px;
+            border-radius: 20px; font-weight: 800; font-size: 14px; margin-bottom: 15px;
         }
 
-        .options-container { 
-            width: 100%; 
-            max-width: 550px;             display: flex; 
-            flex-direction: column; 
-            gap: 14px; 
-        }
-        
+        .options-container { width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 14px; }
         .option-item {
-            background: var(--white);
-            padding: 20px 22px;
-            border-radius: 22px; 
-            font-weight: 700;
-            display: flex; 
-            align-items: center;
-            cursor: pointer; 
-            transition: all 0.25s;
-            border: 2px solid #e8f4e9;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
+            background: var(--white); padding: 20px 22px; border-radius: 22px; font-weight: 700;
+            display: flex; align-items: center; cursor: pointer; transition: all 0.25s;
+            border: 2px solid #e8f4e9; font-size: 16px; position: relative; overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }        
-        .option-item:hover {
-            border-color: var(--gold);
-            transform: translateX(5px);
-            box-shadow: 0 6px 20px rgba(212,175,55,0.15);
-        }
-        
+        .option-item:hover { border-color: var(--gold); transform: translateX(5px); box-shadow: 0 6px 20px rgba(212,175,55,0.15); }
         .option-item::before {
-            content: attr(data-num);
-            position: absolute;
-            right: 20px;
-            width: 28px; height: 28px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 800;
+            content: attr(data-num); position: absolute; right: 20px; width: 28px; height: 28px;
+            background: var(--primary); color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 14px; font-weight: 800;
         }
 
         .option-item.correct { 
-            background: linear-gradient(135deg, #d4edda, #c3e6cb); 
-            border-color: var(--correct); 
-            color: #155724; 
-            animation: correctAnim 0.4s ease;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb); border-color: var(--correct); color: #155724; animation: correctAnim 0.4s ease;
         }
-        
         .option-item.wrong { 
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);             border-color: var(--danger); 
-            color: #721c24; 
-            animation: shake 0.5s; 
-        }
-        
-        @keyframes correctAnim {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shake { 
-            0%, 100% { transform: translateX(0); } 
-            25% { transform: translateX(-12px); } 
-            75% { transform: translateX(12px); } 
-        }
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb); border-color: var(--danger); color: #721c24; animation: shake 0.5s;         }
+        @keyframes correctAnim { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-12px); } 75% { transform: translateX(12px); } }
 
         .info-box {
-            background: linear-gradient(135deg, #fff9e6, #fff3cd);
-            border-right: 5px solid var(--gold);
-            padding: 20px; 
-            border-radius: 18px;
-            margin-top: 20px; 
-            width: 100%; 
-            max-width: 550px;
-            display: none; 
-            text-align: right; 
-            font-size: 15px;
-            line-height: 1.6;
-            box-shadow: 0 5px 20px rgba(212,175,55,0.15);
-            animation: slideIn 0.3s ease;
+            background: linear-gradient(135deg, #fff9e6, #fff3cd); border-right: 5px solid var(--gold);
+            padding: 20px; border-radius: 18px; margin-top: 20px; width: 100%; max-width: 550px;
+            display: none; text-align: right; font-size: 15px; line-height: 1.6;
+            box-shadow: 0 5px 20px rgba(212,175,55,0.15); animation: slideIn 0.3s ease;
         }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .info-box strong { 
-            color: var(--primary); 
-            display: block; 
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .info-box strong { color: var(--primary); display: block; margin-bottom: 8px; font-size: 16px; }
 
         .btn-next {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--primary-dark);
-            border: none; 
-            padding: 18px 30px;             width: 100%; 
-            max-width: 550px;
-            border-radius: 22px; 
-            font-weight: 800; 
-            font-size: 17px;
-            margin-top: 25px; 
-            cursor: pointer; 
-            display: none;
-            box-shadow: 0 8px 25px rgba(212,175,55,0.4);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark);
+            border: none; padding: 18px 30px; width: 100%; max-width: 550px; border-radius: 22px; 
+            font-weight: 800; font-size: 17px; margin-top: 25px; cursor: pointer; display: none;
+            box-shadow: 0 8px 25px rgba(212,175,55,0.4); transition: all 0.3s; position: relative; overflow: hidden;
         }
-        
-        .btn-next:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(212,175,55,0.6);
-        }
-        .btn-next:active {
-            transform: translateY(1px);
-        }
-        
+        .btn-next:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(212,175,55,0.6); }
+        .btn-next:active { transform: translateY(1px); }
         .btn-next::after {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); opacity: 0; transition: opacity 0.3s;
         }
-        
-        .btn-next:hover::after {
-            opacity: 1;
-        }
+        .btn-next:hover::after { opacity: 1; }
 
         .result-overlay {
-            position: fixed; inset: 0; 
-            background: rgba(0,0,0,0.92);
-            z-index: 300; 
-            display: none; 
-            justify-content: center; 
-            align-items: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 300; display: none; 
+            justify-content: center; align-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             animation: fadeIn 0.4s ease;
         }
-        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .win-card {            background: var(--white); 
-            padding: 45px 40px; 
-            border-radius: 35px;
-            text-align: center; 
-            max-width: 450px; 
-            width: 92%;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
-            position: relative;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .win-card {
+            background: var(--white); padding: 45px 40px; border-radius: 35px; text-align: center; 
+            max-width: 450px; width: 92%; box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            position: relative; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            70% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 70% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
         .win-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
-            border-radius: 35px 35px 0 0;
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct)); border-radius: 35px 35px 0 0;
         }
-        
-        .win-card i { 
-            font-size: 80px; 
-            color: var(--gold); 
-            margin-bottom: 25px; 
-            display: block;
-            animation: bounce 1s ease infinite alternate;
-        }
-        
-        .win-card h1 {
-            margin: 0 0 15px 0;
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: 800;
-        }
-        
-        .win-card p {
-            color: #555;
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-        
+        .win-card i { font-size: 80px; color: var(--gold); margin-bottom: 25px; display: block; animation: bounce 1s ease infinite alternate; }
+        .win-card h1 { margin: 0 0 15px 0; color: var(--primary); font-size: 28px; font-weight: 800; }
+        .win-card p { color: #555; font-size: 17px; line-height: 1.6; margin-bottom: 25px; }
         .points-earned {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--primary-dark);            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 800;
-            font-size: 18px;
-            display: inline-block;
-            margin: 15px 0;
-            box-shadow: 0 5px 20px rgba(212,175,55,0.4);
+            background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark);
+            padding: 12px 25px; border-radius: 25px; font-weight: 800; font-size: 18px;            display: inline-block; margin: 15px 0; box-shadow: 0 5px 20px rgba(212,175,55,0.4);
         }
 
         .footer-brand {
             position: fixed; bottom: 0; width: 100%;
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,249,0.98));
-            padding: 14px 20px; 
-            text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.08); 
-            z-index: 50;
-            font-size: 15px;
-            box-shadow: 0 -3px 20px rgba(0,0,0,0.08);
+            padding: 14px 20px; text-align: center; border-top: 1px solid rgba(0,0,0,0.08); z-index: 50;
+            font-size: 15px; box-shadow: 0 -3px 20px rgba(0,0,0,0.08);
         }        
-        .footer-brand strong { 
-            color: var(--primary); 
-            font-weight: 800;
-            position: relative;
-        }
-        
+        .footer-brand strong { color: var(--primary); font-weight: 800; position: relative; }
         .footer-brand strong::after {
-            content: "";
-            position: absolute;
-            bottom: -3px; left: 0; right: 0; height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
+            content: ""; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px;
+            background: var(--gold); border-radius: 2px;
         }
 
         .points-popup {
-            position: fixed;
-            font-weight: 800;
-            font-size: 20px;
-            color: var(--gold);
-            pointer-events: none;
-            animation: floatUp 1s ease-out forwards;
-            z-index: 1000;
+            position: fixed; font-weight: 800; font-size: 20px; color: var(--gold);
+            pointer-events: none; animation: floatUp 1s ease-out forwards; z-index: 1000;
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
-        }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-50px) scale(1.3); } }
 
-        @media (max-width: 480px) {            .game-header { min-height: 210px; border-radius: 0 0 40px 40px; }
+        @media (max-width: 480px) {
+            .game-header { min-height: 210px; border-radius: 0 0 40px 40px; }
             .logo-container { width: 75px; height: 75px; }
             .stat-val { font-size: 16px; }
             .stat-label { font-size: 10px; }
@@ -650,75 +330,58 @@
         }
 
         .loading {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.4s;
+            position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 1000; transition: opacity 0.4s;
         }
-        
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
+        .loading.hidden { opacity: 0; pointer-events: none; }
         .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(30,77,43,0.1);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            width: 60px; height: 60px; border: 5px solid rgba(30,77,43,0.1); border-top-color: var(--gold);
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
         }
-        
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .loading-text {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 18px;
-        }
+        .loading-text { color: var(--primary); font-weight: 700; font-size: 18px; }
 
-        .toast {            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--white);
-            padding: 15px 25px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            font-weight: 700;
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.3s ease;
-            border-right: 4px solid var(--gold);
+        .toast {            position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--white); padding: 15px 25px; border-radius: 20px; box-shadow: var(--shadow);
+            font-weight: 700; z-index: 500; display: flex; align-items: center; gap: 10px;
+            transition: transform 0.3s ease; border-right: 4px solid var(--gold);
         }
-        
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        
+        .toast.show { transform: translateX(-50%) translateY(0); }
         .toast.success { border-color: var(--correct); }
         .toast.error { border-color: var(--danger); }
         .toast i { font-size: 20px; }
 
-        /* أيقونات SVG بديلة في حال فشل Font Awesome */
-        .fa-fallback {
-            display: inline-block;
-            width: 1em; height: 1em;
-            vertical-align: middle;
-            fill: currentColor;
+        /* مؤشر الحفظ */
+        .save-indicator {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: var(--gold);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
+        .save-indicator.show { opacity: 1; }
     </style>
 </head>
 <body>
+
+<!-- مؤشر الحفظ -->
+<div class="save-indicator" id="saveIndicator">💾 تم الحفظ</div>
+
+<!--  شاشة انقطاع الإنترنت -->
+<div id="offline-screen" class="offline-overlay">
+    <i class="fas fa-wifi offline-icon"></i>
+    <h2 class="offline-title">لا يوجد اتصال بالإنترنت</h2>
+    <p class="offline-desc">عذراً، يبدو أنك غير متصل بالشبكة حالياً.<br>يرجى التحقق من اتصالك والمحاولة مرة أخرى.</p>
+    <button class="btn-retry" onclick="retryConnection()">🔄 إعادة المحاولة</button>
+</div>
 
 <!-- شاشة التحميل -->
 <div class="loading" id="loadingScreen">
@@ -727,13 +390,14 @@
 </div>
 
 <!-- رأس اللعبة -->
-<div class="game-header">
-    <div class="logo-container">
-        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار التطبيق" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">
+<div class="game-header">    <div class="logo-container">
+        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار التطبيق" 
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">
     </div>
     <div class="stats-bar">
         <div class="stat-box lives">
-            <i class="fas fa-heart"></i>            <span class="stat-val" id="livesCont">30</span>
+            <i class="fas fa-heart"></i>
+            <span class="stat-val" id="livesCont">30</span>
             <span class="stat-label">قلوب</span>
         </div>
         <div class="stat-box">
@@ -775,14 +439,14 @@
         </div>
         <div class="options-container" id="optionsCont"></div>
         <div id="infoBox" class="info-box">
-            <strong>💡 فائدة علمية:</strong> <span id="expText">الشرح يظهر هنا.</span>
-        </div>
+            <strong>💡 فائدة علمية:</strong> <span id="expText">الشرح يظهر هنا.</span>        </div>
         <button id="nextBtn" class="btn-next" onclick="nextStep()">المتابعة <i class="fas fa-arrow-left" style="margin-right:8px;"></i></button>
     </div>
 </div>
 
 <!-- شاشة النتيجة -->
-<div id="resultOverlay" class="result-overlay">    <div class="win-card">
+<div id="resultOverlay" class="result-overlay">
+    <div class="win-card">
         <i class="fas fa-crown"></i>
         <h1>🎉 مبارك الإنجاز!</h1>
         <p>لقد أتممت هذه المرحلة بنجاح، وزاد علمك ونورك. استمر في الرحلة!</p>
@@ -805,23 +469,111 @@
 
 <script>
     // ========================================
+    //  نظام التحقق من الإنترنت
+    // ========================================
+    function checkConnection() {
+        const offlineScreen = document.getElementById('offline-screen');
+        const loadingScreen = document.getElementById('loadingScreen');
+
+        if (!navigator.onLine) {
+            offlineScreen.style.display = 'flex';
+            if(loadingScreen) loadingScreen.style.display = 'none';
+            document.body.style.overflow = 'hidden';
+        } else {
+            offlineScreen.style.display = 'none';
+            if(loadingScreen) loadingScreen.style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function retryConnection() {
+        document.getElementById('offline-screen').style.display = 'none';
+        document.getElementById('loadingScreen').style.display = 'flex';        window.location.reload();
+    }
+
+    window.addEventListener('online', () => { checkConnection(); showToast('📡 تم استعادة الاتصال', 'success'); });
+    window.addEventListener('offline', () => { checkConnection(); showToast('📴 انقطع الاتصال', 'error'); });
+
+    // ========================================
+    // 💾 نظام الحفظ المتقدم - لا يضيع التقدم أبداً
+    // ========================================
+    const STORAGE_KEY = 'sabriFX_kingdom_state_v3';
+    let saveTimeout = null;
+    
+    function saveGame(immediate = false) {
+        try {
+            // نسخ احتياطي في متغير مؤقت
+            const backup = JSON.stringify(gameState);
+            
+            // حفظ في localStorage
+            localStorage.setItem(STORAGE_KEY, backup);
+            
+            // حفظ إضافي في sessionStorage كنسخة احتياطية
+            try { sessionStorage.setItem(STORAGE_KEY + '_backup', backup); } catch(e) {}
+            
+            // إظهار مؤشر الحفظ
+            showSaveIndicator();
+            
+        } catch (e) {
+            console.error('خطأ في الحفظ:', e);
+            // محاولة الحفظ في sessionStorage إذا فشل localStorage
+            try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(gameState)); } catch(e2) {}
+        }
+    }
+
+    function showSaveIndicator() {
+        const indicator = document.getElementById('saveIndicator');
+        indicator.classList.add('show');
+        setTimeout(() => indicator.classList.remove('show'), 1500);
+    }
+
+    function loadGame() {
+        let loaded = false;
+        try {
+            // المحاولة الأولى: localStorage
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                gameState = { ...gameState, ...parsed };
+                loaded = true;
+            }
+        } catch (e) {            console.log('localStorage failed, trying sessionStorage...');
+        }
+        
+        // المحاولة الثانية: sessionStorage (نسخة احتياطية)
+        if (!loaded) {
+            try {
+                const saved = sessionStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY + '_backup');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    gameState = { ...gameState, ...parsed };
+                    loaded = true;
+                    showToast('تم استعادة من نسخة احتياطية', 'info');
+                }
+            } catch (e) {
+                console.log('sessionStorage also failed');
+            }
+        }
+        
+        if (!loaded) {
+            showToast('تم البدء بلعبة جديدة 🎮', 'success');
+        } else {
+            showToast('تم تحميل تقدمك السابق ✨', 'success');
+        }
+    }
+
+    // ========================================
     // 🔧 WebView Compatibility & Error Handling
     // ========================================
     
-    // كشف حالة الاتصال
-    window.addEventListener('online', () => showToast('📡 تم الاتصال بالإنترنت', 'success'));
-    window.addEventListener('offline', () => showToast('📴 تعمل دون اتصال', 'error'));
-    
-    // معالجة أخطاء تحميل الموارد
     window.addEventListener('error', (e) => {
         console.log('Resource load error:', e.target.src || e.target.href);
     }, true);
     
-    // فوال باك للأيقونات في حال فشل Font Awesome
+    // فوال باك للأيقونات
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             if (typeof FontAwesome === 'undefined' && !document.querySelector('.fa-heart')?.getBoundingClientRect()?.height) {
-                // استبدال الأيقونات برموز نصية
                 document.querySelectorAll('i.fas, i.fab, i.far').forEach(function(icon) {
                     const fallbacks = {
                         'fa-heart': '❤️', 'fa-star': '⭐', 'fa-medal': '🏅',
@@ -831,10 +583,10 @@
                         'fa-book-open': '📖', 'fa-users': '👥', 'fa-graduation-cap': '🎓',
                         'fa-info-circle': 'ℹ️', 'fa-check': '✓', 'fa-exclamation-circle': '⚠️'
                     };
-                    const classes = icon.className;                    for (let key in fallbacks) {
+                    const classes = icon.className;
+                    for (let key in fallbacks) {
                         if (classes.includes(key)) {
-                            icon.outerHTML = '<span style="font-size:inherit;">' + fallbacks[key] + '</span>';
-                            break;
+                            icon.outerHTML = '<span style="font-size:inherit;">' + fallbacks[key] + '</span>';                            break;
                         }
                     }
                 });
@@ -848,11 +600,7 @@
     
     const stagesData = [
         {
-            id: 0, 
-            title: "المرحلة الأولى: فقه الطهارة", 
-            icon: "fa-faucet",
-            type: "fiqh",
-            color: "#1e4d2b",
+            id: 0, title: "المرحلة الأولى: فقه الطهارة", icon: "fa-faucet", type: "fiqh", color: "#1e4d2b",
             questions: [
                 { q: "ما هو حكم السواك عند الوضوء؟", opts: ["واجب", "سنة مؤكدة", "مكروه"], ans: 1, exp: "السواك سنة مؤكدة ثبتت عن النبي ﷺ في أحاديث كثيرة، وهو من أسباب مرضاة الرب." },
                 { q: "كم عدد فروض الوضوء؟", opts: ["أربعة", "ستة", "ثمانية"], ans: 1, exp: "فروض الوضوء ستة: غسل الوجه، اليدين إلى المرفقين، مسح الرأس، غسل الرجلين إلى الكعبين، الترتيب، والموالاة." },
@@ -867,11 +615,7 @@
             ]
         },
         {
-            id: 1, 
-            title: "المرحلة الثانية: فقه الصلاة والصيام", 
-            icon: "fa-mosque",
-            type: "fiqh",
-            color: "#2e7d32",
+            id: 1, title: "المرحلة الثانية: فقه الصلاة والصيام", icon: "fa-mosque", type: "fiqh", color: "#2e7d32",
             questions: [
                 { q: "أي مما يلي يعتبر من شروط صحة الصلاة وليس من أركانها؟", opts: ["الركوع", "استقبال القبلة", "السجود"], ans: 1, exp: "الشرط يسبق الصلاة (كالقبلة والوقت والطهارة)، أما الركن فهو جزء من الصلاة لا تصح بدونه." },
                 { q: "ما هي الصلاة التي ليس لها ركوع ولا سجود؟", opts: ["الكسوف", "الجنازة", "الاستسقاء"], ans: 1, exp: "صلاة الجنازة أربع تكبيرات فقط بدون ركوع أو سجود، والدعاء فيها للميت." },
@@ -880,7 +624,8 @@
                 { q: "من نسي الركوع وتذكره وهو في السجود، ماذا يفعل؟", opts: ["يكمل صلاته ويسجد للسهو", "يرجع فوراً للركوع", "تبطل ركعته"], ans: 1, exp: "يجب العودة للركن الذي نسيه فوراً لأن الركن لا يسقط بالسهو، ثم يكمل صلاته." },
                 { q: "كم عدد ركعات صلاة الفجر؟", opts: ["ثلاث", "أربع", "ركعتان"], ans: 2, exp: "صلاة الفجر ركعتان فرضاً، وهما من أثقل الصلوات على المنافقين، وفيهما تقرأ سورة طويلة." },
                 { q: "ما هو وقت صلاة العصر؟", opts: ["من زوال الشمس", "من حين ظل كل شيء مثله", "بعد المغرب"], ans: 1, exp: "وقت العصر من حين ظل كل شيء مثله بعد ظل الزوال، إلى اصفرار الشمس أو غروبها عند بعض العلماء." },
-                { q: "حكم ترك الصلاة عمداً؟", opts: ["معصية فقط", "كفر أكبر عند جمهور العلماء", "مكروه"], ans: 1, exp: "جمهور العلماء على أن تارك الصلاة عمداً جحوداً أو تكاسلاً كافر كفراً مخرجاً عن الملة، والعياذ بالله." },                { q: "متى يمسك الصائم عن الطعام؟", opts: ["أذان الفجر الأول", "أذان الفجر الصادق", "شروق الشمس"], ans: 1, exp: "الإمساك يبدأ مع طلوع الفجر الصادق المستطير في الأفق، وهو وقت دخول صلاة الفجر." },
+                { q: "حكم ترك الصلاة عمداً؟", opts: ["معصية فقط", "كفر أكبر عند جمهور العلماء", "مكروه"], ans: 1, exp: "جمهور العلماء على أن تارك الصلاة عمداً جحوداً أو تكاسلاً كافر كفراً مخرجاً عن الملة، والعياذ بالله." },
+                { q: "متى يمسك الصائم عن الطعام؟", opts: ["أذان الفجر الأول", "أذان الفجر الصادق", "شروق الشمس"], ans: 1, exp: "الإمساك يبدأ مع طلوع الفجر الصادق المستطير في الأفق، وهو وقت دخول صلاة الفجر." },
                 { q: "من أكل ناسياً في نهار رمضان فما حكمه؟", opts: ["عليه القضاء", "صيامه صحيح", "عليه الكفارة"], ans: 1, exp: "من أكل ناسياً فإنما أطعمه الله وسقاه، وصيامه صحيح ولا قضاء عليه، وليتم صومه." },
                 { q: "ما هي الركعات التي تجب فيها القراءة بالفاتحة؟", opts: ["الأولى فقط", "الأولى والثانية", "جميع الركعات"], ans: 2, exp: "تجب قراءة الفاتحة في كل ركعة من ركعات الصلاة عند جمهور العلماء، وهي ركن من أركان الصلاة." },
                 { q: "حكم صلاة الجماعة للرجال؟", opts: ["سنة", "واجبة", "مستحبة"], ans: 1, exp: "صلاة الجماعة واجبة على الرجال عند جمهور العلماء، وهي أفضل من صلاة الفذ بسبع وعشرين درجة." },
@@ -890,16 +635,11 @@
                 { q: "ما هي النية في الصيام؟", opts: ["تكفي نية واحدة للشهر", "تجب لكل يوم", "تستحب فقط"], ans: 1, exp: "تجب النية لكل يوم من أيام رمضان عند جمهور العلماء، وتكون من الليل قبل طلوع الفجر." },
                 { q: "من أفطر في رمضان لعذر شرعي، فماذا عليه؟", opts: ["الكفارة فقط", "القضاء فقط", "لا شيء"], ans: 1, exp: "من أفطر لعذر شرعي (مرض، سفر، حيض) فعليه قضاء الأيام التي أفطرها فقط، ولا كفارة عليه." },
                 { q: "ما حكم صلاة التراويح؟", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "صلاة التراويح سنة مؤكدة في رمضان، صلاها النبي ﷺ بأصحابه ثم تركها خشية أن تفرض عليهم." },
-                { q: "كم عدد ركعات الوتر؟", opts: ["ركعة واحدة", "ثلاث ركعات", "أكثر من ذلك"], ans: 2, exp: "الوتر ركعة واحدة أو ثلاث أو خمس أو أكثر، وأقله ركعة، وأكمله إحدى عشرة أو ثلاث عشرة ركعة." },
-                { q: "ما هو وقت صلاة الوتر؟", opts: ["بعد العشاء فقط", "من بعد العشاء إلى الفجر", "قبل الفجر فقط"], ans: 1, exp: "وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، والأفضل تأخيره إلى آخر الليل لمن وثق باستيقاظه." }
+                { q: "كم عدد ركعات الوتر؟", opts: ["ركعة واحدة", "ثلاث ركعات", "أكثر من ذلك"], ans: 2, exp: "الوتر ركعة واحدة أو ثلاث أو خمس أو أكثر، وأقله ركعة، وأكمله إحدى عشرة أو ثلاث عشرة ركعة." },                { q: "ما هو وقت صلاة الوتر؟", opts: ["بعد العشاء فقط", "من بعد العشاء إلى الفجر", "قبل الفجر فقط"], ans: 1, exp: "وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، والأفضل تأخيره إلى آخر الليل لمن وثق باستيقاظه." }
             ]
         },
         {
-            id: 2, 
-            title: "المرحلة الثالثة: السيرة النبوية", 
-            icon: "fa-book-open",
-            type: "islamic",
-            color: "#388e3c",
+            id: 2, title: "المرحلة الثالثة: السيرة النبوية", icon: "fa-book-open", type: "islamic", color: "#388e3c",
             questions: [
                 { q: "في أي عام ولد النبي محمد ﷺ؟", opts: ["عام الفيل", "عام الحزن", "عام الهجرة"], ans: 0, exp: "وُلد النبي ﷺ في عام الفيل الموافق 571م تقريباً، وهو العام الذي حاول فيه أبرهة هدم الكعبة." },
                 { q: "ما اسم والدة النبي ﷺ؟", opts: ["آمنة بنت وهب", "حليمة السعدية", "فاطمة بنت أسد"], ans: 0, exp: "والدة النبي ﷺ هي آمنة بنت وهب من بني زهرة، توفيت والأبواب في الأبواء والنبي ﷺ ابن ست سنين." },
@@ -929,10 +669,7 @@
             ]
         },
         {
-            id: 3,             title: "المرحلة الرابعة: الصحابة والسنة", 
-            icon: "fa-users",
-            type: "islamic",
-            color: "#43a047",
+            id: 3, title: "المرحلة الرابعة: الصحابة والسنة", icon: "fa-users", type: "islamic", color: "#43a047",
             questions: [
                 { q: "من هو خليفة النبي ﷺ الأول؟", opts: ["عمر", "عثمان", "أبو بكر"], ans: 2, exp: "أبو بكر الصديق رضي الله عنه أول خليفة للمسلمين بعد النبي ﷺ، بايعه الناس في سقيفة بني ساعدة." },
                 { q: "من هو صاحب سر النبي ﷺ؟", opts: ["علي", "حذيفة", "أبو بكر"], ans: 1, exp: "حذيفة بن اليمان رضي الله عنه كان صاحب سر النبي ﷺ في المنافقين، لا يخبر بهم أحداً حتى لا يقتلوا." },
@@ -947,8 +684,7 @@
                 { q: "من هو الذي كان يُكنى بـ 'أبي عبد الله'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق رضي الله عنه كان يُكنى بأبي عبد الله، وهو من أشهر كناه." },
                 { q: "من هو الذي قال: 'والله لو أنكم تضعونني في يميني لألقيتكم في بحركم هذا'؟", opts: ["خالد بن الوليد", "سعد بن أبي وقاص", "عمرو بن العاص"], ans: 0, exp: "قالها خالد بن الوليد رضي الله عنه في فتح مكة، حينما كاد بعض المشركين أن يعتدوا على المسلمين." },
                 { q: "من هو الذي فتح مصر؟", opts: ["عمرو بن العاص", "خالد بن الوليد", "عقبة بن نافع"], ans: 0, exp: "فتح عمرو بن العاص رضي الله عنه مصر في عهد عمر بن الخطاب، وأسس مدينة الفسطاط." },
-                { q: "من هو الذي قال: 'إنما الأعمال بالنيات'؟", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث 'إنما الأعمال بالنيات' من أعظم أحاديث النبي ﷺ، وهو أول حديث في صحيح البخاري." },
-                { q: "من هو الذي جمع بين البصر والبصيرة؟", opts: ["ابن عباس", "ابن مسعود", "ابن عمر"], ans: 0, exp: "عبد الله بن عباس رضي الله عنهما كان يُسمى 'حبر الأمة' و'ترجمان القرآن'، جمع بين علم الظاهر والباطن." },
+                { q: "من هو الذي قال: 'إنما الأعمال بالنيات'؟", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث 'إنما الأعمال بالنيات' من أعظم أحاديث النبي ﷺ، وهو أول حديث في صحيح البخاري." },                { q: "من هو الذي جمع بين البصر والبصيرة؟", opts: ["ابن عباس", "ابن مسعود", "ابن عمر"], ans: 0, exp: "عبد الله بن عباس رضي الله عنهما كان يُسمى 'حبر الأمة' و'ترجمان القرآن'، جمع بين علم الظاهر والباطن." },
                 { q: "من هي التي كانت تُسمى 'الحميراء'؟", opts: ["عائشة", "حفصة", "جويرية"], ans: 0, exp: "عائشة رضي الله عنها كانت تُسمى 'الحميراء' لبياض بشرتها وإشراقها، وهي أحب أزواج النبي ﷺ إليه." },
                 { q: "من هو الذي كان يُسمى 'ذو النورين'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 2, exp: "عثمان بن عفان رضي الله عنه لُقب بذي النورين، لأنه تزوج ابنتي النبي ﷺ: رقية ثم أم كلثوم." },
                 { q: "من هو الذي كان يُسمى 'الفاروق'؟", opts: ["أبو بكر", "عمر", "علي"], ans: 1, exp: "عمر بن الخطاب رضي الله عنه لُقب بالفاروق، لأنه فرق بين الحق والباطل، وأظهر الإسلام بعد خفائه." },
@@ -972,13 +708,10 @@
             ]
         },
         {
-            id: 4, 
-            title: "المرحلة الخامسة: الثقافة الإسلامية", 
-            icon: "fa-graduation-cap",
-            type: "islamic",
-            color: "#66bb6a",
+            id: 4, title: "المرحلة الخامسة: الثقافة الإسلامية", icon: "fa-graduation-cap", type: "islamic", color: "#66bb6a",
             questions: [
-                { q: "كم عدد سور القرآن الكريم؟", opts: ["112", "114", "116"], ans: 1, exp: "عدد سور القرآن 114 سورة بالاتفاق، أولها الفاتحة وآخرها الناس." },                { q: "ما هي أطول سورة في القرآن؟", opts: ["آل عمران", "البقرة", "النساء"], ans: 1, exp: "سورة البقرة هي أطول سورة في القرآن بـ 286 آية، وهي مدنية." },
+                { q: "كم عدد سور القرآن الكريم؟", opts: ["112", "114", "116"], ans: 1, exp: "عدد سور القرآن 114 سورة بالاتفاق، أولها الفاتحة وآخرها الناس." },
+                { q: "ما هي أطول سورة في القرآن؟", opts: ["آل عمران", "البقرة", "النساء"], ans: 1, exp: "سورة البقرة هي أطول سورة في القرآن بـ 286 آية، وهي مدنية." },
                 { q: "ما هي أقصر سورة في القرآن؟", opts: ["الإخلاص", "الكوثر", "العصر"], ans: 1, exp: "سورة الكوثر هي أقصر سورة في القرآن، ثلاث آيات فقط، وهي مكية." },
                 { q: "كم عدد أجزاء القرآن؟", opts: ["28", "30", "32"], ans: 1, exp: "القرآن الكريم مقسم إلى 30 جزءاً، لتسهيل تلاوته وختمه في شهر." },
                 { q: "ما هي السورة التي تسمى 'قلب القرآن'؟", opts: ["يس", "الرحمن", "الملك"], ans: 0, exp: "سورة يس تسمى قلب القرآن، كما في الحديث: 'إن لكل شيء قلباً، وقلب القرآن يس'." },
@@ -1000,8 +733,7 @@
                 { q: "ما هي أفضل الليالي؟", opts: ["ليلة القدر", "ليلة النصف من شعبان", "ليلة الجمعة"], ans: 0, exp: "أفضل الليالي ليلة القدر، هي خير من ألف شهر، من حرم خيرها فقد حرم." },
                 { q: "ما هي أفضل الشهور؟", opts: ["رمضان", "المحرم", "ذو الحجة"], ans: 0, exp: "أفضل الشهور رمضان، فيه نزل القرآن، وفيه تفتح أبواب الجنة، وتغلق أبواب النار." },
                 { q: "ما هي أفضل البقاع؟", opts: ["المسجد الحرام", "المسجد النبوي", "المسجد الأقصى"], ans: 0, exp: "أفضل البقاع المسجد الحرام، ثم المسجد النبوي، ثم المسجد الأقصى، كما في الحديث." },
-                { q: "ما هي أفضل الصلاة بعد الفريضة؟", opts: ["صلاة الليل", "صلاة الضحى", "صلاة التراويح"], ans: 0, exp: "أفضل الصلاة بعد الفريضة صلاة الليل، كما في الحديث: 'أفضل الصلاة بعد الفريضة صلاة الليل'." },
-                { q: "ما هي أفضل الصيام بعد رمضان؟", opts: ["صيام الاثنين والخميس", "صيام ستة من شوال", "صيام يوم عرفة"], ans: 0, exp: "أفضل الصيام بعد رمضان صيام المحرم، ثم صيام الاثنين والخميس، كما في الحديث." },
+                { q: "ما هي أفضل الصلاة بعد الفريضة؟", opts: ["صلاة الليل", "صلاة الضحى", "صلاة التراويح"], ans: 0, exp: "أفضل الصلاة بعد الفريضة صلاة الليل، كما في الحديث: 'أفضل الصلاة بعد الفريضة صلاة الليل'." },                { q: "ما هي أفضل الصيام بعد رمضان؟", opts: ["صيام الاثنين والخميس", "صيام ستة من شوال", "صيام يوم عرفة"], ans: 0, exp: "أفضل الصيام بعد رمضان صيام المحرم، ثم صيام الاثنين والخميس، كما في الحديث." },
                 { q: "ما هي أفضل الذكر؟", opts: ["لا إله إلا الله", "سبحان الله", "الله أكبر"], ans: 0, exp: "أفضل الذكر لا إله إلا الله، كما في الحديث: 'أفضل ما قلت أنا والنبيون من قبلي: لا إله إلا الله وحده لا شريك له'." },
                 { q: "ما هي أفضل الدعوة؟", opts: ["دعوة الوالد لولده", "دعوة الصائم", "دعوة المظلوم"], ans: 2, exp: "أفضل الدعوة دعوة المظلوم، فإنها ترفع إلى الله فوق الغمام، وتفتح لها أبواب السماء." },
                 { q: "ما هي أفضل الجهاد؟", opts: ["جهاد النفس", "جهاد المال", "كلمة حق عند سلطان جائر"], ans: 2, exp: "أفضل الجهاد كلمة حق عند سلطان جائر، كما في الحديث الصحيح." },
@@ -1027,7 +759,8 @@
                 { q: "ما هي أفضل الكلمة؟", opts: ["لا إله إلا الله", "سبحان الله وبحمده", "أستغفر الله"], ans: 1, exp: "أفضل الكلمة سبحان الله وبحمده، كما في الحديث." },
                 { q: "ما هي أفضل العبادة؟", opts: ["الصلاة", "قراءة القرآن", "ذكر الله"], ans: 2, exp: "أفضل العبادة ذكر الله، كما في الحديث." },
                 { q: "ما هي أفضل الجهاد؟", opts: ["جهاد النفس", "جهاد المال", "كلمة حق عند سلطان جائر"], ans: 2, exp: "أفضل الجهاد كلمة حق عند سلطان جائر، كما في الحديث." }
-            ]        }
+            ]
+        }
     ];
 
     // ========================================
@@ -1044,45 +777,15 @@
     ];
 
     // ========================================
-    // 💾 حالة اللعبة ونظام الحفظ
+    // 💾 حالة اللعبة
     // ========================================
-    const STORAGE_KEY = 'sabriFX_kingdom_state_v2';
-    
     let gameState = {
         points: 0,
         lives: 30,
-        unlockedStages: [0],
-        completedStages: [],
+        unlockedStages: [0],        completedStages: [],
         stageScores: {},
         lastSaved: null
     };
-
-    function loadGame() {
-        try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                gameState = { ...gameState, ...parsed };
-                if (!parsed.lastSaved && gameState.lives < 30) {
-                    gameState.lives = 30;
-                }
-                showToast('تم تحميل تقدمك السابق ✨', 'success');
-            }
-        } catch (e) {
-            console.error('خطأ في تحميل البيانات:', e);
-            showToast('تم البدء بلعبة جديدة 🎮', 'success');
-        }
-    }
-
-    function saveGame() {
-        try {
-            gameState.lastSaved = new Date().toISOString();            localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
-        } catch (e) {
-            console.error('خطأ في الحفظ:', e);
-            showToast('⚠️ تعذر حفظ التقدم', 'error');
-        }
-    }
-    setInterval(saveGame, 30000);
 
     // ========================================
     // 🎯 وظائف الواجهة والتحديث
@@ -1097,17 +800,14 @@
     function updateRank() {
         let currentRank = ranks[0];
         let nextRank = ranks[1];
-        
         for (let i = 0; i < ranks.length; i++) {
             if (gameState.points >= ranks[i].minPoints) {
                 currentRank = ranks[i];
                 nextRank = ranks[i+1] || ranks[i];
             }
         }
-        
         document.getElementById('rankName').innerText = currentRank.name;
         document.getElementById('rankDisplay').innerHTML = `${currentRank.icon} ${currentRank.name}`;
-        
         const progress = nextRank.minPoints === Infinity ? 100 : 
             Math.min(100, ((gameState.points - currentRank.minPoints) / (nextRank.minPoints - currentRank.minPoints)) * 100);
         document.getElementById('rankProgress').style.width = `${progress}%`;
@@ -1116,25 +816,22 @@
     function renderMap() {
         const map = document.getElementById('gameMap');
         map.innerHTML = '';
-        
         stagesData.forEach((stage, index) => {
             const isLocked = !gameState.unlockedStages.includes(index);
             const isCompleted = gameState.completedStages.includes(index);
             const isActive = !isLocked && !isCompleted;
             const stageScore = gameState.stageScores[index] || { correct: 0, total: stage.questions.length };
             const accuracy = stageScore.total ? Math.round((stageScore.correct / stageScore.total) * 100) : 0;
-
             const node = document.createElement('div');
-            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;            if(!isLocked) node.onclick = () => startStage(index);
-
+            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            if(!isLocked) node.onclick = () => startStage(index);
             node.innerHTML = `
                 <div class="node-icon"><i class="fas ${stage.icon}"></i></div>
                 <div class="node-info">
                     <h3>${stage.title}</h3>
                     <span>${stage.questions.length} أسئلة • ${stage.type === 'fiqh' ? 'فقه' : 'ثقافة إسلامية'}</span>
                     <div class="node-meta">
-                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}
-                        ${stageScore.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
+                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}                        ${stageScore.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
                     </div>
                 </div>
                 ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
@@ -1171,24 +868,19 @@
     function showQuestion() {
         const stage = stagesData[gameState.currentStageIndex];
         const q = stage.questions[gameState.currentQIndex];
-        
         document.getElementById('questionText').innerText = q.q;
         document.getElementById('expText').innerText = q.exp;
-                const cont = document.getElementById('optionsCont');
+        const cont = document.getElementById('optionsCont');
         cont.innerHTML = '';
         document.getElementById('infoBox').style.display = 'none';
         document.getElementById('nextBtn').style.display = 'none';
-        
-        const shuffled = q.opts.map((opt, i) => ({ opt, i }))
-            .sort(() => Math.random() - 0.5);
-
+        const shuffled = q.opts.map((opt, i) => ({ opt, i })).sort(() => Math.random() - 0.5);
         shuffled.forEach(({ opt, i: originalIndex }, idx) => {
             const div = document.createElement('div');
             div.className = 'option-item';
             div.dataset.originalIndex = originalIndex;
             div.dataset.num = idx + 1;
-            div.setAttribute('data-num', idx + 1);
-            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
+            div.setAttribute('data-num', idx + 1);            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
             div.onclick = () => checkAns(originalIndex, q.ans, div);
             cont.appendChild(div);
         });
@@ -1197,7 +889,6 @@
     function checkAns(selected, correct, el) {
         const items = document.querySelectorAll('.option-item');
         items.forEach(item => item.style.pointerEvents = 'none');
-
         if(selected === correct) {
             el.classList.add('correct');
             gameState.points += 25;
@@ -1208,29 +899,25 @@
             gameState.lives--;
             showToast('❌ إجابة خاطئة، لا بأس حاول مرة أخرى', 'error');
             items.forEach(item => {
-                if (parseInt(item.dataset.originalIndex) === correct) {
-                    item.classList.add('correct');
-                }
+                if (parseInt(item.dataset.originalIndex) === correct) item.classList.add('correct');
             });
         }
-        
         if (!gameState.stageScores[gameState.currentStageIndex]) {
             gameState.stageScores[gameState.currentStageIndex] = { correct: 0, total: 0 };
         }
         gameState.stageScores[gameState.currentStageIndex].total++;
-        if (selected === correct) {
-            gameState.stageScores[gameState.currentStageIndex].correct++;
-        }
+        if (selected === correct) gameState.stageScores[gameState.currentStageIndex].correct++;
         
         updateStats();
-        saveGame();        if(gameState.lives <= 0 && selected !== correct) {
+        saveGame(true); // حفظ فوري بعد كل إجابة
+        
+        if(gameState.lives <= 0 && selected !== correct) {
             setTimeout(() => { 
                 showToast("❤️ انتهت القلوب! ركز في المرة القادمة", "error");
                 closeQuiz(); 
             }, 1500);
             return;
         }
-        
         setTimeout(() => {
             document.getElementById('infoBox').style.display = 'block';
             document.getElementById('nextBtn').style.display = 'block';
@@ -1241,20 +928,15 @@
         const popup = document.createElement('div');
         popup.className = 'points-popup';
         popup.innerText = text;
-        
         const rect = element.getBoundingClientRect();
-        popup.style.left = `${rect.left + rect.width/2}px`;
-        popup.style.top = `${rect.top}px`;
-        
+        popup.style.left = `${rect.left + rect.width/2}px`;        popup.style.top = `${rect.top}px`;
         document.body.appendChild(popup);
-        
         setTimeout(() => popup.remove(), 1000);
     }
 
     function nextStep() {
         gameState.currentQIndex++;
         const stage = stagesData[gameState.currentStageIndex];
-        
         if(gameState.currentQIndex < stage.questions.length) {
             updateQuestionCounter();
             showQuestion();
@@ -1265,22 +947,19 @@
 
     function winStage() {
         gameState.isQuizActive = false;
-        
         if (!gameState.completedStages.includes(gameState.currentStageIndex)) {
             gameState.completedStages.push(gameState.currentStageIndex);
             const nextIdx = gameState.currentStageIndex + 1;
             if(nextIdx < stagesData.length && !gameState.unlockedStages.includes(nextIdx)) {
                 gameState.unlockedStages.push(nextIdx);
                 showToast(`🔓 تم فتح ${stagesData[nextIdx].title}`, 'success');
-            }        }
-        
+            }
+        }
         const bonus = 100 + (gameState.currentStageIndex * 25);
         gameState.points += bonus;
         document.getElementById('earnedPoints').innerText = bonus;
-        
         updateStats();
-        saveGame();
-        
+        saveGame(true);
         document.getElementById('quizOverlay').style.display = 'none';
         document.getElementById('resultOverlay').style.display = 'flex';
     }
@@ -1299,7 +978,7 @@
     }
 
     function confirmCloseQuiz() {
-        if(confirm("⚠️ هل تريد الخروج؟ ستخسر تقدمك في هذه المرحلة")) {
+        if(confirm("⚠️ هل تريد الخروج؟ تم حفظ تقدمك تلقائياً")) {            saveGame(true);
             closeQuiz();
         }
     }
@@ -1316,43 +995,48 @@
     function showToast(message, type = 'info') {
         const toast = document.getElementById('toast');
         const msg = document.getElementById('toastMsg');
-        
         msg.innerText = message;
         toast.className = `toast ${type} show`;
-        
-        if (type === 'success') {
-            toast.querySelector('i').className = 'fas fa-check-circle';        } else if (type === 'error') {
-            toast.querySelector('i').className = 'fas fa-exclamation-circle';
-        } else {
-            toast.querySelector('i').className = 'fas fa-info-circle';
-        }
-        
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
+        if (type === 'success') toast.querySelector('i').className = 'fas fa-check-circle';
+        else if (type === 'error') toast.querySelector('i').className = 'fas fa-exclamation-circle';
+        else toast.querySelector('i').className = 'fas fa-info-circle';
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     // ========================================
     // 🚀 التهيئة والتشغيل
     // ========================================
     function init() {
-        setTimeout(() => {
-            loadGame();
-            updateStats();
-            renderMap();
-            document.getElementById('loadingScreen').classList.add('hidden');
-            showToast('🎉 أهلاً بك!', 'success');
-        }, 1200);
-        
+        checkConnection();
+        if (navigator.onLine) {
+            setTimeout(() => {
+                loadGame();
+                updateStats();
+                renderMap();
+                document.getElementById('loadingScreen').classList.add('hidden');
+                showToast('🎉 أهلاً بك!', 'success');
+            }, 1200);
+        }
+
         document.addEventListener('touchmove', (e) => {
-            if (gameState.isQuizActive) {
-                e.preventDefault();
-            }
+            if (gameState.isQuizActive) e.preventDefault();
         }, { passive: false });
+
+        // 🔥 حفظ تلقائي كل 10 ثوانٍ
+        setInterval(() => saveGame(true), 10000);
     }
 
     window.addEventListener('load', init);
-    window.addEventListener('beforeunload', saveGame);
+        // حفظ قبل إغلاق الصفحة
+    window.addEventListener('beforeunload', () => saveGame(true));
+    
+    // حفظ عند إخفاء الصفحة (Android WebView)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) saveGame(true);
+    });
+    
+    // حفظ عند إيقاف الصفحة (Android)
+    window.addEventListener('pagehide', () => saveGame(true));
 </script>
 </body>
 </html>
