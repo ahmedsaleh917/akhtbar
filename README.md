@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>مملكة الفقيه - sabriFX Edition</title>
+    <title>sabriFX Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -194,8 +194,7 @@
             transform: none !important;
         }
         
-        .level-node.locked:hover { transform: none !important; }        
-        .level-node.active { 
+        .level-node.locked:hover { transform: none !important; }                .level-node.active { 
             border-color: var(--gold); 
             transform: scale(1.025); 
             box-shadow: var(--shadow-gold);
@@ -243,8 +242,8 @@
             margin: 0 0 6px 0; 
             font-size: 18px; 
             color: var(--primary); 
-            font-weight: 800;             line-height: 1.4;
-        }
+            font-weight: 800;
+            line-height: 1.4;        }
         .node-info span { 
             font-size: 13px; 
             color: #666; 
@@ -292,8 +291,8 @@
             display: none; 
             flex-direction: column;
             animation: slideUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(5px);        }
-
+            backdrop-filter: blur(5px);
+        }
         @keyframes slideUp { 
             from { transform: translateY(100%); opacity: 0; } 
             to { transform: translateY(0); opacity: 1; } 
@@ -341,8 +340,8 @@
             overflow: hidden;
         }
         
-        .question-card::before {            content: "";
-            position: absolute;
+        .question-card::before {
+            content: "";            position: absolute;
             top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
         }
@@ -391,8 +390,7 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }        
-        .option-item:hover {
-            border-color: var(--gold);
+        .option-item:hover {            border-color: var(--gold);
             transform: translateX(5px);
             box-shadow: 0 6px 20px rgba(212,175,55,0.15);
         }
@@ -439,9 +437,9 @@
         }
 
         .info-box {
-            background: linear-gradient(135deg, #fff9e6, #fff3cd);            border-right: 5px solid var(--gold);
-            padding: 20px; 
-            border-radius: 18px;
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border-right: 5px solid var(--gold);
+            padding: 20px;             border-radius: 18px;
             margin-top: 20px; 
             width: 100%; 
             max-width: 550px;
@@ -488,10 +486,9 @@
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(212,175,55,0.6);
         }
-                .btn-next:active {
+        .btn-next:active {
             transform: translateY(1px);
-        }
-        
+        }        
         .btn-next::after {
             content: "";
             position: absolute;
@@ -537,10 +534,10 @@
         }
         
         .win-card::before {
-            content: "";            position: absolute;
+            content: "";
+            position: absolute;
             top: 0; left: 0; right: 0; height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
-            border-radius: 35px 35px 0 0;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));            border-radius: 35px 35px 0 0;
         }
         
         .win-card i { 
@@ -589,8 +586,7 @@
         }        
         .footer-brand strong { 
             color: var(--primary); 
-            font-weight: 800;
-            position: relative;
+            font-weight: 800;            position: relative;
         }
         
         .footer-brand strong::after {
@@ -635,11 +631,11 @@
         }
 
         /* ✨ تأثير التحميل */
-        .loading {            position: fixed;
+        .loading {
+            position: fixed;
             inset: 0;
             background: var(--bg);
-            display: flex;
-            flex-direction: column;
+            display: flex;            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -684,11 +680,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.3s ease;            border-right: 4px solid var(--gold);
+            transition: transform 0.3s ease;
+            border-right: 4px solid var(--gold);
         }
         
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
+        .toast.show {            transform: translateX(-50%) translateY(0);
         }
         
         .toast.success { border-color: var(--correct); }
@@ -701,13 +697,13 @@
 <!-- شاشة التحميل -->
 <div class="loading" id="loadingScreen">
     <div class="loading-spinner"></div>
-    <div class="loading-text">جاري تحميل مملكة الفقيه...</div>
+    <div class="loading-text">جاري التحميل...</div>
 </div>
 
 <!-- رأس اللعبة -->
 <div class="game-header">
     <div class="logo-container">
-        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="مملكة الفقيه">
+        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار التطبيق">
     </div>
     <div class="stats-bar">
         <div class="stat-box lives">
@@ -734,9 +730,9 @@
         <div class="progress-fill" id="rankProgress"></div>
     </div>
 </div>
+
 <!-- خريطة المراحل -->
 <div class="map-container" id="gameMap"></div>
-
 <!-- شاشة الأسئلة -->
 <div class="quiz-overlay" id="quizOverlay">
     <div class="quiz-header">
@@ -773,7 +769,7 @@
 
 <!-- التذييل -->
 <div class="footer-brand">
-    <span>تطوير وإشراف </span><strong>sabriFX</strong> <span>• مملكة الفقيه</span>
+    <span>تطوير وإشراف </span><strong>sabriFX</strong>
 </div>
 
 <!-- إشعارات عائمة -->
@@ -782,11 +778,11 @@
     <span id="toastMsg">رسالة الإشعار</span>
 </div>
 
-<script>    // ========================================
+<script>
+    // ========================================
     // 📊 بيانات اللعبة - المراحل والأسئلة
     // ========================================
-    
-    const stagesData = [
+        const stagesData = [
         {
             id: 0, 
             title: "المرحلة الأولى: فقه الطهارة", 
@@ -831,11 +827,11 @@
                 { q: "ما هي النية في الصيام؟", opts: ["تكفي نية واحدة للشهر", "تجب لكل يوم", "تستحب فقط"], ans: 1, exp: "تجب النية لكل يوم من أيام رمضان عند جمهور العلماء، وتكون من الليل قبل طلوع الفجر." },
                 { q: "من أفطر في رمضان لعذر شرعي، فماذا عليه؟", opts: ["الكفارة فقط", "القضاء فقط", "لا شيء"], ans: 1, exp: "من أفطر لعذر شرعي (مرض، سفر، حيض) فعليه قضاء الأيام التي أفطرها فقط، ولا كفارة عليه." },
                 { q: "ما حكم صلاة التراويح؟", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "صلاة التراويح سنة مؤكدة في رمضان، صلاها النبي ﷺ بأصحابه ثم تركها خشية أن تفرض عليهم." },
-                { q: "كم عدد ركعات الوتر؟", opts: ["ركعة واحدة", "ثلاث ركعات", "أكثر من ذلك"], ans: 2, exp: "الوتر ركعة واحدة أو ثلاث أو خمس أو أكثر، وأقله ركعة، وأكمله إحدى عشرة أو ثلاث عشرة ركعة." },                { q: "ما هو وقت صلاة الوتر؟", opts: ["بعد العشاء فقط", "من بعد العشاء إلى الفجر", "قبل الفجر فقط"], ans: 1, exp: "وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، والأفضل تأخيره إلى آخر الليل لمن وثق باستيقاظه." }
+                { q: "كم عدد ركعات الوتر؟", opts: ["ركعة واحدة", "ثلاث ركعات", "أكثر من ذلك"], ans: 2, exp: "الوتر ركعة واحدة أو ثلاث أو خمس أو أكثر، وأقله ركعة، وأكمله إحدى عشرة أو ثلاث عشرة ركعة." },
+                { q: "ما هو وقت صلاة الوتر؟", opts: ["بعد العشاء فقط", "من بعد العشاء إلى الفجر", "قبل الفجر فقط"], ans: 1, exp: "وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، والأفضل تأخيره إلى آخر الليل لمن وثق باستيقاظه." }
             ]
         },
-        {
-            id: 2, 
+        {            id: 2, 
             title: "المرحلة الثالثة: السيرة النبوية", 
             icon: "fa-book-open",
             type: "islamic",
@@ -880,11 +876,11 @@
                 { q: "من هو الذي جمع القرآن في عهد أبي بكر؟", opts: ["علي بن أبي طالب", "زيد بن ثابت", "أبي بن كعب"], ans: 1, exp: "زيد بن ثابت الأنصاري رضي الله عنه هو الذي كلفه أبو بكر بجمع القرآن بعد استشهاد كثير من القراء في اليمامة." },
                 { q: "من هو الذي قال: 'لو كان الوحي ينزل عليّ لما زدت على ما زاد'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "قالها أبو بكر الصديق رضي الله عنه تواضعاً، وإشارة إلى كمال الوحي وعدم الحاجة للزيادة عليه." },
                 { q: "من هو الذي بشر بالجنة وهو يمشي على الأرض؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 2, exp: "بشر النبي ﷺ عثمان بن عفان رضي الله عنه بالجنة، وبشره بالبلاء بعد ذلك، فصبر واحتسب." },
-                { q: "من هو الذي لقب بـ 'أسد الله'؟", opts: ["حمزة", "علي", "خالد"], ans: 1, exp: "علي بن أبي طالب رضي الله عنه لُقب بأسد الله، لشجاعته وبلائه في الغزوات، وخاصة في غزوة خيبر." },                { q: "من هي التي لُقبت بـ 'أم المساكين'؟", opts: ["عائشة", "زينب بنت جحش", "فاطمة"], ans: 1, exp: "زينب بنت جحش رضي الله عنها لُقبت بأم المساكين، لكثرة صدقتها وإطعامها للفقراء." },
+                { q: "من هو الذي لقب بـ 'أسد الله'؟", opts: ["حمزة", "علي", "خالد"], ans: 1, exp: "علي بن أبي طالب رضي الله عنه لُقب بأسد الله، لشجاعته وبلائه في الغزوات، وخاصة في غزوة خيبر." },
+                { q: "من هي التي لُقبت بـ 'أم المساكين'؟", opts: ["عائشة", "زينب بنت جحش", "فاطمة"], ans: 1, exp: "زينب بنت جحش رضي الله عنها لُقبت بأم المساكين، لكثرة صدقتها وإطعامها للفقراء." },
                 { q: "من هو الذي قال: 'اللهم إني أسألك حبك وحب من يحبك'؟", opts: ["أبو بكر", "عمر", "بلال"], ans: 2, exp: "بلال بن رباح رضي الله عنه كان يردد هذا الدعاء، وهو من أعظم الأدعية الجامعة لمحبة الله ومحبة أوليائه." },
                 { q: "من هو الذي كان يُسمى 'الأمين' قبل البعثة؟", opts: ["أبو بكر", "عمر", "محمد ﷺ"], ans: 2, exp: "كان النبي ﷺ يُسمى 'الأمين' في قريش قبل البعثة، لصدقه وأمانته، حتى أن خديجة استأمنته على مالها في التجارة." },
-                { q: "من هي التي كانت تُسمى 'الطاهرة'؟", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة رضي الله عنها كانت تُسمى 'الطاهرة' في الجاهلية، ثم كانت أول من آمن بالنبي ﷺ." },
-                { q: "من هو الذي كان يُكنى بـ 'أبي عبد الله'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق رضي الله عنه كان يُكنى بأبي عبد الله، وهو من أشهر كناه." },
+                { q: "من هي التي كانت تُسمى 'الطاهرة'؟", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة رضي الله عنها كانت تُسمى 'الطاهرة' في الجاهلية، ثم كانت أول من آمن بالنبي ﷺ." },                { q: "من هو الذي كان يُكنى بـ 'أبي عبد الله'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق رضي الله عنه كان يُكنى بأبي عبد الله، وهو من أشهر كناه." },
                 { q: "من هو الذي قال: 'والله لو أنكم تضعونني في يميني لألقيتكم في بحركم هذا'؟", opts: ["خالد بن الوليد", "سعد بن أبي وقاص", "عمرو بن العاص"], ans: 0, exp: "قالها خالد بن الوليد رضي الله عنه في فتح مكة، حينما كاد بعض المشركين أن يعتدوا على المسلمين." },
                 { q: "من هو الذي فتح مصر؟", opts: ["عمرو بن العاص", "خالد بن الوليد", "عقبة بن نافع"], ans: 0, exp: "فتح عمرو بن العاص رضي الله عنه مصر في عهد عمر بن الخطاب، وأسس مدينة الفسطاط." },
                 { q: "من هو الذي قال: 'إنما الأعمال بالنيات'؟", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث 'إنما الأعمال بالنيات' من أعظم أحاديث النبي ﷺ، وهو أول حديث في صحيح البخاري." },
@@ -929,11 +925,11 @@
                 { q: "كم عدد آيات القرآن؟", opts: ["6236", "6348", "6666"], ans: 2, exp: "عدد آيات القرآن 6666 آية على المشهور، وقيل غير ذلك، والأمر في ذلك واسع." },
                 { q: "ما هي السورة التي لا تبدأ بالبسملة؟", opts: ["التوبة", "الأنفال", "براءة"], ans: 0, exp: "سورة التوبة (براءة) هي السورة الوحيدة التي لا تبدأ بالبسملة، لأن البسملة براءة والتوبة براءة، فلا يجتمعان." },
                 { q: "ما هي السورة التي ذكرت فيها البسملة مرتين؟", opts: ["النمل", "الفاتحة", "البقرة"], ans: 0, exp: "سورة النمل هي الوحيدة التي ذكرت فيها البسملة مرتين: في أولها، وفي قوله تعالى على لسان سليمان: 'إنه من سليمان وإنه بسم الله الرحمن الرحيم'." },
-                { q: "ما هي السورة التي تسمى 'العرائس'؟", opts: ["الرحمن", "يس", "الواقعة"], ans: 0, exp: "سورة الرحمن تسمى سورة العرائس، لحسنها وجمال معانيها، وكثرة ذكر نعم الله فيها." },                { q: "ما هي السورة التي تسمى 'المبثوثة'؟", opts: ["الحشر", "الصف", "الجمعة"], ans: 0, exp: "سورة الحشر تسمى المبثوثة، لكثرة ما فيها من أسماء الله الحسنى وصفاته العلى." },
+                { q: "ما هي السورة التي تسمى 'العرائس'؟", opts: ["الرحمن", "يس", "الواقعة"], ans: 0, exp: "سورة الرحمن تسمى سورة العرائس، لحسنها وجمال معانيها، وكثرة ذكر نعم الله فيها." },
+                { q: "ما هي السورة التي تسمى 'المبثوثة'؟", opts: ["الحشر", "الصف", "الجمعة"], ans: 0, exp: "سورة الحشر تسمى المبثوثة، لكثرة ما فيها من أسماء الله الحسنى وصفاته العلى." },
                 { q: "كم عدد أسماء الله الحسنى؟", opts: ["97", "99", "101"], ans: 1, exp: "أسماء الله الحسنى 99 اسماً، من أحصاها دخل الجنة، كما في الحديث الصحيح." },
                 { q: "ما هو اسم الله الأعظم؟", opts: ["الله", "الرحمن", "اختلف العلماء"], ans: 2, exp: "اختلف العلماء في تعيين اسم الله الأعظم، والأرجح أنه الله، أو الحي القيوم، أو ذو الجلال والإكرام." },
-                { q: "ما هي أركان الإيمان؟", opts: ["5", "6", "7"], ans: 1, exp: "أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر خيره وشره." },
-                { q: "ما هي أركان الإسلام؟", opts: ["4", "5", "6"], ans: 1, exp: "أركان الإسلام خمسة: شهادة أن لا إله إلا الله وأن محمداً رسول الله، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت." },
+                { q: "ما هي أركان الإيمان؟", opts: ["5", "6", "7"], ans: 1, exp: "أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر خيره وشره." },                { q: "ما هي أركان الإسلام؟", opts: ["4", "5", "6"], ans: 1, exp: "أركان الإسلام خمسة: شهادة أن لا إله إلا الله وأن محمداً رسول الله، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت." },
                 { q: "ما هي أفضل الأعمال؟", opts: ["الصلاة", "الإيمان بالله", "الجهاد"], ans: 1, exp: "أفضل الأعمال الإيمان بالله وحده، ثم الجهاد في سبيله، كما في الحديث: 'أفضل الأعمال إيمان بالله وجهاد في سبيله'." },
                 { q: "ما هي أفضل الصدقات؟", opts: ["صدقة السر", "صدقة في رمضان", "الصدقة على ذي الرحم"], ans: 2, exp: "أفضل الصدقات الصدقة على ذي الرحم الكاره، كما في الحديث: 'الصدقة على المسكين صدقة، وعلى ذي الرحم اثنتان: صدقة وصلة'." },
                 { q: "ما هي أفضل الأيام؟", opts: ["يوم الجمعة", "يوم عرفة", "يوم النحر"], ans: 2, exp: "أفضل الأيام يوم النحر (عيد الأضحى)، ثم يوم عرفة، ثم أيام التشريق، كما في الحديث." },
@@ -978,11 +974,11 @@
         { name: "مبتدئ", minPoints: 0, maxPoints: 99, icon: "🌱", color: "#81c784", desc: "بداية الرحلة العلمية" },
         { name: "طالب علم", minPoints: 100, maxPoints: 299, icon: "📖", color: "#4caf50", desc: "يسعى في طلب العلم" },
         { name: "حافظ", minPoints: 300, maxPoints: 599, icon: "🧠", color: "#388e3c", desc: "حفظ من العلم ما ينفع" },
-        { name: "فقيه", minPoints: 600, maxPoints: 999, icon: "⚖️", color: "#2e7d32", desc: "تفقه في الدين" },        { name: "عالم", minPoints: 1000, maxPoints: 1599, icon: "🕌", color: "#1b5e20", desc: "نشر العلم وعلم الناس" },
+        { name: "فقيه", minPoints: 600, maxPoints: 999, icon: "⚖️", color: "#2e7d32", desc: "تفقه في الدين" },
+        { name: "عالم", minPoints: 1000, maxPoints: 1599, icon: "🕌", color: "#1b5e20", desc: "نشر العلم وعلم الناس" },
         { name: "شيخ الإسلام", minPoints: 1600, maxPoints: 2499, icon: "👳", color: "#004d00", desc: "مرجعية علمية" },
         { name: "إمام الأمة", minPoints: 2500, maxPoints: Infinity, icon: "👑", color: "#d4af37", desc: "قدوة الأمة في العلم والعمل" }
     ];
-
     // ========================================
     // 💾 حالة اللعبة ونظام الحفظ
     // ========================================
@@ -993,19 +989,16 @@
         lives: 30,
         unlockedStages: [0],
         completedStages: [],
-        stageScores: {}, // { stageId: { correct: 0, total: 0 } }
+        stageScores: {},
         lastSaved: null
     };
 
-    // تحميل البيانات المحفوظة
     function loadGame() {
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 const parsed = JSON.parse(saved);
-                // دمج البيانات القديمة مع الجديدة لتجنب فقدان التقدم
                 gameState = { ...gameState, ...parsed };
-                // التأكد من أن القلوب 30 كبداية جديدة فقط
                 if (!parsed.lastSaved && gameState.lives < 30) {
                     gameState.lives = 30;
                 }
@@ -1017,7 +1010,6 @@
         }
     }
 
-    // حفظ البيانات مع التحقق
     function saveGame() {
         try {
             gameState.lastSaved = new Date().toISOString();
@@ -1027,7 +1019,6 @@
             showToast('⚠️ تعذر حفظ التقدم', 'error');
         }
     }
-    // حفظ تلقائي دوري كل 30 ثانية
     setInterval(saveGame, 30000);
 
     // ========================================
@@ -1036,8 +1027,7 @@
     
     function updateStats() {
         document.getElementById('pointsCont').innerText = gameState.points;
-        document.getElementById('livesCont').innerText = gameState.lives;
-        updateRank();
+        document.getElementById('livesCont').innerText = gameState.lives;        updateRank();
     }
 
     function updateRank() {
@@ -1054,7 +1044,6 @@
         document.getElementById('rankName').innerText = currentRank.name;
         document.getElementById('rankDisplay').innerHTML = `${currentRank.icon} ${currentRank.name}`;
         
-        // تحديث شريط التقدم للرتبة التالية
         const progress = nextRank.minPoints === Infinity ? 100 : 
             Math.min(100, ((gameState.points - currentRank.minPoints) / (nextRank.minPoints - currentRank.minPoints)) * 100);
         document.getElementById('rankProgress').style.width = `${progress}%`;
@@ -1069,14 +1058,15 @@
             const isCompleted = gameState.completedStages.includes(index);
             const isActive = !isLocked && !isCompleted;
             const stageScore = gameState.stageScores[index] || { correct: 0, total: stage.questions.length };
-            const accuracy = stage.total ? Math.round((stageScore.correct / stageScore.total) * 100) : 0;
+            const accuracy = stageScore.total ? Math.round((stageScore.correct / stageScore.total) * 100) : 0;
 
             const node = document.createElement('div');
             node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
             if(!isLocked) node.onclick = () => startStage(index);
 
             node.innerHTML = `
-                <div class="node-icon"><i class="fas ${stage.icon}"></i></div>                <div class="node-info">
+                <div class="node-icon"><i class="fas ${stage.icon}"></i></div>
+                <div class="node-info">
                     <h3>${stage.title}</h3>
                     <span>${stage.questions.length} أسئلة • ${stage.type === 'fiqh' ? 'فقه' : 'ثقافة إسلامية'}</span>
                     <div class="node-meta">
@@ -1086,8 +1076,7 @@
                 </div>
                 ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
             `;
-            map.appendChild(node);
-        });
+            map.appendChild(node);        });
     }
 
     // ========================================
@@ -1126,7 +1115,7 @@
         cont.innerHTML = '';
         document.getElementById('infoBox').style.display = 'none';
         document.getElementById('nextBtn').style.display = 'none';
-        // خلط الخيارات مع الحفاظ على الإجابة الصحيحة
+        
         const shuffled = q.opts.map((opt, i) => ({ opt, i }))
             .sort(() => Math.random() - 0.5);
 
@@ -1136,8 +1125,7 @@
             div.dataset.originalIndex = originalIndex;
             div.dataset.num = idx + 1;
             div.setAttribute('data-num', idx + 1);
-            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
-            div.onclick = () => checkAns(originalIndex, q.ans, div);
+            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;            div.onclick = () => checkAns(originalIndex, q.ans, div);
             cont.appendChild(div);
         });
     }
@@ -1155,7 +1143,6 @@
             el.classList.add('wrong');
             gameState.lives--;
             showToast('❌ إجابة خاطئة، لا بأس حاول مرة أخرى', 'error');
-            // إظهار الإجابة الصحيحة
             items.forEach(item => {
                 if (parseInt(item.dataset.originalIndex) === correct) {
                     item.classList.add('correct');
@@ -1163,7 +1150,6 @@
             });
         }
         
-        // تحديث نتيجة المرحلة
         if (!gameState.stageScores[gameState.currentStageIndex]) {
             gameState.stageScores[gameState.currentStageIndex] = { correct: 0, total: 0 };
         }
@@ -1188,8 +1174,7 @@
         }, 400);
     }
 
-    function showPointsPopup(text, element) {
-        const popup = document.createElement('div');
+    function showPointsPopup(text, element) {        const popup = document.createElement('div');
         popup.className = 'points-popup';
         popup.innerText = text;
         
@@ -1223,9 +1208,9 @@
             if(nextIdx < stagesData.length && !gameState.unlockedStages.includes(nextIdx)) {
                 gameState.unlockedStages.push(nextIdx);
                 showToast(`🔓 تم فتح ${stagesData[nextIdx].title}`, 'success');
-            }        }
+            }
+        }
         
-        // مكافأة إتمام المرحلة
         const bonus = 100 + (gameState.currentStageIndex * 25);
         gameState.points += bonus;
         document.getElementById('earnedPoints').innerText = bonus;
@@ -1238,8 +1223,7 @@
     }
 
     function closeResult() {
-        document.getElementById('resultOverlay').style.display = 'none';
-        renderMap();
+        document.getElementById('resultOverlay').style.display = 'none';        renderMap();
     }
     
     function nextStage() {
@@ -1272,7 +1256,8 @@
         msg.innerText = message;
         toast.className = `toast ${type} show`;
         
-        if (type === 'success') {            toast.querySelector('i').className = 'fas fa-check-circle';
+        if (type === 'success') {
+            toast.querySelector('i').className = 'fas fa-check-circle';
         } else if (type === 'error') {
             toast.querySelector('i').className = 'fas fa-exclamation-circle';
         } else {
@@ -1287,17 +1272,14 @@
     // ========================================
     // 🚀 التهيئة والتشغيل
     // ========================================
-    function init() {
-        // إخفاء شاشة التحميل بعد تحميل البيانات
-        setTimeout(() => {
+    function init() {        setTimeout(() => {
             loadGame();
             updateStats();
             renderMap();
             document.getElementById('loadingScreen').classList.add('hidden');
-            showToast('🎉 أهلاً بك في مملكة الفقيه!', 'success');
+            showToast('🎉 أهلاً بك!', 'success');
         }, 1200);
         
-        // منع السلوك الافتراضي لبعض الأحداث لتحسين تجربة الجوال
         document.addEventListener('touchmove', (e) => {
             if (gameState.isQuizActive) {
                 e.preventDefault();
@@ -1305,10 +1287,7 @@
         }, { passive: false });
     }
 
-    // بدء اللعبة عند تحميل الصفحة
     window.addEventListener('load', init);
-    
-    // حفظ عند إغلاق الصفحة
     window.addEventListener('beforeunload', saveGame);
 </script>
 </body>
