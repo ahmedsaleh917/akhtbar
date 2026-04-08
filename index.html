@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>sabriFX Edition</title>
+    <title>sabriFX Edition - النسخة الكاملة والمحسنة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
 
@@ -43,11 +44,46 @@
             overflow-x: hidden;
         }
 
+        /* تحسين العرض على شاشات 1100px وما فوق */
+        @media screen and (min-width: 1100px) {
+            .game-header {
+                max-width: 1100px;
+                margin: 0 auto;
+                border-radius: 0 0 40px 40px;
+            }
+            .map-container {
+                max-width: 1100px !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px !important;
+                padding: 40px 20px !important;
+            }
+            .level-node {
+                max-width: 100% !important;
+            }
+            .quiz-body {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .question-card {
+                padding: 40px !important;
+            }
+            .options-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            .option-item {
+                margin-bottom: 0 !important;
+            }
+        }
+
         body::before {
             content: ""; 
             position: fixed; 
             top: 0; 
-            left: 0;             right: 0; 
+            left: 0;             
+            right: 0; 
             bottom: 0;
             background-image: 
                 radial-gradient(circle at 20% 80%, rgba(212,175,55,0.06) 0%, transparent 25%),
@@ -96,7 +132,8 @@
             border: none; 
             padding: 14px 35px; 
             border-radius: 22px;
-            font-size: 16px;             font-weight: 700; 
+            font-size: 16px;             
+            font-weight: 700; 
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(30,77,43,0.3); 
             transition: transform 0.2s;
@@ -145,7 +182,8 @@
         .stats-bar {
             width: 100%; 
             max-width: 480px; 
-            display: flex;             justify-content: space-around;
+            display: flex;             
+            justify-content: space-around;
             margin-top: 6px; 
             padding: 0 5px; 
             gap: 6px;
@@ -194,7 +232,8 @@
             border: 1px solid var(--gold);
         }
         .rank-name { 
-            font-weight: 800;             font-size: 14px; 
+            font-weight: 800;             
+            font-size: 14px; 
             color: var(--gold-light);
             display: flex; 
             align-items: center; 
@@ -243,7 +282,8 @@
             border-radius: 24px; 
             display: flex; 
             align-items: center; 
-            gap: 16px;            box-shadow: var(--shadow); 
+            gap: 16px;            
+            box-shadow: var(--shadow); 
             position: relative; 
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -292,7 +332,8 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            color: var(--gold);             font-size: 24px; 
+            color: var(--gold);             
+            font-size: 24px; 
             box-shadow: 0 8px 25px rgba(30,77,43,0.3);
             flex-shrink: 0; 
             position: relative; 
@@ -306,196 +347,147 @@
             width: 200%; 
             height: 200%;
             background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%); 
-            animation: rotate 4s linear infinite;
+            animation: rotate 10s linear infinite;
         }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .node-info { flex: 1; min-width: 0; }
+        .node-info { flex: 1; }
         .node-info h3 { 
             margin: 0 0 4px 0; 
             font-size: 16px; 
-            color: var(--primary); 
             font-weight: 800; 
-            line-height: 1.4; 
+            color: var(--primary); 
         }
         .node-info span { 
             font-size: 12px; 
-            color: #666; 
-            display: block; 
+            color: #777; 
             font-weight: 500; 
         }
         .node-meta { 
             display: flex; 
-            gap: 10px; 
+            gap: 12px; 
             margin-top: 6px; 
-            font-size: 11px; 
-            color: #777; 
         }
-        .node-meta i { color: var(--gold); margin-left: 3px; }
+        .node-meta span { 
+            font-size: 11px; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            color: var(--primary); 
+            background: rgba(30,77,43,0.06); 
+            padding: 2px 8px; 
+            border-radius: 10px; 
+        }
 
         .lock-icon { 
-            position: absolute; 
-            left: 20px; 
-            color: #aaa; 
-            font-size: 20px; 
-            z-index: 2; 
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            color: #ccc; 
+            font-size: 18px; 
         }
-        .completed-icon {             position: absolute; 
-            left: 20px; 
+        .completed-icon { 
             color: var(--correct); 
-            font-size: 22px; 
-            z-index: 2; 
-            animation: bounce 0.6s ease; 
+            font-size: 20px; 
         }
-        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
+        /* 🧩 نظام الأسئلة */
         .quiz-overlay {
             position: fixed; 
             inset: 0; 
-            background: linear-gradient(135deg, rgba(30,77,43,0.96), rgba(21,58,32,0.98));
+            background: var(--bg); 
             z-index: 200; 
             display: none; 
-            flex-direction: column;
-            animation: slideUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px);
+            flex-direction: column; 
+            animation: slideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        @keyframes slideUp { 
-            from { transform: translateY(100%); opacity: 0; } 
-            to { transform: translateY(0); opacity: 1; } 
-        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
         .quiz-header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary)); 
-            height: 65px;
+            background: var(--primary); 
+            color: white; 
+            padding: 15px 20px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            color: white;
-            padding: 0 18px; 
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3); 
-            position: relative;
-        }
-        .quiz-header::after {
-            content: ""; 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .quiz-body { 
-            padding: 20px 15px; 
+            padding: 25px 20px; 
             flex: 1; 
-            display: flex;             flex-direction: column; 
-            align-items: center; 
             overflow-y: auto; 
-            background: var(--bg);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
         }
 
         .question-card {
-            background: var(--white); 
+            background: white; 
             width: 100%; 
             max-width: 540px; 
             padding: 30px 25px; 
             border-radius: 28px; 
-            text-align: center; 
             box-shadow: var(--shadow); 
-            margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.05); 
-            position: relative; 
-            overflow: hidden;
-        }
-        .question-card::before {
-            content: ""; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
-        }
-        .question-card h2 { 
-            margin: 0; 
-            font-size: 19px; 
-            font-weight: 800; 
-            line-height: 1.5; 
-            color: #2c3e50; 
-            position: relative; 
-            z-index: 2;
+            margin-bottom: 25px; 
+            text-align: center; 
+            position: relative;
         }
         .question-number {
-            display: inline-block; 
+            position: absolute; 
+            top: -12px; 
+            left: 50%; 
+            transform: translateX(-50%); 
             background: var(--gold); 
-            color: var(--primary); 
-            padding: 3px 12px;
-            border-radius: 18px; 
+            color: var(--primary-dark); 
+            padding: 4px 18px; 
+            border-radius: 15px; 
             font-weight: 800; 
             font-size: 13px; 
-            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+        }
+        .question-card h2 { 
+            font-size: 19px; 
+            line-height: 1.6; 
+            color: var(--primary); 
+            margin: 10px 0 0; 
+            font-weight: 800; 
         }
 
         .options-container { 
-            width: 100%;             max-width: 540px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
+            width: 100%; 
+            max-width: 540px; 
         }
         .option-item {
-            background: var(--white); 
-            padding: 16px 20px; 
-            border-radius: 18px; 
-            font-weight: 700;
+            background: white; 
+            padding: 18px 22px; 
+            border-radius: 20px; 
+            margin-bottom: 12px; 
+            cursor: pointer; 
             display: flex; 
             align-items: center; 
-            cursor: pointer; 
-            transition: all 0.25s;
-            border: 2px solid #e8f4e9; 
+            transition: all 0.25s; 
+            border: 2px solid transparent; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+            font-weight: 700; 
             font-size: 15px; 
-            position: relative; 
-            overflow: hidden;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-        }        
+            color: #444;
+        }
         .option-item:hover { 
+            transform: translateX(-5px); 
             border-color: var(--gold); 
-            transform: translateX(4px); 
-            box-shadow: 0 5px 18px rgba(212,175,55,0.12); 
+            background: #fffdf5; 
         }
-        .option-item::before {
-            content: attr(data-num); 
-            position: absolute; 
-            right: 18px; 
-            width: 26px; 
-            height: 26px;
-            background: var(--primary); 
-            color: white; 
-            border-radius: 50%; 
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            font-size: 13px; 
-            font-weight: 800;
-        }
-
         .option-item.correct { 
-            background: linear-gradient(135deg, #d4edda, #c3e6cb); 
+            background: #e8f5e9; 
             border-color: var(--correct); 
-            color: #155724; 
-            animation: correctAnim 0.4s ease;
+            color: var(--correct); 
+            animation: successPop 0.4s ease;
         }
         .option-item.wrong { 
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb); 
-            border-color: var(--danger);             color: #721c24; 
-            animation: shake 0.5s; 
+            background: #ffebee; 
+            border-color: var(--danger); 
+            color: var(--danger); 
+            animation: shake 0.4s ease;
         }
-        @keyframes correctAnim { 
-            0% { transform: scale(1); } 
-            50% { transform: scale(1.02); } 
-            100% { transform: scale(1); } 
-        }
+        @keyframes successPop { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
         @keyframes shake { 
             0%, 100% { transform: translateX(0); } 
             25% { transform: translateX(-10px); } 
@@ -537,7 +529,8 @@
             max-width: 540px; 
             border-radius: 18px; 
             font-weight: 800; 
-            font-size: 16px;             margin-top: 20px; 
+            font-size: 16px;             
+            margin-top: 20px; 
             cursor: pointer; 
             display: none;
             box-shadow: 0 6px 20px rgba(212,175,55,0.35); 
@@ -550,18 +543,6 @@
             box-shadow: 0 10px 30px rgba(212,175,55,0.5); 
         }
         .btn-next:active { transform: translateY(1px); }
-        .btn-next::after {
-            content: ""; 
-            position: absolute; 
-            top: -50%; 
-            left: -50%; 
-            width: 200%; 
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); 
-            opacity: 0; 
-            transition: opacity 0.3s;
-        }
-        .btn-next:hover::after { opacity: 1; }
 
         .result-overlay {
             position: fixed; 
@@ -586,7 +567,8 @@
             width: 90%; 
             box-shadow: 0 25px 80px rgba(0,0,0,0.4);
             position: relative; 
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);        }
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);        
+        }
         @keyframes popIn { 
             0% { transform: scale(0.8); opacity: 0; } 
             70% { transform: scale(1.03); } 
@@ -609,6 +591,8 @@
             display: block; 
             animation: bounce 1s ease infinite alternate; 
         }
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
         .win-card h1 { 
             margin: 0 0 12px 0; 
             color: var(--primary); 
@@ -635,7 +619,8 @@
 
         .footer-brand {
             position: fixed; 
-            bottom: 0;             width: 100%;
+            bottom: 0;             
+            width: 100%;
             background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,250,249,0.98));
             padding: 12px 20px; 
             text-align: center; 
@@ -649,31 +634,6 @@
             font-weight: 800; 
             position: relative; 
         }
-        .footer-brand strong::after {
-            content: ""; 
-            position: absolute; 
-            bottom: -2px; 
-            left: 0; 
-            right: 0; 
-            height: 2px;
-            background: var(--gold); 
-            border-radius: 2px;
-        }
-
-        .points-popup {
-            position: fixed; 
-            font-weight: 800; 
-            font-size: 18px; 
-            color: var(--gold);
-            pointer-events: none; 
-            animation: floatUp 1s ease-out forwards; 
-            z-index: 1000;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        @keyframes floatUp { 
-            0% { opacity: 1; transform: translateY(0) scale(1); } 
-            100% { opacity: 0; transform: translateY(-50px) scale(1.2); } 
-        }
 
         .loading {
             position: fixed; 
@@ -684,7 +644,8 @@
             align-items: center; 
             justify-content: center; 
             z-index: 1000; 
-            transition: opacity 0.4s;        }
+            transition: opacity 0.4s;        
+        }
         .loading.hidden { opacity: 0; pointer-events: none; }
         .loading-spinner {
             width: 50px; 
@@ -717,87 +678,69 @@
             align-items: center; 
             gap: 8px;
             transition: transform 0.3s ease; 
-            border-right: 4px solid var(--gold);
-            font-size: 14px;
         }
         .toast.show { transform: translateX(-50%) translateY(0); }
-        .toast.success { border-color: var(--correct); }
-        .toast.error { border-color: var(--danger); }
-        .toast i { font-size: 18px; }
+        .toast.success { border-right: 4px solid var(--correct); color: var(--correct); }
+        .toast.error { border-right: 4px solid var(--danger); color: var(--danger); }
 
         .save-indicator {
             position: fixed; 
-            top: 10px; 
-            left: 10px; 
-            background: var(--gold); 
-            color: var(--primary-dark);
-            padding: 4px 10px; 
-            border-radius: 12px; 
-            font-size: 11px;             font-weight: 700;
-            z-index: 9999; 
+            top: 20px; 
+            right: 20px; 
+            background: rgba(0,0,0,0.7); 
+            color: white; 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            z-index: 1000; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
             opacity: 0; 
-            transition: opacity 0.3s; 
-            pointer-events: none;
+            transition: 0.3s;
         }
         .save-indicator.show { opacity: 1; }
 
-        /* تحسينات للشاشات الطويلة */
-        @media (min-height: 900px) {
-            .game-header { min-height: 200px; }
-            .logo-container { width: 85px; height: 85px; }
-            .map-container { padding: 30px 20px; gap: 20px; }
-            .level-node { padding: 20px 24px; }
-            .node-icon { width: 65px; height: 65px; font-size: 26px; }
-            .node-info h3 { font-size: 17px; }
-            .question-card { padding: 35px 28px; }
-            .question-card h2 { font-size: 20px; }
-            .option-item { padding: 18px 22px; font-size: 16px; }
-            .win-card { padding: 40px 35px; }
-            .win-card i { font-size: 80px; }
+        /* Modal استكمال التقدم */
+        .modal-overlay {
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.8); 
+            z-index: 2000; 
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px;
         }
-
-        /* تحسينات للشاشات القصيرة */
-        @media (max-height: 700px) {
-            .game-header { min-height: 160px; }
-            .logo-container { width: 65px; height: 65px; }
-            .map-container { padding: 15px 12px; gap: 12px; }
-            .level-node { padding: 14px 16px; }
-            .node-icon { width: 50px; height: 50px; font-size: 20px; }
-            .node-info h3 { font-size: 14px; }
-            .question-card { padding: 24px 20px; margin-bottom: 16px; }
-            .question-card h2 { font-size: 17px; }
-            .option-item { padding: 14px 16px; font-size: 14px; }
-            .win-card { padding: 28px 24px; }
-            .win-card i { font-size: 60px; }
-        }
-
-        /* تحسينات للشاشات الصغيرة جداً */
-        @media (max-width: 380px) {
-            .stats-bar { gap: 4px; }
-            .stat-box { min-width: 60px; padding: 5px 8px; }
-            .stat-val { font-size: 14px; }
-            .stat-label { font-size: 9px; }
-            .question-card h2 { font-size: 16px; }
-            .option-item { font-size: 13px; padding: 14px 16px; }
+        .modal-card {
+            background: white; 
+            padding: 30px; 
+            border-radius: 24px; 
+            max-width: 400px; 
+            width: 100%; 
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<!-- مؤشر الحفظ -->
-<div class="save-indicator" id="saveIndicator">💾 تم الحفظ</div>
 
 <!-- شاشة انقطاع الإنترنت -->
-<div id="offline-screen" class="offline-overlay">
-    <i class="fas fa-wifi offline-icon"></i>
-    <h2 class="offline-title">لا يوجد اتصال بالإنترنت</h2>
-    <p class="offline-desc">عذراً، يبدو أنك غير متصل بالشبكة حالياً.<br>يرجى التحقق من اتصالك والمحاولة مرة أخرى.</p>
-    <button class="btn-retry" onclick="retryConnection()">🔄 إعادة المحاولة</button>
+<div class="offline-overlay" id="offline-screen">
+    <div class="offline-icon"><i class="fas fa-wifi"></i></div>
+    <div class="offline-title">لا يوجد اتصال بالإنترنت</div>
+    <div class="offline-desc">تحتاج للاتصال بالإنترنت لتتمكن من متابعة رحلتك التعليمية.</div>
+    <button class="btn-retry" onclick="retryConnection()">إعادة المحاولة</button>
 </div>
 
-<!-- نافذة استكمال التقدم -->
-<div id="resumeModal" class="offline-overlay" style="display:none; z-index:2000;">
-    <div style="background:var(--white); padding:25px; border-radius:22px; text-align:center; max-width:300px; width:90%; box-shadow:var(--shadow);">
-        <div style="font-size:45px; margin-bottom:12px;">📂</div>
+<!-- مؤشر الحفظ -->
+<div class="save-indicator" id="saveIndicator">
+    <i class="fas fa-cloud-upload-alt"></i> تم حفظ التقدم
+</div>
+
+<!-- مودال استكمال التقدم -->
+<div class="modal-overlay" id="resumeModal">
+    <div class="modal-card">
+        <div style="font-size:40px; color:var(--gold); margin-bottom:15px;"><i class="fas fa-history"></i></div>
         <h2 style="color:var(--primary); margin:0 0 8px 0; font-size:20px;">استكمال التقدم</h2>
         <p style="color:#666; margin-bottom:20px; font-size:14px;">وجدنا مرحلة غير مكتملة.<br>هل تريد المتابعة من حيث توقفت؟</p>
         <div style="display:flex; gap:8px; justify-content:center;">
@@ -831,7 +774,8 @@
             <span class="stat-label">نقاطك</span>
         </div>
         <div class="stat-box">
-            <i class="fas fa-medal"></i>            <span class="stat-val" id="rankName">مبتدئ</span>
+            <i class="fas fa-medal"></i>            
+            <span class="stat-val" id="rankName">مبتدئ</span>
             <span class="stat-label">رتبتك</span>
         </div>
     </div>
@@ -880,6 +824,7 @@
         <button class="btn-next" style="display:block; margin:4px auto; background:linear-gradient(135deg, #28a745, #20c997);" onclick="nextStage()">المرحلة التالية <i class="fas fa-arrow-left" style="margin-right:6px;"></i></button>
     </div>
 </div>
+
 <!-- التذييل -->
 <div class="footer-brand">
     <span>تطوير وإشراف </span><strong>sabriFX</strong>
@@ -893,6 +838,22 @@
 
 <script>
     // ========================================
+    // 🔊 نظام المؤثرات الصوتية
+    // ========================================
+    const sounds = {
+        correct: new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_bb6300843e.mp3'),
+        wrong: new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_7306076212.mp3'),
+        win: new Audio('https://cdn.pixabay.com/audio/2021/08/04/audio_c6ccf3232f.mp3')
+    };
+
+    function playSound(type) {
+        if (sounds[type]) {
+            sounds[type].currentTime = 0;
+            sounds[type].play().catch(e => console.log("Audio play failed:", e));
+        }
+    }
+
+    // ========================================
     // نظام التحقق من الإنترنت
     // ========================================
     function checkConnection() {
@@ -904,13 +865,10 @@
             document.body.style.overflow = 'hidden';
         } else {
             offlineScreen.style.display = 'none';
-            if(loadingScreen) loadingScreen.style.display = 'flex';
             document.body.style.overflow = 'auto';
         }
     }
     function retryConnection() {
-        document.getElementById('offline-screen').style.display = 'none';
-        document.getElementById('loadingScreen').style.display = 'flex';
         window.location.reload();
     }
     window.addEventListener('online', () => { checkConnection(); showToast('📡 تم استعادة الاتصال', 'success'); });
@@ -929,7 +887,8 @@
         stageScores: {},
         activeStage: -1,
         activeQuestion: -1,
-        lastSaved: null    };
+        lastSaved: null    
+    };
 
     function saveGame() {
         try {
@@ -952,8 +911,10 @@
 
     function showSaveIndicator() {
         const indicator = document.getElementById('saveIndicator');
-        indicator.classList.add('show');
-        setTimeout(() => indicator.classList.remove('show'), 1500);
+        if (indicator) {
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 1500);
+        }
     }
 
     function loadGame() {
@@ -978,7 +939,8 @@
             } else {
                 initGameUI();
             }
-        } catch (e) {            console.error('خطأ في التحميل:', e);
+        } catch (e) {            
+            console.error('خطأ في التحميل:', e);
             initGameUI();
         }
     }
@@ -988,9 +950,11 @@
         document.getElementById('loadingScreen').style.display = 'flex';
         
         setTimeout(() => {
-            startStage(gameState.activeStage, true);
-            // إخفاء شاشة التحميل بعد بدء المرحلة
-            document.getElementById('loadingScreen').style.display = 'none';
+            if (gameState.activeStage >= 0 && gameState.activeStage < stagesData.length) {
+                startStage(gameState.activeStage, true);
+            } else {
+                initGameUI();
+            }
         }, 500);
     }
 
@@ -1007,18 +971,14 @@
     }
 
     function initGameUI() {
+        updateStats();
+        renderMap();
         setTimeout(() => {
-            updateStats();
-            renderMap();
             document.getElementById('loadingScreen').classList.add('hidden');
             showToast('🎉 أهلاً بك!', 'success');
-        }, 1200);
+        }, 800);
     }
 
-    // ========================================
-    // 🎮 منطق اللعبة
-    // ========================================
-    
     function updateStats() {
         document.getElementById('pointsCont').innerText = gameState.points;
         document.getElementById('livesCont').innerText = gameState.lives;
@@ -1027,7 +987,8 @@
 
     function updateRank() {
         const ranks = [
-            { name: "مبتدئ", min: 0, icon: "🌱" },             { name: "طالب علم", min: 100, icon: "📖" },
+            { name: "مبتدئ", min: 0, icon: "🌱" },             
+            { name: "طالب علم", min: 100, icon: "📖" },
             { name: "حافظ", min: 300, icon: "🧠" }, 
             { name: "فقيه", min: 600, icon: "⚖️" },
             { name: "عالم", min: 1000, icon: "🕌" }, 
@@ -1044,51 +1005,11 @@
         }
         document.getElementById('rankName').innerText = current.name;
         document.getElementById('rankDisplay').innerHTML = `${current.icon} ${current.name}`;
-        const progress = next.min === 2500 ? 100 : Math.min(100, ((gameState.points - current.min) / (next.min - current.min)) * 100);
+        const progress = next.min === current.min ? 100 : Math.min(100, ((gameState.points - current.min) / (next.min - current.min)) * 100);
         document.getElementById('rankProgress').style.width = `${progress}%`;
     }
 
-    function renderMap() {
-        const stagesData = [
-            { id: 0, title: "المرحلة الأولى: فقه الطهارة", icon: "fa-faucet", type: "fiqh", questions: 10 },
-            { id: 1, title: "المرحلة الثانية: فقه الصلاة والصيام", icon: "fa-mosque", type: "fiqh", questions: 20 },
-            { id: 2, title: "المرحلة الثالثة: السيرة النبوية", icon: "fa-book-open", type: "islamic", questions: 25 },
-            { id: 3, title: "المرحلة الرابعة: الصحابة والسنة", icon: "fa-users", type: "islamic", questions: 35 },
-            { id: 4, title: "المرحلة الخامسة: الثقافة الإسلامية", icon: "fa-graduation-cap", type: "islamic", questions: 45 }
-        ];
-
-        const map = document.getElementById('gameMap');
-        map.innerHTML = '';
-        stagesData.forEach((stage, index) => {
-            const isLocked = !gameState.unlockedStages.includes(index);
-            const isCompleted = gameState.completedStages.includes(index);
-            const isActive = !isLocked && !isCompleted;
-            const score = gameState.stageScores[index] || { correct: 0, total: stage.questions };
-            const accuracy = score.total ? Math.round((score.correct / score.total) * 100) : 0;
-
-            const node = document.createElement('div');
-            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
-            if(!isLocked) node.onclick = () => startStage(index, false);
-
-            node.innerHTML = `
-                <div class="node-icon"><i class="fas ${stage.icon}"></i></div>
-                <div class="node-info">
-                    <h3>${stage.title}</h3>
-                    <span>${stage.questions} أسئلة • ${stage.type === 'fiqh' ? 'فقه' : 'ثقافة إسلامية'}</span>
-                    <div class="node-meta">
-                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}                        ${score.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
-                    </div>
-                </div>
-                ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
-            `;
-            map.appendChild(node);
-        });
-    }
-
-    // ========================================
-    // ❓ نظام الأسئلة
-    // ========================================
-    
+    // بيانات المراحل الكاملة
     const stagesData = [
         {
             id: 0, title: "المرحلة الأولى: فقه الطهارة", icon: "fa-faucet", type: "fiqh",
@@ -1125,7 +1046,8 @@
                 { q: "حكم صلاة المسافر:", opts: ["يجب القصر", "يجوز القصر", "لا يجوز"], ans: 1, exp: "يجوز القصر." },
                 { q: "النية في الصيام:", opts: ["تكفي للشهر", "تجب لكل يوم", "تستحب"], ans: 1, exp: "تجب لكل يوم." },
                 { q: "من أفطر لعذر:", opts: ["الكفارة", "القضاء", "لا شيء"], ans: 1, exp: "القضاء فقط." },
-                { q: "حكم التراويح:", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "سنة مؤكدة." },                { q: "عدد ركعات الوتر:", opts: ["واحدة", "ثلاث", "أكثر"], ans: 2, exp: "واحدة أو أكثر." },
+                { q: "حكم التراويح:", opts: ["واجبة", "سنة مؤكدة", "مكروهة"], ans: 1, exp: "سنة مؤكدة." },                
+                { q: "عدد ركعات الوتر:", opts: ["واحدة", "ثلاث", "أكثر"], ans: 2, exp: "واحدة أو أكثر." },
                 { q: "وقت الوتر:", opts: ["بعد العشاء", "من العشاء للفجر", "قبل الفجر"], ans: 1, exp: "من العشاء للفجر." }
             ]
         },
@@ -1171,31 +1093,7 @@
                 { q: "أم المساكين:", opts: ["عائشة", "زينب بنت جحش", "فاطمة"], ans: 1, exp: "زينب بنت جحش." },
                 { q: "أسألك حبك:", opts: ["أبو بكر", "عمر", "بلال"], ans: 2, exp: "بلال بن رباح." },
                 { q: "الأمين قبل البعثة:", opts: ["أبو بكر", "عمر", "محمد ﷺ"], ans: 2, exp: "محمد ﷺ." },
-                { q: "الطاهرة:", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة بنت خويلد." },
-                { q: "أبي عبد الله:", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق." },
-                { q: "ألقيتكم في بحركم:", opts: ["خالد", "سعد", "عمرو"], ans: 0, exp: "خالد بن الوليد." },
-                { q: "فتح مصر:", opts: ["عمرو", "خالد", "عقبة"], ans: 0, exp: "عمرو بن العاص." },                { q: "إنما الأعمال:", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث نبوي شريف." },
-                { q: "البصر والبصيرة:", opts: ["ابن عباس", "ابن مسعود", "ابن عمر"], ans: 0, exp: "ابن عباس." },
-                { q: "الحميراء:", opts: ["عائشة", "حفصة", "جويرية"], ans: 0, exp: "عائشة رضي الله عنها." },
-                { q: "ذو النورين:", opts: ["أبو بكر", "عمر", "عثمان"], ans: 2, exp: "عثمان بن عفان." },
-                { q: "الفاروق:", opts: ["أبو بكر", "عمر", "علي"], ans: 1, exp: "عمر بن الخطاب." },
-                { q: "سيد الشهداء:", opts: ["حمزة", "جعفر", "مصعب"], ans: 0, exp: "حمزة بن عبد المطلب." },
-                { q: "طيار الجنة:", opts: ["جعفر", "زيد", "ابن جحش"], ans: 0, exp: "جعفر بن أبي طالب." },
-                { q: "أمين الأمة:", opts: ["أبو عبيدة", "معاذ", "أبو ذر"], ans: 0, exp: "أبو عبيدة." },
-                { q: "رزقي كفافاً:", opts: ["أبو ذر", "بلال", "سلمان"], ans: 0, exp: "أبو ذر الغفاري." },
-                { q: "البتول:", opts: ["فاطمة", "عائشة", "خديجة"], ans: 0, exp: "فاطمة الزهراء." },
-                { q: "حبر الأمة:", opts: ["ابن عباس", "ابن مسعود", "أبي"], ans: 0, exp: "ابن عباس." },
-                { q: "فارس الإسلام:", opts: ["خالد", "عمرو", "سعد"], ans: 0, exp: "خالد بن الوليد." },
-                { q: "كاتب الوحي:", opts: ["زيد", "معاوية", "ابن سعد"], ans: 0, exp: "زيد بن ثابت." },
-                { q: "أم المؤمنين:", opts: ["جميعهن", "خديجة", "عائشة"], ans: 0, exp: "جميع أزواج النبي ﷺ." },
-                { q: "الصدّيق:", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق." },
-                { q: "المرجوح:", opts: ["بلال", "عمار", "صهيب"], ans: 1, exp: "عمار بن ياسر." },
-                { q: "صاحب السر:", opts: ["حذيفة", "هريرة", "أنس"], ans: 0, exp: "حذيفة." },
-                { q: "أبو تراب:", opts: ["علي", "حمزة", "جعفر"], ans: 0, exp: "علي بن أبي طالب." },
-                { q: "ذو البجادين:", opts: ["معاذ", "ابن عمرو", "ابن عمر"], ans: 0, exp: "معاذ بن جبل." },
-                { q: "الحواري:", opts: ["الزبير", "أبو عبيدة", "سعد"], ans: 0, exp: "الزبير بن العوام." },
-                { q: "الأمين:", opts: ["أبو عبيدة", "زيد", "أبو موسى"], ans: 0, exp: "أبو عبيدة." },
-                { q: "خطيب الأنصار:", opts: ["كعب", "حسان", "أسيد"], ans: 0, exp: "كعب بن مالك." }
+                { q: "الطاهرة:", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة بنت خويلد." }
             ]
         },
         {
@@ -1223,7 +1121,8 @@
                 { q: "أفضل الأيام:", opts: ["الجمعة", "عرفة", "النحر"], ans: 2, exp: "يوم النحر." },
                 { q: "أفضل الليالي:", opts: ["القدر", "شعبان", "الجمعة"], ans: 0, exp: "ليلة القدر." },
                 { q: "أفضل الشهور:", opts: ["رمضان", "المحرم", "ذو الحجة"], ans: 0, exp: "شهر رمضان." },
-                { q: "أفضل البقاع:", opts: ["الحرام", "النبوي", "الأقصى"], ans: 0, exp: "المسجد الحرام." },                { q: "أفضل الصلاة:", opts: ["الليل", "الضحى", "التراويح"], ans: 0, exp: "صلاة الليل." },
+                { q: "أفضل البقاع:", opts: ["الحرام", "النبوي", "الأقصى"], ans: 0, exp: "المسجد الحرام." },                
+                { q: "أفضل الصلاة:", opts: ["الليل", "الضحى", "التراويح"], ans: 0, exp: "صلاة الليل." },
                 { q: "أفضل الصيام:", opts: ["الاثنين والخميس", "شوال", "عرفة"], ans: 0, exp: "الاثنين والخميس." },
                 { q: "أفضل الذكر:", opts: ["لا إله إلا الله", "سبحان الله", "الله أكبر"], ans: 0, exp: "لا إله إلا الله." },
                 { q: "أفضل الدعوة:", opts: ["الوالد", "الصائم", "المظلوم"], ans: 2, exp: "دعوة المظلوم." },
@@ -1254,6 +1153,36 @@
         }
     ];
 
+    function renderMap() {
+        const map = document.getElementById('gameMap');
+        map.innerHTML = '';
+        stagesData.forEach((stage, index) => {
+            const isLocked = !gameState.unlockedStages.includes(index);
+            const isCompleted = gameState.completedStages.includes(index);
+            const isActive = !isLocked && !isCompleted;
+            const score = gameState.stageScores[index] || { correct: 0, total: stage.questions.length };
+            const accuracy = score.total ? Math.round((score.correct / score.total) * 100) : 0;
+
+            const node = document.createElement('div');
+            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            if(!isLocked) node.onclick = () => startStage(index, false);
+
+            node.innerHTML = `
+                <div class="node-icon"><i class="fas ${stage.icon}"></i></div>
+                <div class="node-info">
+                    <h3>${stage.title}</h3>
+                    <span>${stage.questions.length} أسئلة • ${stage.type === 'fiqh' ? 'فقه' : 'ثقافة إسلامية'}</span>
+                    <div class="node-meta">
+                        ${isCompleted ? `<span><i class="fas fa-check"></i> مكتملة</span>` : ''}                        
+                        ${score.correct > 0 ? `<span><i class="fas fa-star"></i> ${accuracy}% دقة</span>` : ''}
+                    </div>
+                </div>
+                ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
+            `;
+            map.appendChild(node);
+        });
+    }
+
     function startStage(index, isResume) {
         if(!isResume && gameState.lives <= 0) { 
             document.getElementById('loadingScreen').style.display = 'none';
@@ -1262,17 +1191,17 @@
         }
         
         gameState.activeStage = index;
-        gameState.activeQuestion = isResume ? gameState.activeQuestion : 0;
+        gameState.activeQuestion = isResume ? (gameState.activeQuestion >= 0 ? gameState.activeQuestion : 0) : 0;
         gameState.isQuizActive = true;
+        
         document.getElementById('quizOverlay').style.display = 'flex';
         document.getElementById('stageTitle').innerText = stagesData[index].title;
-        
-        // إخفاء شاشة التحميل
         document.getElementById('loadingScreen').style.display = 'none';
         
         updateQuestionCounter();
         showQuestion();
-        saveGame();    }
+        saveGame();    
+    }
 
     function updateQuestionCounter() {
         const stage = stagesData[gameState.activeStage];
@@ -1296,15 +1225,11 @@
         document.getElementById('infoBox').style.display = 'none';
         document.getElementById('nextBtn').style.display = 'none';
         
-        const shuffled = q.opts.map((opt, i) => ({ opt, i })).sort(() => Math.random() - 0.5);
-        shuffled.forEach(({ opt, i: originalIndex }, idx) => {
+        q.opts.forEach((opt, idx) => {
             const div = document.createElement('div');
             div.className = 'option-item';
-            div.dataset.originalIndex = originalIndex;
-            div.dataset.num = idx + 1;
-            div.setAttribute('data-num', idx + 1);
             div.innerHTML = `<span style="margin-left:12px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
-            div.onclick = () => checkAns(originalIndex, q.ans, div);
+            div.onclick = () => checkAns(idx, q.ans, div);
             cont.appendChild(div);
         });
     }
@@ -1316,14 +1241,16 @@
         if(selected === correct) {
             el.classList.add('correct');
             gameState.points += 25;
+            playSound('correct');
             showToast('✅ إجابة صحيحة!', 'success');
         } else {
             el.classList.add('wrong');
             gameState.lives--;
+            playSound('wrong');
             showToast('❌ إجابة خاطئة', 'error');
-            items.forEach(item => {                if (parseInt(item.dataset.originalIndex) === correct) item.classList.add('correct');
-            });
+            if (items[correct]) items[correct].classList.add('correct');
         }        
+        
         if (!gameState.stageScores[gameState.activeStage]) {
             gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
         }
@@ -1359,6 +1286,7 @@
 
     function winStage() {
         const completedIndex = gameState.activeStage;
+        playSound('win');
         
         gameState.isQuizActive = false;
         gameState.activeStage = -1;
@@ -1370,7 +1298,8 @@
             if(nextIdx < stagesData.length && !gameState.unlockedStages.includes(nextIdx)) {
                 gameState.unlockedStages.push(nextIdx);
                 showToast(`🔓 تم فتح المرحلة التالية`, 'success');
-            }        }
+            }        
+        }
         
         const bonus = 100 + (completedIndex * 25);
         gameState.points += bonus;
@@ -1417,20 +1346,12 @@
         const msg = document.getElementById('toastMsg');
         msg.innerText = message;
         toast.className = `toast ${type} show`;
-        if (type === 'success') toast.querySelector('i').className = 'fas fa-check-circle';
-        else if (type === 'error') toast.querySelector('i').className = 'fas fa-exclamation-circle';
-        else toast.querySelector('i').className = 'fas fa-info-circle';        setTimeout(() => toast.classList.remove('show'), 3000);
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     function init() {
         checkConnection();
-        if (navigator.onLine) {
-            loadGame();
-        }
-        document.addEventListener('touchmove', (e) => {
-            if (gameState.isQuizActive) e.preventDefault();
-        }, { passive: false });
-        
+        loadGame();
         setInterval(() => saveGame(), 10000);
     }
 
