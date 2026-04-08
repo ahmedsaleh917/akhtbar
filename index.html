@@ -2,9 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>sabriFX Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;800&display=swap" rel="stylesheet">
+    
+    <!-- خطوط النظام كبديل آمن -->
+    <style>
+        /* تحميل الخطوط مع فاول باك */
+        @font-face {
+            font-family: 'AlmaraiFallback';
+            src: local('Segoe UI'), local('Tahoma'), local('Arial'), local('Droid Arabic Kufi'), local('Noto Sans Arabic');
+        }
+    </style>
+    
+    <!-- Font Awesome محلياً كـ SVG في حال فشل CDN -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -21,19 +33,24 @@
             --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        body {
-            font-family: 'Almarai', 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%);
+        html, body {
+            width: 100%;
+            height: 100%;
             margin: 0; padding: 0;
             overflow-x: hidden;
-            user-select: none;
-            color: #333;
-            min-height: 100vh;
         }
 
-        /* ✨ تأثير الخلفية الإسلامية */
+        body {
+            font-family: 'Almarai', 'Tajawal', 'AlmaraiFallback', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%);
+            user-select: none;
+            -webkit-user-select: none;
+            color: #333;            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -47,7 +64,8 @@
         }
 
         .game-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);            min-height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            min-height: 200px;
             border-bottom-left-radius: 50px;
             border-bottom-right-radius: 50px;
             display: flex;
@@ -59,6 +77,7 @@
             box-shadow: var(--shadow);
             position: sticky; top: 0; z-index: 100;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .logo-container {
@@ -77,8 +96,7 @@
         }
 
         .logo-container img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
+            width: 100%; height: 100%;            border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--gold);
         }
@@ -96,9 +114,11 @@
         .stat-box { 
             text-align: center; 
             background: rgba(255,255,255,0.15);
-            padding: 8px 12px;            border-radius: 15px;
+            padding: 8px 12px;
+            border-radius: 15px;
             min-width: 75px;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             transition: transform 0.2s;
         }
         
@@ -125,8 +145,7 @@
         
         .rank-name { 
             font-weight: 800; 
-            font-size: 16px; 
-            color: var(--gold-light); 
+            font-size: 16px;             color: var(--gold-light); 
             display: flex;
             align-items: center;
             gap: 6px;
@@ -145,7 +164,8 @@
             overflow: hidden;
         }
         
-        .progress-fill {            height: 100%;
+        .progress-fill {
+            height: 100%;
             background: linear-gradient(90deg, var(--gold), var(--gold-light));
             border-radius: 10px;
             transition: width 0.5s ease;
@@ -174,8 +194,7 @@
             gap: 20px;
             box-shadow: var(--shadow);
             position: relative;
-            cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid transparent;
             overflow: hidden;
         }
@@ -194,7 +213,8 @@
             transform: none !important;
         }
         
-        .level-node.locked:hover { transform: none !important; }                .level-node.active { 
+        .level-node.locked:hover { transform: none !important; }        
+        .level-node.active { 
             border-color: var(--gold); 
             transform: scale(1.025); 
             box-shadow: var(--shadow-gold);
@@ -223,8 +243,7 @@
             color: var(--gold); font-size: 28px;
             box-shadow: 0 8px 25px rgba(30,77,43,0.3);
             flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
+            position: relative;            overflow: hidden;
         }
         
         .node-icon::after {
@@ -243,7 +262,8 @@
             font-size: 18px; 
             color: var(--primary); 
             font-weight: 800;
-            line-height: 1.4;        }
+            line-height: 1.4;
+        }
         .node-info span { 
             font-size: 13px; 
             color: #666; 
@@ -272,8 +292,7 @@
         
         .completed-icon { 
             position: absolute; 
-            left: 25px; 
-            color: var(--correct); 
+            left: 25px;             color: var(--correct); 
             font-size: 24px; 
             z-index: 2;
             animation: bounce 0.6s ease;
@@ -292,7 +311,9 @@
             flex-direction: column;
             animation: slideUp 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
+
         @keyframes slideUp { 
             from { transform: translateY(100%); opacity: 0; } 
             to { transform: translateY(0); opacity: 1; } 
@@ -320,8 +341,7 @@
         .quiz-body { 
             padding: 25px 20px; 
             flex: 1; 
-            display: flex; 
-            flex-direction: column; 
+            display: flex;             flex-direction: column; 
             align-items: center; 
             overflow-y: auto; 
             background: var(--bg);
@@ -341,7 +361,8 @@
         }
         
         .question-card::before {
-            content: "";            position: absolute;
+            content: "";
+            position: absolute;
             top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
         }
@@ -369,8 +390,7 @@
 
         .options-container { 
             width: 100%; 
-            max-width: 550px; 
-            display: flex; 
+            max-width: 550px;             display: flex; 
             flex-direction: column; 
             gap: 14px; 
         }
@@ -390,7 +410,8 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }        
-        .option-item:hover {            border-color: var(--gold);
+        .option-item:hover {
+            border-color: var(--gold);
             transform: translateX(5px);
             box-shadow: 0 6px 20px rgba(212,175,55,0.15);
         }
@@ -418,8 +439,7 @@
         }
         
         .option-item.wrong { 
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb); 
-            border-color: var(--danger); 
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);             border-color: var(--danger); 
             color: #721c24; 
             animation: shake 0.5s; 
         }
@@ -439,7 +459,8 @@
         .info-box {
             background: linear-gradient(135deg, #fff9e6, #fff3cd);
             border-right: 5px solid var(--gold);
-            padding: 20px;             border-radius: 18px;
+            padding: 20px; 
+            border-radius: 18px;
             margin-top: 20px; 
             width: 100%; 
             max-width: 550px;
@@ -467,8 +488,7 @@
             background: linear-gradient(135deg, var(--gold), var(--gold-light));
             color: var(--primary-dark);
             border: none; 
-            padding: 18px 30px; 
-            width: 100%; 
+            padding: 18px 30px;             width: 100%; 
             max-width: 550px;
             border-radius: 22px; 
             font-weight: 800; 
@@ -488,7 +508,8 @@
         }
         .btn-next:active {
             transform: translateY(1px);
-        }        
+        }
+        
         .btn-next::after {
             content: "";
             position: absolute;
@@ -510,13 +531,13 @@
             justify-content: center; 
             align-items: center;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             animation: fadeIn 0.4s ease;
         }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .win-card {
-            background: var(--white); 
+        .win-card {            background: var(--white); 
             padding: 45px 40px; 
             border-radius: 35px;
             text-align: center; 
@@ -537,7 +558,8 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));            border-radius: 35px 35px 0 0;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct));
+            border-radius: 35px 35px 0 0;
         }
         
         .win-card i { 
@@ -564,8 +586,7 @@
         
         .points-earned {
             background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--primary-dark);
-            padding: 12px 25px;
+            color: var(--primary-dark);            padding: 12px 25px;
             border-radius: 25px;
             font-weight: 800;
             font-size: 18px;
@@ -586,7 +607,8 @@
         }        
         .footer-brand strong { 
             color: var(--primary); 
-            font-weight: 800;            position: relative;
+            font-weight: 800;
+            position: relative;
         }
         
         .footer-brand strong::after {
@@ -597,7 +619,6 @@
             border-radius: 2px;
         }
 
-        /* 🎯 تأثيرات النقاط */
         .points-popup {
             position: fixed;
             font-weight: 800;
@@ -614,9 +635,7 @@
             100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
         }
 
-        /* 📱 تحسينات الجوال */
-        @media (max-width: 480px) {
-            .game-header { min-height: 210px; border-radius: 0 0 40px 40px; }
+        @media (max-width: 480px) {            .game-header { min-height: 210px; border-radius: 0 0 40px 40px; }
             .logo-container { width: 75px; height: 75px; }
             .stat-val { font-size: 16px; }
             .stat-label { font-size: 10px; }
@@ -630,12 +649,12 @@
             .win-card i { font-size: 65px; }
         }
 
-        /* ✨ تأثير التحميل */
         .loading {
             position: fixed;
             inset: 0;
             background: var(--bg);
-            display: flex;            flex-direction: column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -665,9 +684,7 @@
             font-size: 18px;
         }
 
-        /* 🔔 إشعارات */
-        .toast {
-            position: fixed;
+        .toast {            position: fixed;
             bottom: 80px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
@@ -684,12 +701,21 @@
             border-right: 4px solid var(--gold);
         }
         
-        .toast.show {            transform: translateX(-50%) translateY(0);
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
         
         .toast.success { border-color: var(--correct); }
         .toast.error { border-color: var(--danger); }
         .toast i { font-size: 20px; }
+
+        /* أيقونات SVG بديلة في حال فشل Font Awesome */
+        .fa-fallback {
+            display: inline-block;
+            width: 1em; height: 1em;
+            vertical-align: middle;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
@@ -703,12 +729,11 @@
 <!-- رأس اللعبة -->
 <div class="game-header">
     <div class="logo-container">
-        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار التطبيق">
+        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار التطبيق" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">
     </div>
     <div class="stats-bar">
         <div class="stat-box lives">
-            <i class="fas fa-heart"></i>
-            <span class="stat-val" id="livesCont">30</span>
+            <i class="fas fa-heart"></i>            <span class="stat-val" id="livesCont">30</span>
             <span class="stat-label">قلوب</span>
         </div>
         <div class="stat-box">
@@ -733,6 +758,7 @@
 
 <!-- خريطة المراحل -->
 <div class="map-container" id="gameMap"></div>
+
 <!-- شاشة الأسئلة -->
 <div class="quiz-overlay" id="quizOverlay">
     <div class="quiz-header">
@@ -756,8 +782,7 @@
 </div>
 
 <!-- شاشة النتيجة -->
-<div id="resultOverlay" class="result-overlay">
-    <div class="win-card">
+<div id="resultOverlay" class="result-overlay">    <div class="win-card">
         <i class="fas fa-crown"></i>
         <h1>🎉 مبارك الإنجاز!</h1>
         <p>لقد أتممت هذه المرحلة بنجاح، وزاد علمك ونورك. استمر في الرحلة!</p>
@@ -780,9 +805,48 @@
 
 <script>
     // ========================================
+    // 🔧 WebView Compatibility & Error Handling
+    // ========================================
+    
+    // كشف حالة الاتصال
+    window.addEventListener('online', () => showToast('📡 تم الاتصال بالإنترنت', 'success'));
+    window.addEventListener('offline', () => showToast('📴 تعمل دون اتصال', 'error'));
+    
+    // معالجة أخطاء تحميل الموارد
+    window.addEventListener('error', (e) => {
+        console.log('Resource load error:', e.target.src || e.target.href);
+    }, true);
+    
+    // فوال باك للأيقونات في حال فشل Font Awesome
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            if (typeof FontAwesome === 'undefined' && !document.querySelector('.fa-heart')?.getBoundingClientRect()?.height) {
+                // استبدال الأيقونات برموز نصية
+                document.querySelectorAll('i.fas, i.fab, i.far').forEach(function(icon) {
+                    const fallbacks = {
+                        'fa-heart': '❤️', 'fa-star': '⭐', 'fa-medal': '🏅',
+                        'fa-times': '✕', 'fa-arrow-left': '←', 'fa-map': '🗺️',
+                        'fa-crown': '👑', 'fa-check-circle': '✅', 'fa-lock': '🔒',
+                        'fa-play': '▶️', 'fa-faucet': '🚰', 'fa-mosque': '🕌',
+                        'fa-book-open': '📖', 'fa-users': '👥', 'fa-graduation-cap': '🎓',
+                        'fa-info-circle': 'ℹ️', 'fa-check': '✓', 'fa-exclamation-circle': '⚠️'
+                    };
+                    const classes = icon.className;                    for (let key in fallbacks) {
+                        if (classes.includes(key)) {
+                            icon.outerHTML = '<span style="font-size:inherit;">' + fallbacks[key] + '</span>';
+                            break;
+                        }
+                    }
+                });
+            }
+        }, 2000);
+    });
+
+    // ========================================
     // 📊 بيانات اللعبة - المراحل والأسئلة
     // ========================================
-        const stagesData = [
+    
+    const stagesData = [
         {
             id: 0, 
             title: "المرحلة الأولى: فقه الطهارة", 
@@ -816,8 +880,7 @@
                 { q: "من نسي الركوع وتذكره وهو في السجود، ماذا يفعل؟", opts: ["يكمل صلاته ويسجد للسهو", "يرجع فوراً للركوع", "تبطل ركعته"], ans: 1, exp: "يجب العودة للركن الذي نسيه فوراً لأن الركن لا يسقط بالسهو، ثم يكمل صلاته." },
                 { q: "كم عدد ركعات صلاة الفجر؟", opts: ["ثلاث", "أربع", "ركعتان"], ans: 2, exp: "صلاة الفجر ركعتان فرضاً، وهما من أثقل الصلوات على المنافقين، وفيهما تقرأ سورة طويلة." },
                 { q: "ما هو وقت صلاة العصر؟", opts: ["من زوال الشمس", "من حين ظل كل شيء مثله", "بعد المغرب"], ans: 1, exp: "وقت العصر من حين ظل كل شيء مثله بعد ظل الزوال، إلى اصفرار الشمس أو غروبها عند بعض العلماء." },
-                { q: "حكم ترك الصلاة عمداً؟", opts: ["معصية فقط", "كفر أكبر عند جمهور العلماء", "مكروه"], ans: 1, exp: "جمهور العلماء على أن تارك الصلاة عمداً جحوداً أو تكاسلاً كافر كفراً مخرجاً عن الملة، والعياذ بالله." },
-                { q: "متى يمسك الصائم عن الطعام؟", opts: ["أذان الفجر الأول", "أذان الفجر الصادق", "شروق الشمس"], ans: 1, exp: "الإمساك يبدأ مع طلوع الفجر الصادق المستطير في الأفق، وهو وقت دخول صلاة الفجر." },
+                { q: "حكم ترك الصلاة عمداً؟", opts: ["معصية فقط", "كفر أكبر عند جمهور العلماء", "مكروه"], ans: 1, exp: "جمهور العلماء على أن تارك الصلاة عمداً جحوداً أو تكاسلاً كافر كفراً مخرجاً عن الملة، والعياذ بالله." },                { q: "متى يمسك الصائم عن الطعام؟", opts: ["أذان الفجر الأول", "أذان الفجر الصادق", "شروق الشمس"], ans: 1, exp: "الإمساك يبدأ مع طلوع الفجر الصادق المستطير في الأفق، وهو وقت دخول صلاة الفجر." },
                 { q: "من أكل ناسياً في نهار رمضان فما حكمه؟", opts: ["عليه القضاء", "صيامه صحيح", "عليه الكفارة"], ans: 1, exp: "من أكل ناسياً فإنما أطعمه الله وسقاه، وصيامه صحيح ولا قضاء عليه، وليتم صومه." },
                 { q: "ما هي الركعات التي تجب فيها القراءة بالفاتحة؟", opts: ["الأولى فقط", "الأولى والثانية", "جميع الركعات"], ans: 2, exp: "تجب قراءة الفاتحة في كل ركعة من ركعات الصلاة عند جمهور العلماء، وهي ركن من أركان الصلاة." },
                 { q: "حكم صلاة الجماعة للرجال؟", opts: ["سنة", "واجبة", "مستحبة"], ans: 1, exp: "صلاة الجماعة واجبة على الرجال عند جمهور العلماء، وهي أفضل من صلاة الفذ بسبع وعشرين درجة." },
@@ -831,7 +894,8 @@
                 { q: "ما هو وقت صلاة الوتر؟", opts: ["بعد العشاء فقط", "من بعد العشاء إلى الفجر", "قبل الفجر فقط"], ans: 1, exp: "وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، والأفضل تأخيره إلى آخر الليل لمن وثق باستيقاظه." }
             ]
         },
-        {            id: 2, 
+        {
+            id: 2, 
             title: "المرحلة الثالثة: السيرة النبوية", 
             icon: "fa-book-open",
             type: "islamic",
@@ -865,8 +929,7 @@
             ]
         },
         {
-            id: 3, 
-            title: "المرحلة الرابعة: الصحابة والسنة", 
+            id: 3,             title: "المرحلة الرابعة: الصحابة والسنة", 
             icon: "fa-users",
             type: "islamic",
             color: "#43a047",
@@ -880,7 +943,8 @@
                 { q: "من هي التي لُقبت بـ 'أم المساكين'؟", opts: ["عائشة", "زينب بنت جحش", "فاطمة"], ans: 1, exp: "زينب بنت جحش رضي الله عنها لُقبت بأم المساكين، لكثرة صدقتها وإطعامها للفقراء." },
                 { q: "من هو الذي قال: 'اللهم إني أسألك حبك وحب من يحبك'؟", opts: ["أبو بكر", "عمر", "بلال"], ans: 2, exp: "بلال بن رباح رضي الله عنه كان يردد هذا الدعاء، وهو من أعظم الأدعية الجامعة لمحبة الله ومحبة أوليائه." },
                 { q: "من هو الذي كان يُسمى 'الأمين' قبل البعثة؟", opts: ["أبو بكر", "عمر", "محمد ﷺ"], ans: 2, exp: "كان النبي ﷺ يُسمى 'الأمين' في قريش قبل البعثة، لصدقه وأمانته، حتى أن خديجة استأمنته على مالها في التجارة." },
-                { q: "من هي التي كانت تُسمى 'الطاهرة'؟", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة رضي الله عنها كانت تُسمى 'الطاهرة' في الجاهلية، ثم كانت أول من آمن بالنبي ﷺ." },                { q: "من هو الذي كان يُكنى بـ 'أبي عبد الله'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق رضي الله عنه كان يُكنى بأبي عبد الله، وهو من أشهر كناه." },
+                { q: "من هي التي كانت تُسمى 'الطاهرة'؟", opts: ["خديجة", "عائشة", "فاطمة"], ans: 0, exp: "خديجة رضي الله عنها كانت تُسمى 'الطاهرة' في الجاهلية، ثم كانت أول من آمن بالنبي ﷺ." },
+                { q: "من هو الذي كان يُكنى بـ 'أبي عبد الله'؟", opts: ["أبو بكر", "عمر", "عثمان"], ans: 0, exp: "أبو بكر الصديق رضي الله عنه كان يُكنى بأبي عبد الله، وهو من أشهر كناه." },
                 { q: "من هو الذي قال: 'والله لو أنكم تضعونني في يميني لألقيتكم في بحركم هذا'؟", opts: ["خالد بن الوليد", "سعد بن أبي وقاص", "عمرو بن العاص"], ans: 0, exp: "قالها خالد بن الوليد رضي الله عنه في فتح مكة، حينما كاد بعض المشركين أن يعتدوا على المسلمين." },
                 { q: "من هو الذي فتح مصر؟", opts: ["عمرو بن العاص", "خالد بن الوليد", "عقبة بن نافع"], ans: 0, exp: "فتح عمرو بن العاص رضي الله عنه مصر في عهد عمر بن الخطاب، وأسس مدينة الفسطاط." },
                 { q: "من هو الذي قال: 'إنما الأعمال بالنيات'؟", opts: ["النبي ﷺ", "أبو بكر", "عمر"], ans: 0, exp: "حديث 'إنما الأعمال بالنيات' من أعظم أحاديث النبي ﷺ، وهو أول حديث في صحيح البخاري." },
@@ -914,8 +978,7 @@
             type: "islamic",
             color: "#66bb6a",
             questions: [
-                { q: "كم عدد سور القرآن الكريم؟", opts: ["112", "114", "116"], ans: 1, exp: "عدد سور القرآن 114 سورة بالاتفاق، أولها الفاتحة وآخرها الناس." },
-                { q: "ما هي أطول سورة في القرآن؟", opts: ["آل عمران", "البقرة", "النساء"], ans: 1, exp: "سورة البقرة هي أطول سورة في القرآن بـ 286 آية، وهي مدنية." },
+                { q: "كم عدد سور القرآن الكريم؟", opts: ["112", "114", "116"], ans: 1, exp: "عدد سور القرآن 114 سورة بالاتفاق، أولها الفاتحة وآخرها الناس." },                { q: "ما هي أطول سورة في القرآن؟", opts: ["آل عمران", "البقرة", "النساء"], ans: 1, exp: "سورة البقرة هي أطول سورة في القرآن بـ 286 آية، وهي مدنية." },
                 { q: "ما هي أقصر سورة في القرآن؟", opts: ["الإخلاص", "الكوثر", "العصر"], ans: 1, exp: "سورة الكوثر هي أقصر سورة في القرآن، ثلاث آيات فقط، وهي مكية." },
                 { q: "كم عدد أجزاء القرآن؟", opts: ["28", "30", "32"], ans: 1, exp: "القرآن الكريم مقسم إلى 30 جزءاً، لتسهيل تلاوته وختمه في شهر." },
                 { q: "ما هي السورة التي تسمى 'قلب القرآن'؟", opts: ["يس", "الرحمن", "الملك"], ans: 0, exp: "سورة يس تسمى قلب القرآن، كما في الحديث: 'إن لكل شيء قلباً، وقلب القرآن يس'." },
@@ -929,7 +992,8 @@
                 { q: "ما هي السورة التي تسمى 'المبثوثة'؟", opts: ["الحشر", "الصف", "الجمعة"], ans: 0, exp: "سورة الحشر تسمى المبثوثة، لكثرة ما فيها من أسماء الله الحسنى وصفاته العلى." },
                 { q: "كم عدد أسماء الله الحسنى؟", opts: ["97", "99", "101"], ans: 1, exp: "أسماء الله الحسنى 99 اسماً، من أحصاها دخل الجنة، كما في الحديث الصحيح." },
                 { q: "ما هو اسم الله الأعظم؟", opts: ["الله", "الرحمن", "اختلف العلماء"], ans: 2, exp: "اختلف العلماء في تعيين اسم الله الأعظم، والأرجح أنه الله، أو الحي القيوم، أو ذو الجلال والإكرام." },
-                { q: "ما هي أركان الإيمان؟", opts: ["5", "6", "7"], ans: 1, exp: "أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر خيره وشره." },                { q: "ما هي أركان الإسلام؟", opts: ["4", "5", "6"], ans: 1, exp: "أركان الإسلام خمسة: شهادة أن لا إله إلا الله وأن محمداً رسول الله، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت." },
+                { q: "ما هي أركان الإيمان؟", opts: ["5", "6", "7"], ans: 1, exp: "أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر خيره وشره." },
+                { q: "ما هي أركان الإسلام؟", opts: ["4", "5", "6"], ans: 1, exp: "أركان الإسلام خمسة: شهادة أن لا إله إلا الله وأن محمداً رسول الله، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت." },
                 { q: "ما هي أفضل الأعمال؟", opts: ["الصلاة", "الإيمان بالله", "الجهاد"], ans: 1, exp: "أفضل الأعمال الإيمان بالله وحده، ثم الجهاد في سبيله، كما في الحديث: 'أفضل الأعمال إيمان بالله وجهاد في سبيله'." },
                 { q: "ما هي أفضل الصدقات؟", opts: ["صدقة السر", "صدقة في رمضان", "الصدقة على ذي الرحم"], ans: 2, exp: "أفضل الصدقات الصدقة على ذي الرحم الكاره، كما في الحديث: 'الصدقة على المسكين صدقة، وعلى ذي الرحم اثنتان: صدقة وصلة'." },
                 { q: "ما هي أفضل الأيام؟", opts: ["يوم الجمعة", "يوم عرفة", "يوم النحر"], ans: 2, exp: "أفضل الأيام يوم النحر (عيد الأضحى)، ثم يوم عرفة، ثم أيام التشريق، كما في الحديث." },
@@ -963,8 +1027,7 @@
                 { q: "ما هي أفضل الكلمة؟", opts: ["لا إله إلا الله", "سبحان الله وبحمده", "أستغفر الله"], ans: 1, exp: "أفضل الكلمة سبحان الله وبحمده، كما في الحديث." },
                 { q: "ما هي أفضل العبادة؟", opts: ["الصلاة", "قراءة القرآن", "ذكر الله"], ans: 2, exp: "أفضل العبادة ذكر الله، كما في الحديث." },
                 { q: "ما هي أفضل الجهاد؟", opts: ["جهاد النفس", "جهاد المال", "كلمة حق عند سلطان جائر"], ans: 2, exp: "أفضل الجهاد كلمة حق عند سلطان جائر، كما في الحديث." }
-            ]
-        }
+            ]        }
     ];
 
     // ========================================
@@ -979,6 +1042,7 @@
         { name: "شيخ الإسلام", minPoints: 1600, maxPoints: 2499, icon: "👳", color: "#004d00", desc: "مرجعية علمية" },
         { name: "إمام الأمة", minPoints: 2500, maxPoints: Infinity, icon: "👑", color: "#d4af37", desc: "قدوة الأمة في العلم والعمل" }
     ];
+
     // ========================================
     // 💾 حالة اللعبة ونظام الحفظ
     // ========================================
@@ -1012,8 +1076,7 @@
 
     function saveGame() {
         try {
-            gameState.lastSaved = new Date().toISOString();
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
+            gameState.lastSaved = new Date().toISOString();            localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
         } catch (e) {
             console.error('خطأ في الحفظ:', e);
             showToast('⚠️ تعذر حفظ التقدم', 'error');
@@ -1027,7 +1090,8 @@
     
     function updateStats() {
         document.getElementById('pointsCont').innerText = gameState.points;
-        document.getElementById('livesCont').innerText = gameState.lives;        updateRank();
+        document.getElementById('livesCont').innerText = gameState.lives;
+        updateRank();
     }
 
     function updateRank() {
@@ -1061,8 +1125,7 @@
             const accuracy = stageScore.total ? Math.round((stageScore.correct / stageScore.total) * 100) : 0;
 
             const node = document.createElement('div');
-            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
-            if(!isLocked) node.onclick = () => startStage(index);
+            node.className = `level-node ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;            if(!isLocked) node.onclick = () => startStage(index);
 
             node.innerHTML = `
                 <div class="node-icon"><i class="fas ${stage.icon}"></i></div>
@@ -1076,7 +1139,8 @@
                 </div>
                 ${isLocked ? '<i class="fas fa-lock lock-icon"></i>' : (isCompleted ? '<i class="fas fa-check-circle completed-icon"></i>' : '<i class="fas fa-play lock-icon"></i>')}
             `;
-            map.appendChild(node);        });
+            map.appendChild(node);
+        });
     }
 
     // ========================================
@@ -1110,8 +1174,7 @@
         
         document.getElementById('questionText').innerText = q.q;
         document.getElementById('expText').innerText = q.exp;
-        
-        const cont = document.getElementById('optionsCont');
+                const cont = document.getElementById('optionsCont');
         cont.innerHTML = '';
         document.getElementById('infoBox').style.display = 'none';
         document.getElementById('nextBtn').style.display = 'none';
@@ -1125,7 +1188,8 @@
             div.dataset.originalIndex = originalIndex;
             div.dataset.num = idx + 1;
             div.setAttribute('data-num', idx + 1);
-            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;            div.onclick = () => checkAns(originalIndex, q.ans, div);
+            div.innerHTML = `<span style="margin-left:15px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
+            div.onclick = () => checkAns(originalIndex, q.ans, div);
             cont.appendChild(div);
         });
     }
@@ -1159,8 +1223,7 @@
         }
         
         updateStats();
-        saveGame();
-        if(gameState.lives <= 0 && selected !== correct) {
+        saveGame();        if(gameState.lives <= 0 && selected !== correct) {
             setTimeout(() => { 
                 showToast("❤️ انتهت القلوب! ركز في المرة القادمة", "error");
                 closeQuiz(); 
@@ -1174,7 +1237,8 @@
         }, 400);
     }
 
-    function showPointsPopup(text, element) {        const popup = document.createElement('div');
+    function showPointsPopup(text, element) {
+        const popup = document.createElement('div');
         popup.className = 'points-popup';
         popup.innerText = text;
         
@@ -1208,8 +1272,7 @@
             if(nextIdx < stagesData.length && !gameState.unlockedStages.includes(nextIdx)) {
                 gameState.unlockedStages.push(nextIdx);
                 showToast(`🔓 تم فتح ${stagesData[nextIdx].title}`, 'success');
-            }
-        }
+            }        }
         
         const bonus = 100 + (gameState.currentStageIndex * 25);
         gameState.points += bonus;
@@ -1223,7 +1286,8 @@
     }
 
     function closeResult() {
-        document.getElementById('resultOverlay').style.display = 'none';        renderMap();
+        document.getElementById('resultOverlay').style.display = 'none';
+        renderMap();
     }
     
     function nextStage() {
@@ -1257,8 +1321,7 @@
         toast.className = `toast ${type} show`;
         
         if (type === 'success') {
-            toast.querySelector('i').className = 'fas fa-check-circle';
-        } else if (type === 'error') {
+            toast.querySelector('i').className = 'fas fa-check-circle';        } else if (type === 'error') {
             toast.querySelector('i').className = 'fas fa-exclamation-circle';
         } else {
             toast.querySelector('i').className = 'fas fa-info-circle';
@@ -1272,7 +1335,8 @@
     // ========================================
     // 🚀 التهيئة والتشغيل
     // ========================================
-    function init() {        setTimeout(() => {
+    function init() {
+        setTimeout(() => {
             loadGame();
             updateStats();
             renderMap();
