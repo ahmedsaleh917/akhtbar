@@ -26,7 +26,19 @@
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
         html { height: 100%; scroll-behavior: smooth; }
-        body { font-family: 'Tajawal', sans-serif; background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%); user-select: none; -webkit-user-select: none; color: var(--text); min-height: 100vh; -webkit-text-size-adjust: 100%; line-height: 1.5; margin: 0; padding: 0; overflow-x: hidden; font-size: var(--font-size-base); }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%); 
+            user-select: none; -webkit-user-select: none; 
+            color: var(--text); 
+            min-height: 100vh; 
+            -webkit-text-size-adjust: 100%; 
+            line-height: 1.5; 
+            margin: 0; padding: 0; 
+            overflow-x: hidden; 
+            font-size: var(--font-size-base);
+            text-align: center !important;
+        }
         [data-theme="dark"] body { background: linear-gradient(135deg, #0f1712 0%, #1a231f 100%); }
 
         @media screen and (min-width: 1100px) {
@@ -35,8 +47,7 @@
             .level-node { max-width: 100% !important; }
             .quiz-body { max-width: 720px; margin: 0 auto; }
             .question-card { padding: 28px !important; }
-            .options-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-            .option-item { margin-bottom: 0 !important; }
+            .options-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }            .option-item { margin-bottom: 0 !important; }
         }
 
         body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(212,175,55,0.05) 0%, transparent 25%), radial-gradient(circle at 80% 20%, rgba(30,77,43,0.05) 0%, transparent 25%), radial-gradient(circle at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 35%); pointer-events: none; z-index: -1; }
@@ -47,25 +58,96 @@
         .offline-icon { font-size: 64px; color: var(--primary); margin-bottom: 16px; animation: pulse 2s infinite; }
         .offline-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 12px; line-height: 1.4; }
         .offline-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
-        .btn-retry { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 14px 32px; border-radius: 22px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(30,77,43,0.3); transition: all 0.25s; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; }        .btn-retry:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,77,43,0.4); }
+        .btn-retry { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 14px 32px; border-radius: 22px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(30,77,43,0.3); transition: all 0.25s; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-retry:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,77,43,0.4); }
         .btn-retry:active { transform: translateY(0); }
         @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.85; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 🎨 الهيدر الموحد */
-        .game-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); min-height: 160px; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 10px 12px 14px; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        /* 🎨 الهيدر الموحد - التصميم الجديد */
+        .game-header {
+            background: linear-gradient(135deg, rgba(27, 67, 50, 0.95), rgba(8, 28, 21, 0.9)), 
+                        url('https://i.postimg.cc/zvS6s80G/IMG-20260404-200653.jpg') center/cover;
+            min-height: 280px;
+            border-radius: 0 0 50px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-sizing: border-box;
+        }
 
-        /* 🔘 زر الوضع الليلي */
-        .theme-toggle { position: absolute; top: 12px; left: 12px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 2px solid var(--gold); color: var(--gold); font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; z-index: 101; }
-        .theme-toggle:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
-        .theme-toggle:active { transform: scale(0.98); }
+        /* 🔘 أزرار التحكم العلوية */
+        .top-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .back-btn, .theme-toggle {
+            background: #fff;
+            border: none;
+            color: var(--primary);
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        .back-btn:active, .theme-toggle:active { transform: scale(0.9); }
 
-        .logo-container { width: 68px; height: 68px; background: white; border-radius: 50%; padding: 3px; box-shadow: 0 5px 16px rgba(0,0,0,0.2), 0 0 0 2px var(--gold); margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
-        .logo-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin: 10px 0 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
 
-        .stats-bar { width: 100%; max-width: 460px; display: flex; justify-content: space-around; margin-top: 5px; padding: 0 4px; gap: 5px; }
+        .logo-container {
+            width: 110px;
+            height: 110px;
+            margin: 20px auto 0;
+            background: #fff;
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+            border: 3px solid #fff;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .header-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        /* شريط الإحصائيات */
+        .stats-bar { width: 100%; max-width: 460px; display: flex; justify-content: space-around; margin-top: 15px; padding: 0 4px; gap: 5px; }
         .stat-box { text-align: center; background: rgba(255,255,255,0.12); padding: 5px 9px; border-radius: var(--border-radius-sm); min-width: 66px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: transform 0.2s; }
         .stat-box:hover { transform: translateY(-2px); background: rgba(255,255,255,0.2); }
         .stat-box i { color: var(--gold); font-size: 14px; margin-bottom: 1px; display: block; }
@@ -79,15 +161,7 @@
         .progress-bar { width: 100%; max-width: 460px; height: 5px; background: rgba(255,255,255,0.18); border-radius: 8px; margin-top: 7px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 8px; transition: width 0.5s ease; width: 0%; }
 
-        /* 🔘 زر العودة في الهيدر - تصميم جديد */
-        .header-actions { position: absolute; top: 12px; right: 12px; display: flex; gap: 8px; z-index: 101; }
-        .btn-header { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 2px solid var(--gold); color: var(--gold); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; }
-        .btn-header:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
-        .btn-header:active { transform: scale(0.98); }
-        .btn-header.back-btn { display: none; }
-        .quiz-active .btn-header.back-btn { display: flex; }
-        .quiz-active .theme-toggle { display: none; }
-
+        /* الخريطة والأسئلة */
         .map-container { padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-bottom: 80px; max-width: 580px; margin: 0 auto; }
         .level-node { width: 100%; max-width: 420px; background: var(--white); padding: 16px 18px; border-radius: var(--border-radius); display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow); position: relative; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2); border: 2px solid transparent; overflow: hidden; }
         .level-node::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--gold)); }
@@ -114,19 +188,18 @@
         .quiz-header { background: var(--primary); color: white; padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 3px 12px rgba(0,0,0,0.08); position: relative; }
         .quiz-body { padding: 20px 16px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
 
-        .question-card { background: var(--white); width: 100%; max-width: 520px; padding: 26px 22px; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 20px; text-align: center; position: relative; }
+        .question-card { background: var(--white); width: 100%; max-width: 520px; padding: 26px 22px; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 20px; text-align: center !important; position: relative; }
         .question-number { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--primary-dark); padding: 3px 16px; border-radius: 14px; font-weight: 800; font-size: 12px; box-shadow: 0 3px 10px rgba(212,175,55,0.25); }
         .question-card h2 { font-size: 17px; line-height: 1.55; color: var(--primary); margin: 9px 0 0; font-weight: 800; }
 
         .options-container { width: 100%; max-width: 520px; }
-        .option-item { background: var(--white); padding: 16px 20px; border-radius: var(--border-radius-sm); margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; border: 2px solid transparent; box-shadow: 0 3px 10px rgba(0,0,0,0.03); font-weight: 700; font-size: 14px; color: var(--text); }
-        .option-item:hover { transform: translateX(-4px); border-color: var(--gold); background: rgba(212,175,55,0.05); }
-        .option-item.correct { background: #e8f5e9; border-color: var(--correct); color: var(--correct); animation: successPop 0.35s ease; }
+        .option-item { background: var(--white); padding: 16px 20px; border-radius: var(--border-radius-sm); margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; border: 2px solid transparent; box-shadow: 0 3px 10px rgba(0,0,0,0.03); font-weight: 700; font-size: 14px; color: var(--text); justify-content: center; text-align: center !important; }
+        .option-item:hover { transform: translateX(-4px); border-color: var(--gold); background: rgba(212,175,55,0.05); }        .option-item.correct { background: #e8f5e9; border-color: var(--correct); color: var(--correct); animation: successPop 0.35s ease; }
         .option-item.wrong { background: #ffebee; border-color: var(--danger); color: var(--danger); animation: shake 0.35s ease; }
         @keyframes successPop { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
-        .info-box { background: linear-gradient(135deg, #fff9e6, #fff3cd); border-right: 3px solid var(--gold); padding: 14px; border-radius: var(--border-radius-sm); margin-top: 14px; width: 100%; max-width: 520px; display: none; text-align: right; font-size: 13px; line-height: 1.55; box-shadow: 0 3px 14px rgba(212,175,55,0.1); animation: slideIn 0.25s ease; }
+        .info-box { background: linear-gradient(135deg, #fff9e6, #fff3cd); border-right: 3px solid var(--gold); padding: 14px; border-radius: var(--border-radius-sm); margin-top: 14px; width: 100%; max-width: 520px; display: none; text-align: center !important; font-size: 13px; line-height: 1.55; box-shadow: 0 3px 14px rgba(212,175,55,0.1); animation: slideIn 0.25s ease; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .info-box strong { color: var(--primary); display: block; margin-bottom: 5px; font-size: 14px; }
 
@@ -134,7 +207,6 @@
         .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(212,175,55,0.45); }
         .btn-next:active { transform: translateY(1px); }
 
-        /* 🔄 زر العودة للسؤال السابق */
         .btn-prev-question {
             background: rgba(255,255,255,0.1);
             color: white;
@@ -145,7 +217,8 @@
             font-weight: 600;
             cursor: pointer;
             display: none;
-            align-items: center;            gap: 5px;
+            align-items: center;
+            gap: 5px;
             transition: all 0.2s;
             margin-top: 12px;
         }
@@ -155,7 +228,7 @@
 
         /* 🏆 شاشة النتيجة */
         .result-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 300; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeIn 0.35s ease; }
-        .win-card { background: var(--white); padding: 30px 26px; border-radius: var(--border-radius); text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 65px rgba(0,0,0,0.35); position: relative; animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.2); }
+        .win-card { background: var(--white); padding: 30px 26px; border-radius: var(--border-radius); text-align: center !important; max-width: 400px; width: 90%; box-shadow: 0 20px 65px rgba(0,0,0,0.35); position: relative; animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.2); }
         @keyframes popIn { 0% { transform: scale(0.82); opacity: 0; } 70% { transform: scale(1.02); } 100% { transform: scale(1); opacity: 1; } }
         .win-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct)); border-radius: var(--border-radius) var(--border-radius) 0 0; }
         .win-card i { font-size: 60px; color: var(--gold); margin-bottom: 16px; display: block; animation: bounce 0.9s ease infinite alternate; }
@@ -170,8 +243,7 @@
 
         .loading { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transition: opacity 0.35s; }
         .loading.hidden { opacity: 0; pointer-events: none; }
-        .loading-spinner { width: 46px; height: 46px; border: 3px solid rgba(30,77,43,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 14px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-spinner { width: 46px; height: 46px; border: 3px solid rgba(30,77,43,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 14px; }        @keyframes spin { to { transform: rotate(360deg); } }
         .loading-text { color: var(--primary); font-weight: 700; font-size: 15px; }
 
         .toast { position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(90px); background: var(--white); padding: 11px 20px; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); font-weight: 700; z-index: 500; display: flex; align-items: center; gap: 7px; transition: transform 0.25s ease; font-size: 13px; }
@@ -183,21 +255,25 @@
         .save-indicator.show { opacity: 1; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-card { background: var(--white); padding: 26px; border-radius: var(--border-radius); max-width: 380px; width: 90%; text-align: center; }
+        .modal-card { background: var(--white); padding: 26px; border-radius: var(--border-radius); max-width: 380px; width: 90%; text-align: center !important; }
 
         @media (max-height: 700px) {
-            .game-header { min-height: 145px; }
-            .logo-container { width: 60px; height: 60px; }
+            .game-header { min-height: 260px; }
+            .logo-container { width: 90px; height: 90px; }
             .map-container { padding: 13px 10px; gap: 11px; }
             .level-node { padding: 13px 15px; }
             .node-icon { width: 48px; height: 48px; font-size: 19px; }
             .node-info h3 { font-size: 14px; }
             .question-card { padding: 22px 18px; margin-bottom: 14px; }
             .question-card h2 { font-size: 16px; }
-            .option-item { padding: 13px 15px; font-size: 13px; }            .win-card { padding: 26px 22px; }
+            .option-item { padding: 13px 15px; font-size: 13px; }
+            .win-card { padding: 26px 22px; }
             .win-card i { font-size: 54px; }
         }
-        @media (max-width: 380px) {
+        @media (max-width: 500px) {
+            .game-header { height: 280px; }
+            .header-title { font-size: 20px; }
+            .logo-container { width: 90px; height: 90px; }
             .stats-bar { gap: 3px; }
             .stat-box { min-width: 56px; padding: 4px 7px; }
             .stat-val { font-size: 13px; }
@@ -216,8 +292,7 @@
         <div class="offline-title">عذراً، أنت غير متصل بالإنترنت</div>
         <div class="offline-desc">بعض ميزات التطبيق تحتاج للاتصال. جرب الاتصال وحاول مرة أخرى.</div>
         <button class="btn-retry" onclick="retryConnection()"><i class="fas fa-sync-alt"></i> إعادة المحاولة</button>
-    </div>
-</div>
+    </div></div>
 
 <div class="save-indicator" id="saveIndicator"><i class="fas fa-cloud-upload-alt"></i> تم الحفظ</div>
 
@@ -235,15 +310,26 @@
 
 <div class="loading" id="loadingScreen"><div class="loading-spinner"></div><div class="loading-text">جاري التحميل...</div></div>
 
-<div class="game-header">
-    <!-- أزرار الهيدر -->
-    <div class="header-actions">
-        <button class="btn-header back-btn" id="quizBackBtn" title="عودة" onclick="handleQuizBack()"><i class="fas fa-arrow-right"></i></button>
-        <button class="btn-header theme-toggle" id="themeToggle" title="تبديل الوضع"><i class="fas fa-moon"></i></button>
+<!-- 🎨 الهيدر الموحد - التصميم الجديد -->
+<header class="game-header">
+    <div class="top-controls">
+        <button class="back-btn" onclick="goBack()" title="عودة">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
     </div>
     
+    <h1 class="header-title">🛡️ الرقية الشرعية الكاملة 🛡️</h1>
+    
     <div class="logo-container">
-        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار صفاء الروح" onerror="this.src='image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">    </div>
+        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار صفاء الروح" class="logo-img">
+    </div>
+    
+    <p class="header-subtitle">حفظ من كل سوء وشفاء من كل داء - sabriFX</p>
+    
+    <!-- شريط الإحصائيات داخل الهيدر -->
     <div class="stats-bar">
         <div class="stat-box lives"><i class="fas fa-heart"></i><span class="stat-val" id="livesCont">30</span><span class="stat-label">قلوب</span></div>
         <div class="stat-box"><i class="fas fa-star"></i><span class="stat-val" id="pointsCont">0</span><span class="stat-label">نقاطك</span></div>
@@ -251,12 +337,11 @@
     </div>
     <div class="rank-display"><span class="rank-name" id="rankDisplay">🌱 مبتدئ</span><div class="rank-label">مرحلتك العلمية</div></div>
     <div class="progress-bar"><div class="progress-fill" id="rankProgress"></div></div>
-</div>
+</header>
 
 <div class="map-container" id="gameMap"></div>
 
-<div class="quiz-overlay" id="quizOverlay">
-    <div class="quiz-header">
+<div class="quiz-overlay" id="quizOverlay">    <div class="quiz-header">
         <button onclick="confirmCloseQuiz()" style="background:none; border:none; color:white; font-size:20px; cursor:pointer; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='none'"><i class="fas fa-times"></i></button>
         <h2 id="stageTitle" style="margin:0; font-size:15px; font-weight:800; text-align:center; flex:1;">اسم المرحلة</h2>
         <div style="width:34px; text-align:left; font-weight:700; color:var(--gold); font-size:13px;" id="questionCounter">1/10</div>
@@ -268,7 +353,6 @@
         </div>
         <div class="options-container" id="optionsCont"></div>
         <div id="infoBox" class="info-box"><strong>💡 فائدة:</strong><span id="expText">الشرح يظهر هنا.</span></div>
-        <!-- زر العودة للسؤال السابق -->
         <button id="prevQuestionBtn" class="btn-prev-question" onclick="goToPrevQuestion()">
             <i class="fas fa-arrow-right"></i> السابق
         </button>
@@ -292,15 +376,27 @@
 
 <script>
 // 🌙 نظام الوضع الليلي
-(function initTheme() {    const saved = localStorage.getItem('sabriFX_theme');
-    const toggle = document.getElementById('themeToggle');
-    const icon = toggle.querySelector('i');
-    if (saved === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); icon.className = 'fas fa-sun'; }
-    toggle.onclick = () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('sabriFX_theme', 'light'); icon.className = 'fas fa-moon'; }
-        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('sabriFX_theme', 'dark'); icon.className = 'fas fa-sun'; }
-    };
+(function initTheme() {
+    const saved = localStorage.getItem('sabriFX_theme');
+    const toggle = document.querySelector('.theme-toggle');
+    const icon = document.getElementById('themeIcon');
+    if (saved === 'dark') { 
+        document.documentElement.setAttribute('data-theme', 'dark'); 
+        icon.className = 'fas fa-sun'; 
+    }
+    if(toggle) {
+        toggle.onclick = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) { 
+                document.documentElement.removeAttribute('data-theme'); 
+                localStorage.setItem('sabriFX_theme', 'light'); 
+                icon.className = 'fas fa-moon';             } else { 
+                document.documentElement.setAttribute('data-theme', 'dark'); 
+                localStorage.setItem('sabriFX_theme', 'dark'); 
+                icon.className = 'fas fa-sun'; 
+            }
+        };
+    }
 })();
 
 // 🔊 نظام الصوت
@@ -314,9 +410,52 @@ function playBeep(type) {
     else if (type === 'win') { [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => { const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination); o.frequency.value = freq; g.gain.setValueAtTime(0.18, audioCtx.currentTime + i*0.09); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i*0.09 + 0.18); o.start(audioCtx.currentTime + i*0.09); o.stop(audioCtx.currentTime + i*0.09 + 0.18); }); }
 }
 
-// 🌐 التحقق من الإنترنت
-function checkConnection() { const offline = document.getElementById('offline-screen'), loading = document.getElementById('loadingScreen'); if (!navigator.onLine) { offline.style.display = 'flex'; if(loading) loading.style.display = 'none'; document.body.style.overflow = 'hidden'; } else { offline.style.display = 'none'; document.body.style.overflow = 'auto'; } }
+// 🌐 التحقق من الإنترنت + Cache
+function checkConnection() { 
+    const offline = document.getElementById('offline-screen'), loading = document.getElementById('loadingScreen'); 
+    if (!navigator.onLine) { 
+        offline.style.display = 'flex'; 
+        if(loading) loading.style.display = 'none'; 
+        document.body.style.overflow = 'hidden'; 
+    } else { 
+        offline.style.display = 'none'; 
+        document.body.style.overflow = 'auto';
+        // تسجيل خدمة التخزين المؤقت
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Error:', err));
+        }
+    } 
+}
+
 function retryConnection() { window.location.reload(); }
+
+// دالة الرجوع للخلف
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        // العودة للصفحة الرئيسية أو إعادة تحميل
+        if(confirm("هل تريد العودة للرئيسية؟")) {
+            window.location.href = 'index.html';
+        }
+    }
+}
+// تبديل الوضع
+function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.getElementById('themeIcon');
+    const currentTheme = html.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('sabriFX_theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('sabriFX_theme', 'dark');
+    }
+}
+
 window.addEventListener('online', () => { checkConnection(); showToast('📡 متصل', 'success'); });
 window.addEventListener('offline', () => { checkConnection(); showToast('📴 غير متصل', 'error'); });
 
@@ -342,14 +481,14 @@ function updateRank() {
     document.getElementById('rankName').innerText=cur.name; document.getElementById('rankDisplay').innerHTML=`${cur.icon} ${cur.name}`;
     const prg=nxt.min===cur.min?100:Math.min(100,((gameState.points-cur.min)/(nxt.min-cur.min))*100); document.getElementById('rankProgress').style.width=`${prg}%`;
 }
+
 // 📚 بيانات المراحل (محتوى كامل)
 const stagesData = [
     { id:0, title:"المرحلة الأولى: فقه الطهارة", icon:"fa-faucet", type:"fiqh", questions: [
         {q:"ما هو حكم السواك عند الوضوء؟",opts:["واجب","سنة مؤكدة","مكروه"],ans:1,exp:"السواك سنة مؤكدة عند الوضوء وفي كل وقت."},
         {q:"كم عدد فروض الوضوء؟",opts:["أربعة","ستة","ثمانية"],ans:1,exp:"فروض الوضوء ستة: النية، وغسل الوجه، وغسل اليدين إلى المرفقين، ومسح الرأس، وغسل الرجلين إلى الكعبين، والترتيب."},
         {q:"الماء الذي خالطته نجاسة فغيرت طعمه أو لونه أو رائحته هو:",opts:["طهور","طاهر","نجس"],ans:2,exp:"الماء إذا خالطته نجاسة وغيرت إحدى صفاته الثلاث يصبح نجساً لا يجوز التطهر به."},
-        {q:"ما هو الترتيب الصحيح في التيمم؟",opts:["مسح الوجه ثم الكفين","مسح الكفين ثم الوجه","غسل اليدين"],ans:0,exp:"التيمم: ضربة واحدة للوجه والكفين معاً، ثم مسح الوجه ثم الكفين."},
-        {q:"غسل أعضاء الوضوء أكثر من ثلاث مرات:",opts:["مستحب","مباح","مكروه"],ans:2,exp:"غسل الأعضاء أكثر من ثلاث مرات مكروه عند جمهور العلماء."},
+        {q:"ما هو الترتيب الصحيح في التيمم؟",opts:["مسح الوجه ثم الكفين","مسح الكفين ثم الوجه","غسل اليدين"],ans:0,exp:"التيمم: ضربة واحدة للوجه والكفين معاً، ثم مسح الوجه ثم الكفين."},        {q:"غسل أعضاء الوضوء أكثر من ثلاث مرات:",opts:["مستحب","مباح","مكروه"],ans:2,exp:"غسل الأعضاء أكثر من ثلاث مرات مكروه عند جمهور العلماء."},
         {q:"ما الذي ينقض الوضوء من الخارجات؟",opts:["مسح الرأس","خروج ريح","المس دون شهوة"],ans:1,exp:"خروج الريح من الدبر ينقض الوضوء بإجماع العلماء."},
         {q:"هل يشترط النية في الوضوء؟",opts:["لا يشترط","يشترط عند الجمهور","يشترط فقط في الغسل"],ans:1,exp:"النية ركن في الوضوء عند جمهور العلماء، ولا يصح الوضوء بدونها."},
         {q:"ما حكم المسح على الخفين؟",opts:["حرام","جائز بشروط","واجب"],ans:1,exp:"المسح على الخفين جائز بشروط: أن يلبسا على طهارة، وأن يكونا ساترين لمحل الفرض، وأن يكونا من الجلد أو ما في حكمه."},
@@ -390,15 +529,15 @@ const stagesData = [
         {q:"سنة الهجرة النبوية:",opts:["620م","622م","624م"],ans:1,exp:"كانت الهجرة النبوية في سنة 622م، وهي بداية التقويم الهجري."},
         {q:"أول مسجد جُمِّع فيه في الإسلام:",opts:["مسجد قباء","المسجد النبوي","مسجد بني سالم"],ans:2,exp:"أول جمعة صلاها النبي ﷺ كانت في مسجد بني سالم بن عوف ببطن راناء."},
         {q:"من آخى النبي ﷺ بينه وبين نفسه؟",opts:["أبو بكر الصديق","علي بن أبي طالب","عمر بن الخطاب"],ans:1,exp:"آخى النبي ﷺ بينه وبين علي بن أبي طالب رضي الله عنه في المدينة."},
-        {q:"أول غزوة غزاها النبي ﷺ:",opts:["غزوة بدر","غزوة أحد","غزوة الأبواء"],ans:2,exp:"أول غزوة غزاها النبي ﷺ هي غزوة الأبواء (ودان) في السنة الثانية للهجرة."},        {q:"في أي غزوة كسرت رباعية النبي ﷺ؟",opts:["غزوة بدر","غزوة أحد","غزوة الخندق"],ans:1,exp:"كسرت رباعية النبي ﷺ وشُجّ في وجهه في غزوة أحد."},
+        {q:"أول غزوة غزاها النبي ﷺ:",opts:["غزوة بدر","غزوة أحد","غزوة الأبواء"],ans:2,exp:"أول غزوة غزاها النبي ﷺ هي غزوة الأبواء (ودان) في السنة الثانية للهجرة."},
+        {q:"في أي غزوة كسرت رباعية النبي ﷺ؟",opts:["غزوة بدر","غزوة أحد","غزوة الخندق"],ans:1,exp:"كسرت رباعية النبي ﷺ وشُجّ في وجهه في غزوة أحد."},
         {q:"من التي سمت النبي ﷺ؟",opts:["هند بنت عتبة","زينب بنت الحارث اليهودية","أم جميل"],ans:1,exp:"زينب بنت الحارث اليهودية هي التي وضعت السم للنبي ﷺ في شاة مذبوحة في خيبر."},
         {q:"سنة عمرة القضاء:",opts:["6هـ","7هـ","8هـ"],ans:1,exp:"كانت عمرة القضاء في السنة السابعة للهجرة، بعد صلح الحديبية."},
         {q:"يوم الملحمة في السيرة هو:",opts:["فتح مكة","فتح خيبر","فتح القسطنطينية"],ans:1,exp:"يوم الملحمة هو يوم فتح خيبر، وكانت من أعظم غزوات النبي ﷺ."},
         {q:"سنة حجة الوداع:",opts:["9هـ","10هـ","11هـ"],ans:1,exp:"حجة الوداع كانت في السنة العاشرة للهجرة، وهي آخر حج للنبي ﷺ."},
         {q:"توفي النبي ﷺ في:",opts:["12 ربيع الأول","2 ربيع الأول","1 ربيع الأول"],ans:0,exp:"توفي النبي ﷺ يوم الاثنين 12 ربيع الأول سنة 11هـ."},
         {q:"آخر من تزوج النبي ﷺ من أزواجه:",opts:["عائشة","أم سلمة","ميمونة"],ans:1,exp:"آخر من تزوج النبي ﷺ أم سلمة رضي الله عنها، وكانت آخر من ماتت من أمهات المؤمنين."},
-        {q:"اسم ناقة النبي ﷺ في الهجرة:",opts:["العضباء","القصواء","سبأ"],ans:1,exp:"القصواء هي الناقة التي ركبها النبي ﷺ في الهجرة من مكة إلى المدينة."},
-        {q:"من نام في فراش النبي ﷺ ليلة الهجرة؟",opts:["أبو بكر","علي بن أبي طالب","زيد بن حارثة"],ans:1,exp:"نام علي بن أبي طالب في فراش النبي ﷺ ليلة الهجرة ليخدع المشركين."},
+        {q:"اسم ناقة النبي ﷺ في الهجرة:",opts:["العضباء","القصواء","سبأ"],ans:1,exp:"القصواء هي الناقة التي ركبها النبي ﷺ في الهجرة من مكة إلى المدينة."},        {q:"من نام في فراش النبي ﷺ ليلة الهجرة؟",opts:["أبو بكر","علي بن أبي طالب","زيد بن حارثة"],ans:1,exp:"نام علي بن أبي طالب في فراش النبي ﷺ ليلة الهجرة ليخدع المشركين."},
         {q:"غار الاختباء في الهجرة:",opts:["غار حراء","غار ثور","غار أحد"],ans:1,exp:"اختبأ النبي ﷺ وأبو بكر في غار ثور ثلاثة أيام أثناء الهجرة."},
         {q:"دليل النبي ﷺ في الهجرة:",opts:["عبد الله بن أريقط","عبد الله بن فهيرة","أسماء بنت أبي بكر"],ans:0,exp:"عبد الله بن أريقط الليثي كان دليل النبي ﷺ في الهجرة، وكان مشركاً أميناً."},
         {q:"البئر التي شرب منها النبي ﷺ في المدينة:",opts:["بئر ميمونة","بئر أبي عنبة","بئر رومة"],ans:1,exp:"بئر أبي عنبة هي التي شرب منها النبي ﷺ وتبرك بها في المدينة."},
@@ -439,15 +578,15 @@ const stagesData = [
         {q:"السورة التي لا تبدأ بالبسملة:",opts:["التوبة","الأنفال","براءة"],ans:0,exp:"سورة التوبة هي السورة الوحيدة التي لا تبدأ بالبسملة."},
         {q:"السورة التي ذكرت فيها البسملة مرتين:",opts:["النمل","الفاتحة","البقرة"],ans:0,exp:"سورة النمل فيها بسملة في البداية، وأخرى في قصة سليمان مع بلقيس."},
         {q:"سورة تُسمى 'العرائس':",opts:["الرحمن","يس","الواقعة"],ans:0,exp:"سورة الرحمن تسمى سورة العرائس لحسنها وجمال معانيها."},
-        {q:"سورة تُسمى 'المبثوثة':",opts:["الحشر","الصف","الجمعة"],ans:0,exp:"سورة الحشر تسمى المبثوثة لكثرة ما بُثَّ فيها من المواعظ."},        {q:"عدد أسماء الله الحسنى:",opts:["97","99","101"],ans:1,exp:"أسماء الله الحسنى تسعة وتسعون اسماً، من أحصاها دخل الجنة."},
+        {q:"سورة تُسمى 'المبثوثة':",opts:["الحشر","الصف","الجمعة"],ans:0,exp:"سورة الحشر تسمى المبثوثة لكثرة ما بُثَّ فيها من المواعظ."},
+        {q:"عدد أسماء الله الحسنى:",opts:["97","99","101"],ans:1,exp:"أسماء الله الحسنى تسعة وتسعون اسماً، من أحصاها دخل الجنة."},
         {q:"اسم الله الأعظم:",opts:["الله","الرحمن","اختلف العلماء في تعيينه"],ans:2,exp:"اختلف العلماء في تعيين اسم الله الأعظم، والراجح أنه لا يُحصر في اسم واحد."},
         {q:"عدد أركان الإيمان:",opts:["5","6","7"],ans:1,exp:"أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر."},
         {q:"عدد أركان الإسلام:",opts:["4","5","6"],ans:1,exp:"أركان الإسلام خمسة: الشهادتان، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت."},
         {q:"أفضل الأعمال عند الله:",opts:["الصلاة","الإيمان بالله ورسوله","الجهاد"],ans:1,exp:"أفضل الأعمال الإيمان بالله ورسوله، ثم الجهاد في سبيله، كما صح في الحديث."},
         {q:"أفضل الصدقات:",opts:["الصدقة في السر","صدقة رمضان","الصدقة على ذي الرحم"],ans:2,exp:"الصدقة على ذي الرحم أفضل، لأنها صدقة وصلة."},
         {q:"أفضل الأيام عند الله:",opts:["يوم الجمعة","يوم عرفة","يوم النحر"],ans:2,exp:"يوم النحر (يوم العيد) أفضل الأيام عند الله، كما صح في الحديث."},
-        {q:"أفضل الليالي:",opts:["ليلة القدر","ليلة شعبان","ليلة الجمعة"],ans:0,exp:"ليلة القدر خير من ألف شهر، وهي أفضل الليالي."},
-        {q:"أفضل الشهور:",opts:["رمضان","المحرم","ذو الحجة"],ans:0,exp:"شهر رمضان أفضل الشهور، فيه نزل القرآن، وفيه تُفتح أبواب الجنة."},
+        {q:"أفضل الليالي:",opts:["ليلة القدر","ليلة شعبان","ليلة الجمعة"],ans:0,exp:"ليلة القدر خير من ألف شهر، وهي أفضل الليالي."},        {q:"أفضل الشهور:",opts:["رمضان","المحرم","ذو الحجة"],ans:0,exp:"شهر رمضان أفضل الشهور، فيه نزل القرآن، وفيه تُفتح أبواب الجنة."},
         {q:"أفضل البقاع:",opts:["المسجد الحرام","المسجد النبوي","المسجد الأقصى"],ans:0,exp:"المسجد الحرام أفضل البقاع، والصلاة فيه بمئة ألف صلاة."},
         {q:"أفضل الصلاة بعد الفريضة:",opts:["صلاة الليل","صلاة الضحى","صلاة التراويح"],ans:0,exp:"أفضل الصلاة بعد الفريضة صلاة الليل، كما صح عن النبي ﷺ."},
         {q:"أفضل الصيام بعد رمضان:",opts:["صيام الاثنين والخميس","صيام شوال","صيام عرفة"],ans:0,exp:"أفضل الصيام بعد رمضان صيام المحرم، ثم صيام الاثنين والخميس."},
@@ -486,16 +625,6 @@ function startStage(index, isResume) {
     updateQuestionCounter(); showQuestion(); saveGame(); updatePrevButton();
 }
 
-// 🔙 دالة التعامل مع زر العودة في الهيدر
-function handleQuizBack() {
-    if (gameState.activeQuestion > 0) {        // الرجوع للسؤال السابق
-        goToPrevQuestion();
-    } else {
-        // الرجوع للخريطة (أول سؤال)
-        if(confirm("⚠️ تم حفظ تقدمك. العودة للخريطة؟")) { saveGame(); closeQuiz(); }
-    }
-}
-
 // 🔙 الرجوع للسؤال السابق
 function goToPrevQuestion() {
     if (gameState.activeQuestion > 0) {
@@ -506,7 +635,6 @@ function goToPrevQuestion() {
         updatePrevButton();
     }
 }
-
 // تحديث حالة زر السابق
 function updatePrevButton() {
     const btn = document.getElementById('prevQuestionBtn');
@@ -537,7 +665,8 @@ function showQuestion() {
 function checkAns(selected, correct, el) {
     const items = document.querySelectorAll('.option-item'); items.forEach(item => item.style.pointerEvents = 'none');
     if(selected === correct) { el.classList.add('correct'); gameState.points += 25; playBeep('correct'); showToast('✅ صحيحة!', 'success'); }
-    else { el.classList.add('wrong'); gameState.lives--; playBeep('wrong'); showToast('❌ خاطئة', 'error'); if(items[correct]) items[correct].classList.add('correct'); }    if(!gameState.stageScores[gameState.activeStage]) gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
+    else { el.classList.add('wrong'); gameState.lives--; playBeep('wrong'); showToast('❌ خاطئة', 'error'); if(items[correct]) items[correct].classList.add('correct'); }
+    if(!gameState.stageScores[gameState.activeStage]) gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
     gameState.stageScores[gameState.activeStage].total++; if(selected === correct) gameState.stageScores[gameState.activeStage].correct++;
     updateStats(); saveGame();
     if(gameState.lives <= 0 && selected !== correct) { setTimeout(()=>{ showToast("❤️ انتهت القلوب!", "error"); closeQuiz(); }, 1400); return; }
@@ -555,8 +684,7 @@ function winStage() {
 }
 
 function closeResult() { document.getElementById('resultOverlay').style.display = 'none'; renderMap(); }
-function nextStage() { closeResult(); for(let i=0; i<stagesData.length; i++) { if(!gameState.completedStages.includes(i)) { startStage(i, false); return; } } showToast('🎉 أنهيت جميع المراحل!', 'success'); }
-function confirmCloseQuiz() { if(confirm("⚠️ تم الحفظ. الخروج؟")) { saveGame(); closeQuiz(); } }
+function nextStage() { closeResult(); for(let i=0; i<stagesData.length; i++) { if(!gameState.completedStages.includes(i)) { startStage(i, false); return; } } showToast('🎉 أنهيت جميع المراحل!', 'success'); }function confirmCloseQuiz() { if(confirm("⚠️ تم الحفظ. الخروج؟")) { saveGame(); closeQuiz(); } }
 function closeQuiz() { 
     gameState.isQuizActive = false; 
     document.body.classList.remove('quiz-active');
@@ -567,7 +695,17 @@ function showToast(msg, type='info') { const t = document.getElementById('toast'
 
 function init() { checkConnection(); loadGame(); setInterval(()=>saveGame(), 9000); }
 window.addEventListener('load', init); window.addEventListener('beforeunload', ()=>saveGame()); document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveGame(); }); document.addEventListener('click', initAudio, {once:true});
-if('serviceWorker' in navigator) { /* navigator.serviceWorker.register('/sw.js'); */ }
+
+// 🔧 Service Worker للتخزين المؤقت (Offline)
+if('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            console.log('✅ Service Worker registered:', reg.scope);
+        }).catch(err => {
+            console.log('❌ Service Worker registration failed:', err);
+        });
+    });
+}
 </script>
 </body>
 </html>
