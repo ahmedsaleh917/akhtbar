@@ -9,68 +9,25 @@
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
 
         :root {
-            --primary: #1e4d2b;
-            --primary-dark: #153a20;
-            --gold: #d4af37;
-            --gold-light: #f4d03f;
-            --bg: #f8faf9;
-            --white: #ffffff;
-            --text: #333333;
-            --text-secondary: #666666;
-            --danger: #e74c3c;
-            --correct: #28a745;
-            --shadow: 0 8px 32px rgba(0,0,0,0.1);
-            --shadow-gold: 0 6px 24px rgba(212, 175, 55, 0.2);
-            --border-radius: 18px;
-            --border-radius-sm: 12px;
-            --font-size-base: 14px;
-            --font-size-lg: 16px;
-            --font-size-sm: 11px;
+            --primary: #1e4d2b; --primary-dark: #153a20; --gold: #d4af37; --gold-light: #f4d03f;
+            --bg: #f8faf9; --white: #ffffff; --text: #333333; --text-secondary: #666666;
+            --danger: #e74c3c; --correct: #28a745;
+            --shadow: 0 8px 32px rgba(0,0,0,0.1); --shadow-gold: 0 6px 24px rgba(212, 175, 55, 0.2);
+            --border-radius: 18px; --border-radius-sm: 12px;
+            --font-size-base: 14px; --font-size-lg: 16px; --font-size-sm: 11px;
         }
 
-        /* 🌙 الوضع الليلي */
         [data-theme="dark"] {
-            --primary: #2d6a4f;
-            --primary-dark: #1e4d2b;
-            --gold: #e6c06b;
-            --gold-light: #f4e4a1;
-            --bg: #0f1712;
-            --white: #1a231f;
-            --text: #e8f5e9;
-            --text-secondary: #a5d6a7;
-            --danger: #ef5350;
-            --correct: #66bb6a;
-            --shadow: 0 8px 32px rgba(0,0,0,0.4);
-            --shadow-gold: 0 6px 24px rgba(212, 175, 55, 0.3);
+            --primary: #2d6a4f; --primary-dark: #1e4d2b; --gold: #e6c06b; --gold-light: #f4e4a1;
+            --bg: #0f1712; --white: #1a231f; --text: #e8f5e9; --text-secondary: #a5d6a7;
+            --danger: #ef5350; --correct: #66bb6a;
+            --shadow: 0 8px 32px rgba(0,0,0,0.4); --shadow-gold: 0 6px 24px rgba(212, 175, 55, 0.3);
         }
 
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent;
-            -webkit-font-smoothing: antialiased;            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
         html { height: 100%; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%);
-            user-select: none; 
-            -webkit-user-select: none;
-            color: var(--text); 
-            min-height: 100vh; 
-            -webkit-text-size-adjust: 100%;
-            line-height: 1.5;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-size: var(--font-size-base);
-        }
-
-        [data-theme="dark"] body {
-            background: linear-gradient(135deg, #0f1712 0%, #1a231f 100%);
-        }
+        body { font-family: 'Tajawal', sans-serif; background: linear-gradient(135deg, #f0f4f3 0%, #e8f5e9 100%); user-select: none; -webkit-user-select: none; color: var(--text); min-height: 100vh; -webkit-text-size-adjust: 100%; line-height: 1.5; margin: 0; padding: 0; overflow-x: hidden; font-size: var(--font-size-base); }
+        [data-theme="dark"] body { background: linear-gradient(135deg, #0f1712 0%, #1a231f 100%); }
 
         @media screen and (min-width: 1100px) {
             .game-header { max-width: 1100px; margin: 0 auto; border-radius: 0 0 32px 32px; }
@@ -82,588 +39,151 @@
             .option-item { margin-bottom: 0 !important; }
         }
 
-        body::before {
-            content: ""; 
-            position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(212,175,55,0.05) 0%, transparent 25%),
-                radial-gradient(circle at 80% 20%, rgba(30,77,43,0.05) 0%, transparent 25%),
-                radial-gradient(circle at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 35%);
-            pointer-events: none; z-index: -1;
-        }
+        body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 80%, rgba(212,175,55,0.05) 0%, transparent 25%), radial-gradient(circle at 80% 20%, rgba(30,77,43,0.05) 0%, transparent 25%), radial-gradient(circle at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 35%); pointer-events: none; z-index: -1; }
 
-        /* 🟢 شاشة عدم الاتصال - تصميم محسن */
-        .offline-overlay {
-            position: fixed; 
-            inset: 0;             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #2d6a4f 100%);
-            z-index: 9999;
-            display: none; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            text-align: center; 
-            padding: 24px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .offline-card {
-            background: var(--white);
-            backdrop-filter: blur(12px);
-            padding: 32px 24px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-            max-width: 380px;
-            width: 90%;
-            border: 2px solid var(--gold);
-            animation: slideUp 0.4s ease;
-        }
-        
-        .offline-icon {
-            font-size: 64px; 
-            color: var(--primary); 
-            margin-bottom: 16px;
-            animation: pulse 2s infinite;
-        }
-        
-        .offline-title {
-            font-size: 20px; 
-            font-weight: 800; 
-            color: var(--primary); 
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-        
-        .offline-desc {
-            font-size: 14px; 
-            color: var(--text-secondary); 
-            margin-bottom: 20px; 
-            line-height: 1.6;
-        }
-        
-        .btn-retry {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; 
-            border: none; 
-            padding: 14px 32px;             border-radius: 22px;
-            font-size: 14px; 
-            font-weight: 700; 
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(30,77,43,0.3); 
-            transition: all 0.25s;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-retry:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,77,43,0.4); }
+        /* 🟢 شاشة عدم الاتصال */
+        .offline-overlay { position: fixed; inset: 0; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #2d6a4f 100%); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; animation: fadeIn 0.3s ease; }
+        .offline-card { background: var(--white); backdrop-filter: blur(12px); padding: 32px 24px; border-radius: var(--border-radius); box-shadow: 0 20px 60px rgba(0,0,0,0.25); max-width: 380px; width: 90%; border: 2px solid var(--gold); animation: slideUp 0.4s ease; }
+        .offline-icon { font-size: 64px; color: var(--primary); margin-bottom: 16px; animation: pulse 2s infinite; }
+        .offline-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 12px; line-height: 1.4; }
+        .offline-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+        .btn-retry { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 14px 32px; border-radius: 22px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(30,77,43,0.3); transition: all 0.25s; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; }        .btn-retry:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,77,43,0.4); }
         .btn-retry:active { transform: translateY(0); }
-
         @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.85; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* 🎨 الهيدر الموحد */
-        .game-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            min-height: 160px; 
-            border-bottom-left-radius: 32px; 
-            border-bottom-right-radius: 32px;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            color: white; 
-            padding: 10px 12px 14px; 
-            box-shadow: var(--shadow);
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-        }
+        .game-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); min-height: 160px; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 10px 12px 14px; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
-        /* 🔘 زر الوضع الليلي - أعلى يمين */
-        .theme-toggle {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid var(--gold);
-            color: var(--gold);            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            z-index: 101;
-        }
+        /* 🔘 زر الوضع الليلي */
+        .theme-toggle { position: absolute; top: 12px; left: 12px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 2px solid var(--gold); color: var(--gold); font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; z-index: 101; }
         .theme-toggle:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
         .theme-toggle:active { transform: scale(0.98); }
 
-        .logo-container {
-            width: 68px; 
-            height: 68px; 
-            background: white; 
-            border-radius: 50%; 
-            padding: 3px;
-            box-shadow: 0 5px 16px rgba(0,0,0,0.2), 0 0 0 2px var(--gold); 
-            margin-bottom: 8px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .logo-container img { 
-            width: 100%; 
-            height: 100%; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 2px solid var(--gold); 
-        }
+        .logo-container { width: 68px; height: 68px; background: white; border-radius: 50%; padding: 3px; box-shadow: 0 5px 16px rgba(0,0,0,0.2), 0 0 0 2px var(--gold); margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+        .logo-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
-        .stats-bar {
-            width: 100%; 
-            max-width: 460px; 
-            display: flex; 
-            justify-content: space-around;
-            margin-top: 5px; 
-            padding: 0 4px; 
-            gap: 5px;
-        }
-        
-        .stat-box { 
-            text-align: center; 
-            background: rgba(255,255,255,0.12); 
-            padding: 5px 9px;
-            border-radius: var(--border-radius-sm); 
-            min-width: 66px; 
-            backdrop-filter: blur(4px); 
-            -webkit-backdrop-filter: blur(4px);
-            transition: transform 0.2s;
-        }        
+        .stats-bar { width: 100%; max-width: 460px; display: flex; justify-content: space-around; margin-top: 5px; padding: 0 4px; gap: 5px; }
+        .stat-box { text-align: center; background: rgba(255,255,255,0.12); padding: 5px 9px; border-radius: var(--border-radius-sm); min-width: 66px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: transform 0.2s; }
         .stat-box:hover { transform: translateY(-2px); background: rgba(255,255,255,0.2); }
         .stat-box i { color: var(--gold); font-size: 14px; margin-bottom: 1px; display: block; }
         .stat-val { display: block; font-weight: 800; font-size: 15px; color: white; }
         .stat-label { font-size: var(--font-size-sm); color: rgba(255,255,255,0.9); margin-top: 1px; font-weight: 500; }
         .lives i { animation: pulse 1.5s infinite; }
 
-        .rank-display { 
-            text-align: center; 
-            margin-top: 7px; 
-            background: rgba(212,175,55,0.18);
-            padding: 4px 16px; 
-            border-radius: 18px; 
-            border: 1px solid var(--gold);
-        }
-        
-        .rank-name { 
-            font-weight: 800; 
-            font-size: 13px; 
-            color: var(--gold-light);
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            justify-content: center;
-        }
-        
+        .rank-display { text-align: center; margin-top: 7px; background: rgba(212,175,55,0.18); padding: 4px 16px; border-radius: 18px; border: 1px solid var(--gold); }
+        .rank-name { font-weight: 800; font-size: 13px; color: var(--gold-light); display: flex; align-items: center; gap: 4px; justify-content: center; }
         .rank-label { font-size: 9px; color: rgba(255,255,255,0.85); margin-top: 1px; }
+        .progress-bar { width: 100%; max-width: 460px; height: 5px; background: rgba(255,255,255,0.18); border-radius: 8px; margin-top: 7px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 8px; transition: width 0.5s ease; width: 0%; }
 
-        .progress-bar {
-            width: 100%; 
-            max-width: 460px; 
-            height: 5px; 
-            background: rgba(255,255,255,0.18);
-            border-radius: 8px; 
-            margin-top: 7px; 
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%; 
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            border-radius: 8px; 
-            transition: width 0.5s ease; 
-            width: 0%;
-        }
+        /* 🔘 زر العودة في الهيدر - تصميم جديد */
+        .header-actions { position: absolute; top: 12px; right: 12px; display: flex; gap: 8px; z-index: 101; }
+        .btn-header { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 2px solid var(--gold); color: var(--gold); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; }
+        .btn-header:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+        .btn-header:active { transform: scale(0.98); }
+        .btn-header.back-btn { display: none; }
+        .quiz-active .btn-header.back-btn { display: flex; }
+        .quiz-active .theme-toggle { display: none; }
 
-        /* 🔘 زر العودة الموحد */
-        .btn-back-unified {
-            position: fixed;
-            bottom: 72px;            left: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            padding: 11px 18px;
-            border-radius: 22px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(30,77,43,0.35);
-            transition: all 0.25s;
-            display: none;
-            align-items: center;
-            gap: 6px;
-            z-index: 210;
-            font-family: inherit;
-        }
-        .btn-back-unified:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(30,77,43,0.5); }
-        .btn-back-unified:active { transform: translateY(0); }
-
-        .map-container {
-            padding: 16px 12px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            gap: 14px; 
-            padding-bottom: 80px; 
-            max-width: 580px; 
-            margin: 0 auto;
-        }
-
-        .level-node {
-            width: 100%; 
-            max-width: 420px; 
-            background: var(--white); 
-            padding: 16px 18px;
-            border-radius: var(--border-radius); 
-            display: flex; 
-            align-items: center; 
-            gap: 14px;
-            box-shadow: var(--shadow); 
-            position: relative; 
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
-            border: 2px solid transparent; 
-            overflow: hidden;
-        }
-        
-        .level-node::before {
-            content: "";             position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-        }
-        
+        .map-container { padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-bottom: 80px; max-width: 580px; margin: 0 auto; }
+        .level-node { width: 100%; max-width: 420px; background: var(--white); padding: 16px 18px; border-radius: var(--border-radius); display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow); position: relative; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2); border: 2px solid transparent; overflow: hidden; }
+        .level-node::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--gold)); }
         .level-node.locked { opacity: 0.65; filter: grayscale(0.7); cursor: not-allowed; transform: none !important; }
         .level-node.locked:hover { transform: none !important; }
         .level-node.active { border-color: var(--gold); transform: scale(1.015); box-shadow: var(--shadow-gold); animation: glow 2s ease-in-out infinite alternate; }
-        
         @keyframes glow { from { box-shadow: 0 12px 30px rgba(212, 175, 55, 0.12); } to { box-shadow: 0 12px 38px rgba(212, 175, 55, 0.28); } }
-        
         .level-node.completed { border-color: var(--correct); background: linear-gradient(135deg, #fff 70%, #e8f5e9 100%); }
         .level-node.completed::before { background: linear-gradient(90deg, var(--correct), #4caf50); }
-
-        .node-icon {
-            width: 54px; 
-            height: 54px; 
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 16px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            color: var(--gold); 
-            font-size: 21px; 
-            box-shadow: 0 6px 20px rgba(30,77,43,0.25);
-            flex-shrink: 0; 
-            position: relative; 
-            overflow: hidden;
-        }
-        
-        .node-icon::after {
-            content: ""; 
-            position: absolute; 
-            top: -50%; 
-            left: -50%; 
-            width: 200%; 
-            height: 200%;
-            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%); 
-            animation: rotate 10s linear infinite;
-        }
-        
+        .node-icon { width: 54px; height: 54px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 21px; box-shadow: 0 6px 20px rgba(30,77,43,0.25); flex-shrink: 0; position: relative; overflow: hidden; }
+        .node-icon::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%); animation: rotate 10s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
         .node-info { flex: 1; }
         .node-info h3 { margin: 0 0 3px 0; font-size: 15px; font-weight: 800; color: var(--primary); }
         .node-info span { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
-        .node-meta { display: flex; gap: 10px; margin-top: 5px; }        .node-meta span { font-size: 10px; display: flex; align-items: center; gap: 3px; color: var(--primary); background: rgba(30,77,43,0.05); padding: 2px 7px; border-radius: 9px; }
+        .node-meta { display: flex; gap: 10px; margin-top: 5px; }
+        .node-meta span { font-size: 10px; display: flex; align-items: center; gap: 3px; color: var(--primary); background: rgba(30,77,43,0.05); padding: 2px 7px; border-radius: 9px; }
         [data-theme="dark"] .node-meta span { background: rgba(212,175,55,0.1); }
-
         .lock-icon { color: #bbb; font-size: 16px; }
         .completed-icon { color: var(--correct); font-size: 18px; }
 
         /* 🎯 طبقة الاختبار */
-        .quiz-overlay {
-            position: fixed; 
-            inset: 0; 
-            background: var(--bg); 
-            z-index: 200; 
-            display: none; 
-            flex-direction: column; 
-            animation: slideUp 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .quiz-header {
-            background: var(--primary); 
-            color: white; 
-            padding: 13px 18px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
-
+        .quiz-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 200; display: none; flex-direction: column; animation: slideUp 0.35s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .quiz-header { background: var(--primary); color: white; padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 3px 12px rgba(0,0,0,0.08); position: relative; }
         .quiz-body { padding: 20px 16px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
 
-        .question-card {
-            background: var(--white); 
-            width: 100%; 
-            max-width: 520px; 
-            padding: 26px 22px; 
-            border-radius: var(--border-radius); 
-            box-shadow: var(--shadow); 
-            margin-bottom: 20px; 
-            text-align: center; 
-            position: relative;
-        }
-        
-        .question-number {
-            position: absolute; 
-            top: -10px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: var(--gold);
-            color: var(--primary-dark); 
-            padding: 3px 16px; 
-            border-radius: 14px;             font-weight: 800; 
-            font-size: 12px; 
-            box-shadow: 0 3px 10px rgba(212,175,55,0.25);
-        }
-        
+        .question-card { background: var(--white); width: 100%; max-width: 520px; padding: 26px 22px; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 20px; text-align: center; position: relative; }
+        .question-number { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--primary-dark); padding: 3px 16px; border-radius: 14px; font-weight: 800; font-size: 12px; box-shadow: 0 3px 10px rgba(212,175,55,0.25); }
         .question-card h2 { font-size: 17px; line-height: 1.55; color: var(--primary); margin: 9px 0 0; font-weight: 800; }
 
         .options-container { width: 100%; max-width: 520px; }
-        
-        .option-item {
-            background: var(--white); 
-            padding: 16px 20px; 
-            border-radius: var(--border-radius-sm); 
-            margin-bottom: 10px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            transition: all 0.2s; 
-            border: 2px solid transparent; 
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03); 
-            font-weight: 700; 
-            font-size: 14px; 
-            color: var(--text);
-        }
-        
+        .option-item { background: var(--white); padding: 16px 20px; border-radius: var(--border-radius-sm); margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; border: 2px solid transparent; box-shadow: 0 3px 10px rgba(0,0,0,0.03); font-weight: 700; font-size: 14px; color: var(--text); }
         .option-item:hover { transform: translateX(-4px); border-color: var(--gold); background: rgba(212,175,55,0.05); }
         .option-item.correct { background: #e8f5e9; border-color: var(--correct); color: var(--correct); animation: successPop 0.35s ease; }
         .option-item.wrong { background: #ffebee; border-color: var(--danger); color: var(--danger); animation: shake 0.35s ease; }
-        
         @keyframes successPop { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
-        .info-box {
-            background: linear-gradient(135deg, #fff9e6, #fff3cd); 
-            border-right: 3px solid var(--gold);
-            padding: 14px; 
-            border-radius: var(--border-radius-sm); 
-            margin-top: 14px; 
-            width: 100%; 
-            max-width: 520px;
-            display: none; 
-            text-align: right; 
-            font-size: 13px; 
-            line-height: 1.55;
-            box-shadow: 0 3px 14px rgba(212,175,55,0.1); 
-            animation: slideIn 0.25s ease;
-        }
-        
+        .info-box { background: linear-gradient(135deg, #fff9e6, #fff3cd); border-right: 3px solid var(--gold); padding: 14px; border-radius: var(--border-radius-sm); margin-top: 14px; width: 100%; max-width: 520px; display: none; text-align: right; font-size: 13px; line-height: 1.55; box-shadow: 0 3px 14px rgba(212,175,55,0.1); animation: slideIn 0.25s ease; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .info-box strong { color: var(--primary); display: block; margin-bottom: 5px; font-size: 14px; }
-        .btn-next {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light)); 
-            color: var(--primary-dark);
-            border: none; 
-            padding: 14px 26px; 
-            width: 100%; 
-            max-width: 520px; 
-            border-radius: var(--border-radius-sm); 
-            font-weight: 800; 
-            font-size: 15px; 
-            margin-top: 18px; 
-            cursor: pointer; 
-            display: none;
-            box-shadow: 0 5px 18px rgba(212,175,55,0.3); 
-            transition: all 0.25s; 
-            position: relative; 
-            overflow: hidden;
-        }
+
+        .btn-next { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); border: none; padding: 14px 26px; width: 100%; max-width: 520px; border-radius: var(--border-radius-sm); font-weight: 800; font-size: 15px; margin-top: 18px; cursor: pointer; display: none; box-shadow: 0 5px 18px rgba(212,175,55,0.3); transition: all 0.25s; position: relative; overflow: hidden; }
         .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(212,175,55,0.45); }
         .btn-next:active { transform: translateY(1px); }
 
+        /* 🔄 زر العودة للسؤال السابق */
+        .btn-prev-question {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 16px;
+            border-radius: var(--border-radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;            gap: 5px;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .btn-prev-question:hover { background: rgba(255,255,255,0.2); }
+        .btn-prev-question:disabled { opacity: 0.5; cursor: not-allowed; }
+        .quiz-active .btn-prev-question { display: inline-flex; }
+
         /* 🏆 شاشة النتيجة */
-        .result-overlay {
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.88); 
-            z-index: 300; 
-            display: none; 
-            justify-content: center; 
-            align-items: center; 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-            animation: fadeIn 0.35s ease;
-        }
-        
-        .win-card {
-            background: var(--white); 
-            padding: 30px 26px; 
-            border-radius: var(--border-radius); 
-            text-align: center; 
-            max-width: 400px; 
-            width: 90%; 
-            box-shadow: 0 20px 65px rgba(0,0,0,0.35);
-            position: relative; 
-            animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.2);
-        }
-        
+        .result-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 300; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeIn 0.35s ease; }
+        .win-card { background: var(--white); padding: 30px 26px; border-radius: var(--border-radius); text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 65px rgba(0,0,0,0.35); position: relative; animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.2); }
         @keyframes popIn { 0% { transform: scale(0.82); opacity: 0; } 70% { transform: scale(1.02); } 100% { transform: scale(1); opacity: 1; } }
-                .win-card::before {
-            content: ""; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct)); 
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-        }
-        
+        .win-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--gold), var(--correct)); border-radius: var(--border-radius) var(--border-radius) 0 0; }
         .win-card i { font-size: 60px; color: var(--gold); margin-bottom: 16px; display: block; animation: bounce 0.9s ease infinite alternate; }
         @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-8px); } }
-        
         .win-card h1 { margin: 0 0 10px 0; color: var(--primary); font-size: 22px; font-weight: 800; }
         .win-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.55; margin-bottom: 18px; }
-        
-        .points-earned {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light)); 
-            color: var(--primary-dark);
-            padding: 9px 20px; 
-            border-radius: 20px; 
-            font-weight: 800; 
-            font-size: 15px;
-            display: inline-block; 
-            margin: 10px 0; 
-            box-shadow: 0 3px 14px rgba(212,175,55,0.3);
-        }
+        .points-earned { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); padding: 9px 20px; border-radius: 20px; font-weight: 800; font-size: 15px; display: inline-block; margin: 10px 0; box-shadow: 0 3px 14px rgba(212,175,55,0.3); }
 
-        .footer-brand {
-            position: fixed; 
-            bottom: 0; 
-            width: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(248,250,249,0.96));
-            padding: 10px 18px; 
-            text-align: center; 
-            border-top: 1px solid rgba(0,0,0,0.06); 
-            z-index: 50;
-            font-size: 13px; 
-            box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
-        }
-        [data-theme="dark"] .footer-brand {
-            background: linear-gradient(135deg, rgba(26,35,31,0.96), rgba(15,23,18,0.98));
-            border-top-color: rgba(255,255,255,0.08);
-        }
+        .footer-brand { position: fixed; bottom: 0; width: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(248,250,249,0.96)); padding: 10px 18px; text-align: center; border-top: 1px solid rgba(0,0,0,0.06); z-index: 50; font-size: 13px; box-shadow: 0 -2px 16px rgba(0,0,0,0.06); }
+        [data-theme="dark"] .footer-brand { background: linear-gradient(135deg, rgba(26,35,31,0.96), rgba(15,23,18,0.98)); border-top-color: rgba(255,255,255,0.08); }
         .footer-brand strong { color: var(--primary); font-weight: 800; }
 
-        .loading {
-            position: fixed; 
-            inset: 0;             background: var(--bg); 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            z-index: 1000; 
-            transition: opacity 0.35s;
-        }
+        .loading { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transition: opacity 0.35s; }
         .loading.hidden { opacity: 0; pointer-events: none; }
-        
-        .loading-spinner {
-            width: 46px; 
-            height: 46px; 
-            border: 3px solid rgba(30,77,43,0.1); 
-            border-top-color: var(--gold);
-            border-radius: 50%; 
-            animation: spin 1s linear infinite; 
-            margin-bottom: 14px;
-        }
+        .loading-spinner { width: 46px; height: 46px; border: 3px solid rgba(30,77,43,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 14px; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .loading-text { color: var(--primary); font-weight: 700; font-size: 15px; }
 
-        .toast {
-            position: fixed; 
-            bottom: 65px; 
-            left: 50%; 
-            transform: translateX(-50%) translateY(90px);
-            background: var(--white); 
-            padding: 11px 20px; 
-            border-radius: var(--border-radius-sm);
-            box-shadow: var(--shadow);
-            font-weight: 700; 
-            z-index: 500; 
-            display: flex; 
-            align-items: center; 
-            gap: 7px;
-            transition: transform 0.25s ease;
-            font-size: 13px;
-        }
+        .toast { position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(90px); background: var(--white); padding: 11px 20px; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); font-weight: 700; z-index: 500; display: flex; align-items: center; gap: 7px; transition: transform 0.25s ease; font-size: 13px; }
         .toast.show { transform: translateX(-50%) translateY(0); }
         .toast.success { border-right: 3px solid var(--correct); color: var(--correct); }
         .toast.error { border-right: 3px solid var(--danger); color: var(--danger); }
 
-        .save-indicator {
-            position: fixed; 
-            top: 18px; 
-            right: 60px; 
-            background: rgba(0,0,0,0.65); 
-            color: white; 
-            padding: 5px 12px;             border-radius: 18px; 
-            font-size: 10px; 
-            z-index: 1000; 
-            display: flex; 
-            align-items: center; 
-            gap: 5px; 
-            opacity: 0; 
-            transition: 0.25s;
-        }
+        .save-indicator { position: fixed; top: 18px; right: 60px; background: rgba(0,0,0,0.65); color: white; padding: 5px 12px; border-radius: 18px; font-size: 10px; z-index: 1000; display: flex; align-items: center; gap: 5px; opacity: 0; transition: 0.25s; }
         .save-indicator.show { opacity: 1; }
 
-        .modal-overlay {
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.75); 
-            z-index: 2000; 
-            display: none;
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px;
-        }
-        .modal-card {
-            background: var(--white); 
-            padding: 26px; 
-            border-radius: var(--border-radius); 
-            max-width: 380px; 
-            width: 90%; 
-            text-align: center;
-        }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-card { background: var(--white); padding: 26px; border-radius: var(--border-radius); max-width: 380px; width: 90%; text-align: center; }
 
         @media (max-height: 700px) {
             .game-header { min-height: 145px; }
@@ -674,45 +194,38 @@
             .node-info h3 { font-size: 14px; }
             .question-card { padding: 22px 18px; margin-bottom: 14px; }
             .question-card h2 { font-size: 16px; }
-            .option-item { padding: 13px 15px; font-size: 13px; }
-            .win-card { padding: 26px 22px; }
+            .option-item { padding: 13px 15px; font-size: 13px; }            .win-card { padding: 26px 22px; }
             .win-card i { font-size: 54px; }
         }
-
         @media (max-width: 380px) {
             .stats-bar { gap: 3px; }
             .stat-box { min-width: 56px; padding: 4px 7px; }
             .stat-val { font-size: 13px; }
             .stat-label { font-size: 9px; }
-            .question-card h2 { font-size: 15px; }            .option-item { font-size: 13px; padding: 13px 15px; }
+            .question-card h2 { font-size: 15px; }
+            .option-item { font-size: 13px; padding: 13px 15px; }
         }
     </style>
 </head>
 <body>
 
-<!-- 🟢 شاشة عدم الاتصال - تصميم محسن -->
+<!-- 🟢 شاشة عدم الاتصال -->
 <div class="offline-overlay" id="offline-screen">
     <div class="offline-card">
         <div class="offline-icon"><i class="fas fa-wifi-slash"></i></div>
         <div class="offline-title">عذراً، أنت غير متصل بالإنترنت</div>
         <div class="offline-desc">بعض ميزات التطبيق تحتاج للاتصال. جرب الاتصال وحاول مرة أخرى.</div>
-        <button class="btn-retry" onclick="retryConnection()">
-            <i class="fas fa-sync-alt"></i> إعادة المحاولة
-        </button>
+        <button class="btn-retry" onclick="retryConnection()"><i class="fas fa-sync-alt"></i> إعادة المحاولة</button>
     </div>
 </div>
 
-<div class="save-indicator" id="saveIndicator">
-    <i class="fas fa-cloud-upload-alt"></i> تم الحفظ
-</div>
+<div class="save-indicator" id="saveIndicator"><i class="fas fa-cloud-upload-alt"></i> تم الحفظ</div>
 
 <div class="modal-overlay" id="resumeModal">
     <div class="modal-card">
         <div style="font-size:36px; color:var(--gold); margin-bottom:13px;"><i class="fas fa-history"></i></div>
         <h2 style="color:var(--primary); margin:0 0 7px 0; font-size:19px;">استكمال التقدم</h2>
-        <p style="color:var(--text-secondary); margin-bottom:18px; font-size:13px;">
-            وجدنا مرحلة غير مكتملة.<br>هل تريد المتابعة من حيث توقفت؟
-        </p>
+        <p style="color:var(--text-secondary); margin-bottom:18px; font-size:13px;">وجدنا مرحلة غير مكتملة.<br>هل تريد المتابعة من حيث توقفت؟</p>
         <div style="display:flex; gap:7px; justify-content:center;">
             <button onclick="resumeGame()" style="background:var(--primary); color:white; padding:9px 18px; border-radius:11px; border:none; font-weight:700; font-size:13px; cursor:pointer;">نعم، متابعة</button>
             <button onclick="cancelResume()" style="background:#eee; color:#333; padding:9px 18px; border-radius:11px; border:none; font-weight:700; font-size:13px; cursor:pointer;">لا، للخريطة</button>
@@ -720,37 +233,27 @@
     </div>
 </div>
 
-<div class="loading" id="loadingScreen">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">جاري التحميل...</div>
-</div>
+<div class="loading" id="loadingScreen"><div class="loading-spinner"></div><div class="loading-text">جاري التحميل...</div></div>
 
 <div class="game-header">
-    <!-- 🔘 زر الوضع الليلي -->
-    <button class="theme-toggle" id="themeToggle" title="تبديل الوضع" aria-label="تبديل الوضع الليلي">
-        <i class="fas fa-moon"></i>
-    </button>
+    <!-- أزرار الهيدر -->
+    <div class="header-actions">
+        <button class="btn-header back-btn" id="quizBackBtn" title="عودة" onclick="handleQuizBack()"><i class="fas fa-arrow-right"></i></button>
+        <button class="btn-header theme-toggle" id="themeToggle" title="تبديل الوضع"><i class="fas fa-moon"></i></button>
+    </div>
     
     <div class="logo-container">
-        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار صفاء الروح" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">
-    </div>    <div class="stats-bar">
+        <img src="https://i.postimg.cc/zGSvxgCn/1775323811617.png" alt="شعار صفاء الروح" onerror="this.src='image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%231e4d2b%27/%3E%3Ctext x=%2750%27 y=%2755%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23d4af37%27%3E🕌%3C/text%3E%3C/svg%3E'">    </div>
+    <div class="stats-bar">
         <div class="stat-box lives"><i class="fas fa-heart"></i><span class="stat-val" id="livesCont">30</span><span class="stat-label">قلوب</span></div>
         <div class="stat-box"><i class="fas fa-star"></i><span class="stat-val" id="pointsCont">0</span><span class="stat-label">نقاطك</span></div>
         <div class="stat-box"><i class="fas fa-medal"></i><span class="stat-val" id="rankName">مبتدئ</span><span class="stat-label">رتبتك</span></div>
     </div>
-    <div class="rank-display">
-        <span class="rank-name" id="rankDisplay">🌱 مبتدئ</span>
-        <div class="rank-label">مرحلتك العلمية</div>
-    </div>
+    <div class="rank-display"><span class="rank-name" id="rankDisplay">🌱 مبتدئ</span><div class="rank-label">مرحلتك العلمية</div></div>
     <div class="progress-bar"><div class="progress-fill" id="rankProgress"></div></div>
 </div>
 
 <div class="map-container" id="gameMap"></div>
-
-<!-- 🔘 زر العودة الموحد -->
-<button id="btnBackMap" class="btn-back-unified" onclick="backToMap()">
-    <i class="fas fa-arrow-right"></i> الخريطة
-</button>
 
 <div class="quiz-overlay" id="quizOverlay">
     <div class="quiz-header">
@@ -765,6 +268,10 @@
         </div>
         <div class="options-container" id="optionsCont"></div>
         <div id="infoBox" class="info-box"><strong>💡 فائدة:</strong><span id="expText">الشرح يظهر هنا.</span></div>
+        <!-- زر العودة للسؤال السابق -->
+        <button id="prevQuestionBtn" class="btn-prev-question" onclick="goToPrevQuestion()">
+            <i class="fas fa-arrow-right"></i> السابق
+        </button>
         <button id="nextBtn" class="btn-next" onclick="nextStep()">المتابعة <i class="fas fa-arrow-left" style="margin-right:5px;"></i></button>
     </div>
 </div>
@@ -780,15 +287,12 @@
     </div>
 </div>
 
-<div class="footer-brand">
-    <span>تطبيق </span><strong>صفاء الروح</strong><span> • </span><strong>sabriFX</strong>
-</div>
+<div class="footer-brand"><span>تطبيق </span><strong>صفاء الروح</strong><span> • </span><strong>sabriFX</strong></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMsg">رسالة</span></div>
 
 <script>
-// 🌙 نظام الوضع الليلي - مع الحفظ
-(function initTheme() {
-    const saved = localStorage.getItem('sabriFX_theme');
+// 🌙 نظام الوضع الليلي
+(function initTheme() {    const saved = localStorage.getItem('sabriFX_theme');
     const toggle = document.getElementById('themeToggle');
     const icon = toggle.querySelector('i');
     if (saved === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); icon.className = 'fas fa-sun'; }
@@ -811,11 +315,7 @@ function playBeep(type) {
 }
 
 // 🌐 التحقق من الإنترنت
-function checkConnection() {
-    const offline = document.getElementById('offline-screen'), loading = document.getElementById('loadingScreen');
-    if (!navigator.onLine) { offline.style.display = 'flex'; if(loading) loading.style.display = 'none'; document.body.style.overflow = 'hidden'; }
-    else { offline.style.display = 'none'; document.body.style.overflow = 'auto'; }
-}
+function checkConnection() { const offline = document.getElementById('offline-screen'), loading = document.getElementById('loadingScreen'); if (!navigator.onLine) { offline.style.display = 'flex'; if(loading) loading.style.display = 'none'; document.body.style.overflow = 'hidden'; } else { offline.style.display = 'none'; document.body.style.overflow = 'auto'; } }
 function retryConnection() { window.location.reload(); }
 window.addEventListener('online', () => { checkConnection(); showToast('📡 متصل', 'success'); });
 window.addEventListener('offline', () => { checkConnection(); showToast('📴 غير متصل', 'error'); });
@@ -828,11 +328,7 @@ function showSaveIndicator() { const ind = document.getElementById('saveIndicato
 function loadGame() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const p = JSON.parse(saved);
-            gameState = { ...gameState, ...p };
-            if (gameState.activeStage !== -1 && !gameState.completedStages.includes(gameState.activeStage)) { document.getElementById('resumeModal').style.display = 'flex'; document.getElementById('loadingScreen').style.display = 'none'; }            else { initGameUI(); }
-        } else { initGameUI(); }
+        if (saved) { const p = JSON.parse(saved); gameState = { ...gameState, ...p }; if (gameState.activeStage !== -1 && !gameState.completedStages.includes(gameState.activeStage)) { document.getElementById('resumeModal').style.display = 'flex'; document.getElementById('loadingScreen').style.display = 'none'; } else { initGameUI(); } } else { initGameUI(); }
     } catch(e) { initGameUI(); }
 }
 function resumeGame() { document.getElementById('resumeModal').style.display = 'none'; document.getElementById('loadingScreen').style.display = 'flex'; setTimeout(()=>{ if(gameState.activeStage>=0 && gameState.activeStage<stagesData.length) startStage(gameState.activeStage,true); else initGameUI(); },450); }
@@ -842,14 +338,11 @@ function initGameUI() { updateStats(); renderMap(); document.getElementById('loa
 function updateStats() { document.getElementById('pointsCont').innerText=gameState.points; document.getElementById('livesCont').innerText=gameState.lives; updateRank(); }
 function updateRank() {
     const ranks = [{name:"مبتدئ",min:0,icon:"🌱"},{name:"طالب علم",min:100,icon:"📖"},{name:"حافظ",min:300,icon:"🧠"},{name:"فقيه",min:600,icon:"⚖️"},{name:"عالم",min:1000,icon:"🕌"},{name:"شيخ الإسلام",min:1600,icon:"👳"},{name:"إمام الأمة",min:2500,icon:"👑"}];
-    let cur=ranks[0], nxt=ranks[1];
-    for(let i=0;i<ranks.length;i++) if(gameState.points>=ranks[i].min){cur=ranks[i];nxt=ranks[i+1]||ranks[i];}
+    let cur=ranks[0], nxt=ranks[1]; for(let i=0;i<ranks.length;i++) if(gameState.points>=ranks[i].min){cur=ranks[i];nxt=ranks[i+1]||ranks[i];}
     document.getElementById('rankName').innerText=cur.name; document.getElementById('rankDisplay').innerHTML=`${cur.icon} ${cur.name}`;
-    const prg=nxt.min===cur.min?100:Math.min(100,((gameState.points-cur.min)/(nxt.min-cur.min))*100);
-    document.getElementById('rankProgress').style.width=`${prg}%`;
+    const prg=nxt.min===cur.min?100:Math.min(100,((gameState.points-cur.min)/(nxt.min-cur.min))*100); document.getElementById('rankProgress').style.width=`${prg}%`;
 }
-
-// 📚 بيانات المراحل (محتوى كامل - لم يُختصر حرف)
+// 📚 بيانات المراحل (محتوى كامل)
 const stagesData = [
     { id:0, title:"المرحلة الأولى: فقه الطهارة", icon:"fa-faucet", type:"fiqh", questions: [
         {q:"ما هو حكم السواك عند الوضوء؟",opts:["واجب","سنة مؤكدة","مكروه"],ans:1,exp:"السواك سنة مؤكدة عند الوضوء وفي كل وقت."},
@@ -880,7 +373,8 @@ const stagesData = [
         {q:"تبطل الصلاة بـ:",opts:["الكلام العمد","الحركة القليلة","التثاؤب"],ans:0,exp:"الكلام العمد في الصلاة يبطلها، أما الحركة القليلة والتثاؤب فلا يبطلانها."},
         {q:"حكم صلاة المسافر:",opts:["يجب عليه القصر","يجوز له القصر","لا يجوز القصر"],ans:1,exp:"يجوز للمسافر قصر الرباعية إلى ركعتين، وهو رخصة من الله."},
         {q:"النية في صيام رمضان:",opts:["تكفي نية واحدة للشهر","تجب لكل يوم","تستحب فقط"],ans:1,exp:"تجب النية لكل يوم من أيام رمضان عند جمهور العلماء، وتكون من الليل."},
-        {q:"من أفطر في رمضان لعذر شرعي:",opts:["عليه الكفارة فقط","عليه القضاء فقط","لا شيء عليه"],ans:1,exp:"من أفطر لعذر كالمرض أو السفر، فعليه القضاء فقط دون كفارة."},        {q:"حكم صلاة التراويح:",opts:["واجبة","سنة مؤكدة","مكروهة"],ans:1,exp:"صلاة التراويح سنة مؤكدة، فعلها النبي ﷺ وأقرها الصحابة."},
+        {q:"من أفطر في رمضان لعذر شرعي:",opts:["عليه الكفارة فقط","عليه القضاء فقط","لا شيء عليه"],ans:1,exp:"من أفطر لعذر كالمرض أو السفر، فعليه القضاء فقط دون كفارة."},
+        {q:"حكم صلاة التراويح:",opts:["واجبة","سنة مؤكدة","مكروهة"],ans:1,exp:"صلاة التراويح سنة مؤكدة، فعلها النبي ﷺ وأقرها الصحابة."},
         {q:"عدد ركعات صلاة الوتر:",opts:["واحدة فقط","ثلاث فقط","واحدة أو ثلاث أو أكثر"],ans:2,exp:"الوتر يكون بركعة واحدة، أو ثلاث، أو خمس، أو أكثر، وأقله واحدة."},
         {q:"وقت صلاة الوتر:",opts:["بعد العشاء فقط","من بعد العشاء إلى طلوع الفجر","قبل الفجر فقط"],ans:1,exp:"وقت الوتر من بعد صلاة العشاء إلى طلوع الفجر، وأفضله آخر الليل."}
     ]},
@@ -896,8 +390,7 @@ const stagesData = [
         {q:"سنة الهجرة النبوية:",opts:["620م","622م","624م"],ans:1,exp:"كانت الهجرة النبوية في سنة 622م، وهي بداية التقويم الهجري."},
         {q:"أول مسجد جُمِّع فيه في الإسلام:",opts:["مسجد قباء","المسجد النبوي","مسجد بني سالم"],ans:2,exp:"أول جمعة صلاها النبي ﷺ كانت في مسجد بني سالم بن عوف ببطن راناء."},
         {q:"من آخى النبي ﷺ بينه وبين نفسه؟",opts:["أبو بكر الصديق","علي بن أبي طالب","عمر بن الخطاب"],ans:1,exp:"آخى النبي ﷺ بينه وبين علي بن أبي طالب رضي الله عنه في المدينة."},
-        {q:"أول غزوة غزاها النبي ﷺ:",opts:["غزوة بدر","غزوة أحد","غزوة الأبواء"],ans:2,exp:"أول غزوة غزاها النبي ﷺ هي غزوة الأبواء (ودان) في السنة الثانية للهجرة."},
-        {q:"في أي غزوة كسرت رباعية النبي ﷺ؟",opts:["غزوة بدر","غزوة أحد","غزوة الخندق"],ans:1,exp:"كسرت رباعية النبي ﷺ وشُجّ في وجهه في غزوة أحد."},
+        {q:"أول غزوة غزاها النبي ﷺ:",opts:["غزوة بدر","غزوة أحد","غزوة الأبواء"],ans:2,exp:"أول غزوة غزاها النبي ﷺ هي غزوة الأبواء (ودان) في السنة الثانية للهجرة."},        {q:"في أي غزوة كسرت رباعية النبي ﷺ؟",opts:["غزوة بدر","غزوة أحد","غزوة الخندق"],ans:1,exp:"كسرت رباعية النبي ﷺ وشُجّ في وجهه في غزوة أحد."},
         {q:"من التي سمت النبي ﷺ؟",opts:["هند بنت عتبة","زينب بنت الحارث اليهودية","أم جميل"],ans:1,exp:"زينب بنت الحارث اليهودية هي التي وضعت السم للنبي ﷺ في شاة مذبوحة في خيبر."},
         {q:"سنة عمرة القضاء:",opts:["6هـ","7هـ","8هـ"],ans:1,exp:"كانت عمرة القضاء في السنة السابعة للهجرة، بعد صلح الحديبية."},
         {q:"يوم الملحمة في السيرة هو:",opts:["فتح مكة","فتح خيبر","فتح القسطنطينية"],ans:1,exp:"يوم الملحمة هو يوم فتح خيبر، وكانت من أعظم غزوات النبي ﷺ."},
@@ -929,7 +422,8 @@ const stagesData = [
         {q:"من كان يسمى 'حبر الأمة'؟",opts:["ابن عباس","ابن مسعود","ابن عمر"],ans:0,exp:"عبد الله بن عباس رضي الله عنهما لُقب بحبر الأمة لترجمته للقرآن وعلمه."},
         {q:"من كانت تُدعى 'الحميراء'؟",opts:["عائشة","حفصة","جويرية"],ans:0,exp:"عائشة رضي الله عنها كانت تُدعى الحميراء لصفاء بشرتها."},
         {q:"من لُقب بـ 'ذو النورين'؟",opts:["أبو بكر","عمر","عثمان"],ans:2,exp:"عثمان بن عفان لُقب بذي النورين لأنه تزوج ابنتي النبي ﷺ: رقية ثم أم كلثوم."},
-        {q:"من لُقب بـ 'الفاروق'؟",opts:["أبو بكر","عمر","علي"],ans:1,exp:"عمر بن الخطاب رضي الله عنه لُقب بالفاروق لأنه فرق بين الحق والباطل."},        {q:"من هو 'سيد الشهداء'؟",opts:["حمزة بن عبد المطلب","جعفر بن أبي طالب","مصعب بن عمير"],ans:0,exp:"حمزة بن عبد المطلب رضي الله عنه سيد الشهداء، قُتل في غزوة أحد."},
+        {q:"من لُقب بـ 'الفاروق'؟",opts:["أبو بكر","عمر","علي"],ans:1,exp:"عمر بن الخطاب رضي الله عنه لُقب بالفاروق لأنه فرق بين الحق والباطل."},
+        {q:"من هو 'سيد الشهداء'؟",opts:["حمزة بن عبد المطلب","جعفر بن أبي طالب","مصعب بن عمير"],ans:0,exp:"حمزة بن عبد المطلب رضي الله عنه سيد الشهداء، قُتل في غزوة أحد."},
         {q:"من هو 'طيار الجنة'؟",opts:["جعفر بن أبي طالب","زيد بن حارثة","عبد الله بن جحش"],ans:0,exp:"جعفر بن أبي طالب رضي الله عنه لُقب بطيار الجنة لاستشهاده في مؤتة."}
     ]},
     { id:4, title:"المرحلة الخامسة: الثقافة الإسلامية", icon:"fa-graduation-cap", type:"islamic", questions: [
@@ -945,8 +439,7 @@ const stagesData = [
         {q:"السورة التي لا تبدأ بالبسملة:",opts:["التوبة","الأنفال","براءة"],ans:0,exp:"سورة التوبة هي السورة الوحيدة التي لا تبدأ بالبسملة."},
         {q:"السورة التي ذكرت فيها البسملة مرتين:",opts:["النمل","الفاتحة","البقرة"],ans:0,exp:"سورة النمل فيها بسملة في البداية، وأخرى في قصة سليمان مع بلقيس."},
         {q:"سورة تُسمى 'العرائس':",opts:["الرحمن","يس","الواقعة"],ans:0,exp:"سورة الرحمن تسمى سورة العرائس لحسنها وجمال معانيها."},
-        {q:"سورة تُسمى 'المبثوثة':",opts:["الحشر","الصف","الجمعة"],ans:0,exp:"سورة الحشر تسمى المبثوثة لكثرة ما بُثَّ فيها من المواعظ."},
-        {q:"عدد أسماء الله الحسنى:",opts:["97","99","101"],ans:1,exp:"أسماء الله الحسنى تسعة وتسعون اسماً، من أحصاها دخل الجنة."},
+        {q:"سورة تُسمى 'المبثوثة':",opts:["الحشر","الصف","الجمعة"],ans:0,exp:"سورة الحشر تسمى المبثوثة لكثرة ما بُثَّ فيها من المواعظ."},        {q:"عدد أسماء الله الحسنى:",opts:["97","99","101"],ans:1,exp:"أسماء الله الحسنى تسعة وتسعون اسماً، من أحصاها دخل الجنة."},
         {q:"اسم الله الأعظم:",opts:["الله","الرحمن","اختلف العلماء في تعيينه"],ans:2,exp:"اختلف العلماء في تعيين اسم الله الأعظم، والراجح أنه لا يُحصر في اسم واحد."},
         {q:"عدد أركان الإيمان:",opts:["5","6","7"],ans:1,exp:"أركان الإيمان ستة: الإيمان بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر."},
         {q:"عدد أركان الإسلام:",opts:["4","5","6"],ans:1,exp:"أركان الإسلام خمسة: الشهادتان، وإقام الصلاة، وإيتاء الزكاة، وصوم رمضان، وحج البيت."},
@@ -979,20 +472,50 @@ function renderMap() {
         map.appendChild(node);
     });
 }
+
 function startStage(index, isResume) {
     initAudio();
     if(!isResume && gameState.lives <= 0) { document.getElementById('loadingScreen').style.display = 'none'; showToast("❤️ انتهت محاولاتك!", "error"); return; }
     gameState.activeStage = index;
     gameState.activeQuestion = isResume ? (gameState.activeQuestion >= 0 ? gameState.activeQuestion : 0) : 0;
     gameState.isQuizActive = true;
+    document.body.classList.add('quiz-active');
     document.getElementById('quizOverlay').style.display = 'flex';
     document.getElementById('stageTitle').innerText = stagesData[index].title;
-    document.getElementById('btnBackMap').style.display = 'flex';
     document.getElementById('loadingScreen').style.display = 'none';
-    updateQuestionCounter(); showQuestion(); saveGame();
+    updateQuestionCounter(); showQuestion(); saveGame(); updatePrevButton();
 }
 
-function backToMap() { if(confirm("⚠️ تم حفظ تقدمك. العودة للخريطة؟")) { saveGame(); closeQuiz(); } }
+// 🔙 دالة التعامل مع زر العودة في الهيدر
+function handleQuizBack() {
+    if (gameState.activeQuestion > 0) {        // الرجوع للسؤال السابق
+        goToPrevQuestion();
+    } else {
+        // الرجوع للخريطة (أول سؤال)
+        if(confirm("⚠️ تم حفظ تقدمك. العودة للخريطة؟")) { saveGame(); closeQuiz(); }
+    }
+}
+
+// 🔙 الرجوع للسؤال السابق
+function goToPrevQuestion() {
+    if (gameState.activeQuestion > 0) {
+        gameState.activeQuestion--;
+        saveGame();
+        updateQuestionCounter();
+        showQuestion();
+        updatePrevButton();
+    }
+}
+
+// تحديث حالة زر السابق
+function updatePrevButton() {
+    const btn = document.getElementById('prevQuestionBtn');
+    if (btn) {
+        btn.disabled = (gameState.activeQuestion <= 0);
+        btn.style.opacity = (gameState.activeQuestion <= 0) ? '0.5' : '1';
+    }
+}
+
 function updateQuestionCounter() { const s = stagesData[gameState.activeStage]; document.getElementById('questionCounter').innerText = `${gameState.activeQuestion + 1}/${s.questions.length}`; document.getElementById('currentQNum').innerText = gameState.activeQuestion + 1; }
 
 function showQuestion() {
@@ -1008,13 +531,13 @@ function showQuestion() {
         div.innerHTML = `<span style="margin-left:11px; color:var(--gold); font-weight:800;">${idx + 1}.</span> ${opt}`;
         div.onclick = () => checkAns(idx, q.ans, div); cont.appendChild(div);
     });
+    updatePrevButton();
 }
 
 function checkAns(selected, correct, el) {
     const items = document.querySelectorAll('.option-item'); items.forEach(item => item.style.pointerEvents = 'none');
     if(selected === correct) { el.classList.add('correct'); gameState.points += 25; playBeep('correct'); showToast('✅ صحيحة!', 'success'); }
-    else { el.classList.add('wrong'); gameState.lives--; playBeep('wrong'); showToast('❌ خاطئة', 'error'); if(items[correct]) items[correct].classList.add('correct'); }
-    if(!gameState.stageScores[gameState.activeStage]) gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
+    else { el.classList.add('wrong'); gameState.lives--; playBeep('wrong'); showToast('❌ خاطئة', 'error'); if(items[correct]) items[correct].classList.add('correct'); }    if(!gameState.stageScores[gameState.activeStage]) gameState.stageScores[gameState.activeStage] = { correct: 0, total: 0 };
     gameState.stageScores[gameState.activeStage].total++; if(selected === correct) gameState.stageScores[gameState.activeStage].correct++;
     updateStats(); saveGame();
     if(gameState.lives <= 0 && selected !== correct) { setTimeout(()=>{ showToast("❤️ انتهت القلوب!", "error"); closeQuiz(); }, 1400); return; }
@@ -1025,21 +548,25 @@ function nextStep() { gameState.activeQuestion++; saveGame(); const s = stagesDa
 
 function winStage() {
     const idx = gameState.activeStage; playBeep('win'); gameState.isQuizActive = false; gameState.activeStage = -1; gameState.activeQuestion = -1;
-    document.getElementById('btnBackMap').style.display = 'none';
+    document.body.classList.remove('quiz-active');
     if(idx !== -1 && !gameState.completedStages.includes(idx)) { gameState.completedStages.push(idx); const nxt = idx + 1; if(nxt < stagesData.length && !gameState.unlockedStages.includes(nxt)) { gameState.unlockedStages.push(nxt); showToast('🔓 المرحلة التالية', 'success'); } }
-    const bonus = 100 + (idx * 25); gameState.points += bonus; document.getElementById('earnedPoints').innerText = bonus;    updateStats(); saveGame(); document.getElementById('quizOverlay').style.display = 'none'; document.getElementById('resultOverlay').style.display = 'flex';
+    const bonus = 100 + (idx * 25); gameState.points += bonus; document.getElementById('earnedPoints').innerText = bonus;
+    updateStats(); saveGame(); document.getElementById('quizOverlay').style.display = 'none'; document.getElementById('resultOverlay').style.display = 'flex';
 }
 
 function closeResult() { document.getElementById('resultOverlay').style.display = 'none'; renderMap(); }
 function nextStage() { closeResult(); for(let i=0; i<stagesData.length; i++) { if(!gameState.completedStages.includes(i)) { startStage(i, false); return; } } showToast('🎉 أنهيت جميع المراحل!', 'success'); }
 function confirmCloseQuiz() { if(confirm("⚠️ تم الحفظ. الخروج؟")) { saveGame(); closeQuiz(); } }
-function closeQuiz() { gameState.isQuizActive = false; document.getElementById('quizOverlay').style.display = 'none'; document.getElementById('btnBackMap').style.display = 'none'; renderMap(); }
+function closeQuiz() { 
+    gameState.isQuizActive = false; 
+    document.body.classList.remove('quiz-active');
+    document.getElementById('quizOverlay').style.display = 'none'; 
+    renderMap(); 
+}
 function showToast(msg, type='info') { const t = document.getElementById('toast'), m = document.getElementById('toastMsg'); m.innerText = msg; t.className = `toast ${type} show`; setTimeout(()=>t.classList.remove('show'), 2800); }
 
 function init() { checkConnection(); loadGame(); setInterval(()=>saveGame(), 9000); }
 window.addEventListener('load', init); window.addEventListener('beforeunload', ()=>saveGame()); document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveGame(); }); document.addEventListener('click', initAudio, {once:true});
-
-// 📦 تلميح لخدمة العمل بدون إنترنت (يمكن تفعيله لاحقاً)
 if('serviceWorker' in navigator) { /* navigator.serviceWorker.register('/sw.js'); */ }
 </script>
 </body>
